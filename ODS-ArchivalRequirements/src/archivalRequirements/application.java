@@ -41,13 +41,13 @@ public class application {
 		String parsed_output_filepath = "";
 		try {
 			cmd = parser.parse(options, args);
-			if(cmd.hasOption("che")) {
+			if (cmd.hasOption("che")) {
 				parsed_check = true;
 			}
-			if(cmd.hasOption("cha")) {
+			if (cmd.hasOption("cha")) {
 				parsed_change = true;
 			}
-			if(cmd.hasOption("val")) {
+			if (cmd.hasOption("val")) {
 				parsed_validate = true;
 			}
 			if (cmd.hasOption("inp")) {
@@ -55,9 +55,6 @@ public class application {
 			}
 			if (cmd.hasOption("out")) {
 				parsed_output_filepath = cmd.getOptionValue("outputfilepath");
-			}
-			else if (!cmd.hasOption("out")) {
-				parsed_output_filepath = parsed_input_filepath;
 			}
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
@@ -72,52 +69,22 @@ public class application {
 		System.out.println("Output filepath: " + parsed_output_filepath);
 		System.out.println("PERFORM OPERATIONS ON INPUT");
 
-		// Extract input filepath extension for switch
-		String input_extension = parsed_input_filepath.substring(parsed_input_filepath.lastIndexOf('.') + 1);
+		// Check I/O of user inputs
+		checkIO IO = new checkIO();
+		String filepath = IO.Filepath(parsed_input_filepath, parsed_output_filepath);
 
-		// Perform check, if true
+		// Perform user-chosen operations
 		if (parsed_check == true) {
-			switch (input_extension.toLowerCase()) {
-
-				case "fods":
-				case "ods":
-				case "ots":
-					// Check for protection
-					try {
-
-					}
-					catch (IOException) {
-						throw new IOException("File cannot be read e.g. has password protection, is corrupt");
-					}
-
-					// Copy file, if output filepath is set
-					String filepath = "";
-					if (parsed_output_filepath == null) {
-						filepath = copyFile(parsed_input_filepath, parsed_output_filepath);
-					}
-					// Else use input filepath for operations
-					else if (parsed_output_filepath != null) {
-						filepath = parsed_input_filepath;
-					}
-
-					// Perform user-chosen operations
-					if (parsed_check == true) {
-						check Perform = new check();
-						Perform.Check(filepath);
-					}
-					if (parsed_change == true) {
-						change Perform = new change();
-						Perform.Change(filepath);
-					}
-					if (parsed_validate == true) {
-						validation Perform = new validation();
-						Perform.Validation(filepath);
-					}
-					break;
-
-				default:
-					throw new IOException("Input filepath does not have an accepted file format extension. Accepted file format extensions are: .ods, .ots and .fods");
-			}
+			check Perform = new check();
+			Perform.Check(filepath);
+		}
+		if (parsed_change == true) {
+			change Perform = new change();
+			Perform.Change(filepath);
+		}
+		if (parsed_validate == true) {
+			validation Perform = new validation();
+			Perform.Validation(filepath);
 		}
 	}
 }
