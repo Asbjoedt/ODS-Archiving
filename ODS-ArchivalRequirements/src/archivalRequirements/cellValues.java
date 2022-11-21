@@ -19,7 +19,7 @@ public class cellValues {
 		
 		Boolean hasCellValue = false;
 
-		var spreadsheet = org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument.loadDocument(filepath);
+		OdfSpreadsheetDocument spreadsheet = (OdfSpreadsheetDocument) org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument.loadDocument(filepath);
 		var root = spreadsheet.getContentRoot();
 
 		hasCellValue = spreadsheet.getSpreadsheetTables().isEmpty();

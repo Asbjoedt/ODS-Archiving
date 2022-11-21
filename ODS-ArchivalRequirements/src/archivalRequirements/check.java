@@ -1,7 +1,24 @@
 package archivalRequirements;
 
+import java.util.*;
+
 public class check {
-    public void Check(String filepath) throws Exception {
+
+    // Class data types
+    boolean cellValuesExist = false;
+    int dataConnections = 0;
+    int externalCellReferences = 0;
+    int RTDFunctions = 0;
+    int printerSettings = 0;
+    int embeddedObjects = 0;
+    int externalObjects = 0;
+    boolean absolutePath = false;
+
+    // Perform check of archival requirements
+    public List<check> Check(String filepath) throws Exception {
+        // Create list to return
+        List<check> results = new ArrayList<>();
+
         // CELL VALUES
         cellValues cellValue = new cellValues();
         Boolean hasCellValue = cellValue.Check(filepath);
@@ -11,15 +28,31 @@ public class check {
         int conns = dataConnection.Check(filepath);
 
         // EXTERNAL CELL REFERENCES
+        externalCellReferences externalCellReference = new externalCellReferences();
+        int extCellRefs = externalCellReference.Check(filepath);
 
         // RTD FUNCTIONS
+        RTDFunctions RTDFunction = new RTDFunctions();
+        int rtdFunctions = RTDFunction.Check(filepath);
 
         // PRINTER SETTINGS
+        printerSettings printersetting = new printerSettings();
+        int printers = printersetting.Check(filepath);
 
         // EMBEDDED OBJECTS
+        embeddedObjects embeddedObject = new embeddedObjects();
+        int embedObj = embeddedObject.Check(filepath);
 
         // EXTERNAL OBJECTS
+        externalObjects externalObject = new externalObjects();
+        int extObj = externalObject.Check(filepath);
 
         // ABSOLUTE PATH
+        absolutePath absPath = new absolutePath();
+        boolean hasAbsolutePath = absPath.Check(filepath);
+
+        // Add to list and return it
+        results.add(new check(cellValuesExist = hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObj, extObj, hasAbsolutePath));
+        return results;
     }
 }
