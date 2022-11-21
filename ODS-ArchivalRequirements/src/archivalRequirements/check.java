@@ -17,6 +17,7 @@ public class check {
     // Perform check of archival requirements
     public List<check> Check(String filepath) throws Exception {
         // Create list to return
+        check che = new check();
         List<check> results = new ArrayList<>();
 
         // CELL VALUES
@@ -41,18 +42,18 @@ public class check {
 
         // EMBEDDED OBJECTS
         embeddedObjects embeddedObject = new embeddedObjects();
-        int embedObj = embeddedObject.Check(filepath);
+        int embedObjs = embeddedObject.Check(filepath);
 
         // EXTERNAL OBJECTS
         externalObjects externalObject = new externalObjects();
-        int extObj = externalObject.Check(filepath);
+        int extObjs = externalObject.Check(filepath);
 
         // ABSOLUTE PATH
         absolutePath absPath = new absolutePath();
         boolean hasAbsolutePath = absPath.Check(filepath);
 
         // Add to list and return it
-        results.add(new check(cellValuesExist = hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObj, extObj, hasAbsolutePath));
+        results.add(new check(che.cellValuesExist = hasCellValue, cellValuesExist = hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
         return results;
     }
 }

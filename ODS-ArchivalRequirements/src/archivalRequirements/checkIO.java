@@ -3,31 +3,32 @@ package archivalRequirements;
 import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
-import org.odftoolkit.*;
 
 public class checkIO {
     public String Filepath(String input_filepath, String output_filepath) throws IOException {
         String filepath = "";
 
         // Check if input filepath exists
-        File f = new File(input_filepath);
-        if (!f.exists() && !f.isDirectory()) {
-            throw new IOException("File does not exist");
+        File file = new File(input_filepath);
+        if (!file.exists() && !file.isDirectory()) {
+            throw new IOException("Input file does not exist");
         }
 
         // Check if output directory exists
-
+        String parent = file.getParent();
+        File directory = new File(parent);
+        if (!directory.exists()) {
+            throw new IOException("Output directory does not exist");
+        }
 
         // Check for file protection
-        try {
-            OdfSpreadsheetDocument spreadsheet = (OdfSpreadsheetDocument) org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument.loadDocument(input_filepath);
-        } catch (IOException) {
+        boolean writeable = file.canWrite();
+        if (!writeable) {
             throw new IOException("File cannot be read e.g. has password protection, is corrupt");
         }
 
-        // Extract input filepath extension for switch
-        String input_extension = input_filepath.substring(input_filepath.lastIndexOf('.') + 1);
         // Check for accepted file format extension
+        String input_extension = input_filepath.substring(input_filepath.lastIndexOf('.') + 1);
         switch (input_extension.toLowerCase()) {
 
             case "fods":
@@ -41,29 +42,24 @@ public class checkIO {
         }
 
         // Copy file, if output filepath is set
-        if (output_filepath == null) {
+        if (output_filepath != null) {
             filepath = copyFile(input_filepath, output_filepath);
         }
         // Else use input filepath for operations
-        else if (output_filepath != null) {
+        else if (output_filepath == null) {
             filepath = input_filepath;
         }
 
         return filepath;
     }
 
-    public String CopyFile(String input_filepath, String output_filepath) throws IOException {
+    // Method for copying files
+    private static String copyFile(String input_filepath, String output_filepath) throws IOException {
 
-        // Copy file
-        File copied = new File(input_filepath);
-        FileUtils.copyFile(original, copied);
+        File input_file = new File(input_filepath);
+        File output_file = new File(output_filepath);
+        FileUtils.copyFile(input_file, output_file);
 
-        // Check for correct copying
-        assertThat(copied).exists();
-        assertThat(Files.readAllLines(original.toPath())
-                .equals(Files.readAllLines(copied.toPath())));
-
-        // Return copied filepath,if successful
         return output_filepath;
     }
 }

@@ -5,7 +5,6 @@ import java.util.*;
 public class change {
 
     // Class data types
-    boolean cellValuesExist = false;
     int dataConnections = 0;
     int externalCellReferences = 0;
     int RTDFunctions = 0;
@@ -37,18 +36,18 @@ public class change {
 
         // EMBEDDED OBJECTS
         embeddedObjects embeddedObject = new embeddedObjects();
-        int embedObj = embeddedObject.Change(filepath);
+        int embedObjs = embeddedObject.Change(filepath);
 
         // EXTERNAL OBJECTS
         externalObjects externalObject = new externalObjects();
-        int extObj = externalObject.Change(filepath);
+        int extObjs = externalObject.Change(filepath);
 
         // ABSOLUTE PATH
         absolutePath absPath = new absolutePath();
         boolean hasAbsolutePath = absPath.Change(filepath);
 
         // Add to list and return it
-        results.add(new change(cellValuesExist = hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObj, extObj, hasAbsolutePath));
+        results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);
         return results;
     }
 }
