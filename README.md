@@ -16,6 +16,10 @@ An example implementation:
 ```
 --check --change --validate --inputfilepath "C:\Users\%USERNAME%\Desktop\TestSpreadsheet.ods" --outputfilepath "C:\Users\%USERNAME%\Desktop\TestSpreadsheet.ods"
 ```
+Or shorter:
+```
+-che -cha -val -inp "C:\TestSpreadsheet.ods" -out "C:\TestSpreadsheet.ods"
+```
 
 ## Dependencies
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.

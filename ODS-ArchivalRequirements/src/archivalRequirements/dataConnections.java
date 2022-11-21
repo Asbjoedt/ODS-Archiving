@@ -13,7 +13,7 @@ public class dataConnections {
 		return dataConnections;
 	}
 	
-	public void change(String filepath) {
+	public void change(String input_filepath, String output_filepath) {
 		
 		
 	}

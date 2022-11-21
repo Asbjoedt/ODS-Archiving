@@ -20,8 +20,7 @@ public class cellValues {
 		Boolean hasCellValue = false;
 
 		var spreadsheet = org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument.loadDocument(filepath);
-		String abs = spreadsheet.getAbsoluteFilePath(filepath);
-		System.out.println(abs);
+		var root = spreadsheet.getContentRoot();
 
 		hasCellValue = spreadsheet.getSpreadsheetTables().isEmpty();
 		if (hasCellValue == true) {
