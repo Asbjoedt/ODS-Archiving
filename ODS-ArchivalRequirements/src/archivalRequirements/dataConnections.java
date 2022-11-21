@@ -5,7 +5,7 @@ import org.odftoolkit.odfdom.*;
 
 public class dataConnections {
 
-	public int check(String filepath) {
+	public int Check(String filepath) {
 		
 		int dataConnections = 0;
 		
@@ -13,7 +13,7 @@ public class dataConnections {
 		return dataConnections;
 	}
 	
-	public void change(String input_filepath, String output_filepath) {
+	public void Change(String input_filepath, String output_filepath) {
 		
 		
 	}

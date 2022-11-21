@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class application {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception, ParseException, IOException {
 
 		//define argument options
 		Options options = new Options();
@@ -74,39 +74,27 @@ public class application {
 
 		// Perform check, if true
 		if (parsed_check == true) {
-			switch(input_extension.toLowerCase()) {
+			switch (input_extension.toLowerCase()) {
 
 				case "fods":
 				case "ods":
 				case "ots":
-					// CELL VALUES
-					cellValues cellValue = new cellValues();
-					Boolean hasCellValue = cellValue.check(parsed_input_filepath);
-
-					// DATA CONNECTIONS
-					dataConnections dataConnection = new dataConnections();
-					int conns = dataConnection.check(parsed_input_filepath);
-
-					if (parsed_change == true && conns > 0) {
-						dataConnection.change(parsed_input_filepath, parsed_output_filepath);
+					if (parsed_check == true) {
+						check Perform = new check();
+						Perform.Check(parsed_input_filepath);
 					}
-
-					// EXTERNAL CELL REFERENCES
-
-					// RTD FUNCTIONS
-
-					// PRINTER SETTINGS
-
-					// EMBEDDED OBJECTS
-
-					// EXTERNAL OBJECTS
-
-					// ABSOLUTE PATH
-
+					if (parsed_change == true) {
+						change Perform = new change();
+						Perform.Change(parsed_input_filepath, parsed_output_filepath);
+					}
+					if (parsed_validate == true) {
+						validation Perform = new validation();
+						Perform.Validation(parsed_input_filepath);
+					}
 					break;
 
 				default:
-					throw new IOException("Input filepath does not have an accepted file format extension");
+					throw new IOException("Input filepath does not have an accepted file format extension. Accepted file format extensions are: .ods, .ots and .fods");
 			}
 		}
 	}

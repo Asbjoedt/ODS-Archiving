@@ -4,11 +4,13 @@ A Java console application, easy to integrate in workflows to check if an OpenDo
 * For more information, see repository **[CLISC](https://github.com/Asbjoedt/CLISC)**
 
 ## Methods
-The application accepts input and output filepaths as arguments and you then have to choose one or more of the following methods as arguments.
+The application requires input and output filepaths as arguments and you then have to choose one or more optional arguments for processing the filepaths.
 ```
---check
---change
---validate
+--inputfilepath (required)
+--outputfilepath (required)
+--check (optional)
+--change (optional)
+--validate (optional)
 ```
 
 An example implementation:
