@@ -24,7 +24,7 @@ public class application {
 		Option output_filepath = Option.builder("out").longOpt("outputfilepath")
 				.argName("outputfilepath")
 				.hasArg()
-				.required(true)
+				.required(false)
 				.desc("Set spreadsheet output filepath").build();
 		options.addOption(output_filepath);
 
@@ -56,6 +56,9 @@ public class application {
 			if (cmd.hasOption("out")) {
 				parsed_output_filepath = cmd.getOptionValue("outputfilepath");
 			}
+			else if (!cmd.hasOption("out")) {
+				parsed_output_filepath = parsed_input_filepath;
+			}
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
 			helper.printHelp("Usage:", options);
@@ -79,17 +82,36 @@ public class application {
 				case "fods":
 				case "ods":
 				case "ots":
+					// Check for protection
+					try {
+
+					}
+					catch (IOException) {
+						throw new IOException("File cannot be read e.g. has password protection, is corrupt");
+					}
+
+					// Copy file, if output filepath is set
+					String filepath = "";
+					if (parsed_output_filepath == null) {
+						filepath = copyFile(parsed_input_filepath, parsed_output_filepath);
+					}
+					// Else use input filepath for operations
+					else if (parsed_output_filepath != null) {
+						filepath = parsed_input_filepath;
+					}
+
+					// Perform user-chosen operations
 					if (parsed_check == true) {
 						check Perform = new check();
-						Perform.Check(parsed_input_filepath);
+						Perform.Check(filepath);
 					}
 					if (parsed_change == true) {
 						change Perform = new change();
-						Perform.Change(parsed_input_filepath, parsed_output_filepath);
+						Perform.Change(filepath);
 					}
 					if (parsed_validate == true) {
 						validation Perform = new validation();
-						Perform.Validation(parsed_input_filepath);
+						Perform.Validation(filepath);
 					}
 					break;
 

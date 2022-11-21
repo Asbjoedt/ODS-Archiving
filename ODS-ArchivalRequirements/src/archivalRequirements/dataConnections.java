@@ -5,16 +5,19 @@ import org.odftoolkit.odfdom.*;
 
 public class dataConnections {
 
+	// Check for data connections
 	public int Check(String filepath) {
-		
 		int dataConnections = 0;
 		
 
 		return dataConnections;
 	}
-	
-	public void Change(String input_filepath, String output_filepath) {
-		
-		
+
+	// Remove data connections
+	public int Change(String filepath) {
+		int dataConnections = 0;
+
+
+		return dataConnections;
 	}
 }

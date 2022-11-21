@@ -7,7 +7,7 @@ A Java console application, easy to integrate in workflows to check if an OpenDo
 The application requires input and output filepaths as arguments and you then have to choose one or more optional arguments for processing the filepaths.
 ```
 --inputfilepath (required)
---outputfilepath (required)
+--outputfilepath (optional, if not set, filepath is identical to input filepath)
 --check (optional)
 --change (optional)
 --validate (optional)
