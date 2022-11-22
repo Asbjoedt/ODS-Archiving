@@ -19,6 +19,8 @@ public class application {
 		options.addOption(convert);
 		Option validate = new Option("val", "validate", false, "Validate OpenDocument Spreadsheets file format standard");
 		options.addOption(validate);
+		Option delete = new Option("del", "delete", false, "Delete original input spreadsheet file");
+		options.addOption(delete);
 		Option input_filepath = Option.builder("inp").longOpt("inputfilepath")
 				.argName("inputfilepath")
 				.hasArg()
@@ -42,6 +44,7 @@ public class application {
 		boolean parsed_change = false;
 		boolean parsed_convert = false;
 		boolean parsed_validate = false;
+		boolean parsed_delete = false;
 		String parsed_input_filepath = "";
 		String parsed_output_filepath = "";
 		try {
@@ -57,6 +60,9 @@ public class application {
 			}
 			if (cmd.hasOption("val")) {
 				parsed_validate = true;
+			}
+			if (cmd.hasOption("del")) {
+				parsed_delete = true;
 			}
 			if (cmd.hasOption("inp")) {
 				parsed_input_filepath = cmd.getOptionValue("inputfilepath");
@@ -82,8 +88,8 @@ public class application {
 		String filepath = IO.Filepath(parsed_input_filepath, parsed_output_filepath);
 
 		// Perform operations based on file format extension
-		String input_extension = FilenameUtils.getExtension(parsed_input_filepath);
-		switch (input_extension.toLowerCase()) {
+		String input_extension = FilenameUtils.getExtension(parsed_input_filepath).toLowerCase();
+		switch (input_extension) {
 
 			case "fods":
 			case "ods":
@@ -91,7 +97,7 @@ public class application {
 				// Perform user-chosen operations
 				if (parsed_convert == true) {
 					convert Perform = new convert();
-					Perform.ConvertToODS_LibreOffice(filepath);
+					Perform.ConvertToODS_LibreOffice(filepath, filepath);
 				}
 				if (parsed_check == true) {
 					check Perform = new check();
@@ -113,7 +119,7 @@ public class application {
 				// Perform user-chosen operations
 				if (parsed_convert == true) {
 					convert Perform = new convert();
-					Perform.ConvertToXLSX_LibreOffice(filepath);
+					Perform.ConvertToXLSX_LibreOffice(filepath, filepath);
 				}
 				if (parsed_check == true) {
 					check Perform = new check();
@@ -126,7 +132,7 @@ public class application {
 				// Perform user-chosen operations
 				if (parsed_convert == true) {
 					convert Perform = new convert();
-					Perform.ConvertToODS_LibreOffice(filepath);
+					Perform.ConvertToODS_LibreOffice(filepath, filepath);
 				}
 				if (parsed_validate == true) {
 					validation Perform = new validation();
@@ -150,7 +156,7 @@ public class application {
 				}
 				if (parsed_convert == true) {
 					convert Perform = new convert();
-					Perform.ConvertToODS_LibreOffice(filepath);
+					Perform.ConvertToODS_LibreOffice(filepath, filepath);
 				}
 				if (parsed_validate == true) {
 					validation Perform = new validation();

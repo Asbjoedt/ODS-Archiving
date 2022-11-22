@@ -12,6 +12,7 @@ The application requires input and output filepaths as arguments and you then ha
 --change (optional, changes data according to archival requirements)
 --convert (optional, converts spreadsheet to .ods using LibreOffice)
 --validate (optional, validates OpenDocument Spreadsheets file format standard)
+--delete (optional, if you want to delete the original input spreadsheet)
 ```
 Example of usage:
 ```
