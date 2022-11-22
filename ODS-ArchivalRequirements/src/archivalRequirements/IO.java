@@ -3,8 +3,8 @@ package archivalRequirements;
 import org.apache.commons.io.*;
 import java.io.*;
 
-public class checkIO {
-    public Pair<String, String> Filepath(String input_filepath, String output_filepath) throws IOException {
+public class IO {
+    public Pair<String, String> CheckIO(String input_filepath, String output_filepath) throws IOException {
         String filepath = "";
 
         // Check if input filepath exists
@@ -88,12 +88,23 @@ public class checkIO {
     }
 
     // Method for copying files
-    private static String copyFile(String input_filepath, String output_filepath) throws IOException {
+    private static String CopyFile(String input_filepath, String output_filepath) throws IOException {
 
         File input_file = new File(input_filepath);
         File output_file = new File(output_filepath);
         FileUtils.copyFile(input_file, output_file);
 
         return output_filepath;
+    }
+
+    // Method for deleting input file
+    public void DeleteInputFile(String input_filepath) {
+        File del = new File(input_filepath);
+        boolean success = del.delete();
+        if (success == true) {
+            System.out.println("Input file was deleted");
+        } else {
+            System.out.println("Input file was NOT deleted");
+        }
     }
 }

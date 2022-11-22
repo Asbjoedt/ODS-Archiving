@@ -23,7 +23,7 @@ public class convert {
         File output_file = new File(output_filepath);
         String output_folder = output_file.getParent();
 
-        ProcessBuilder Conversion = new ProcessBuilder ("C:\\Program Files\\LibreOffice\\program\\scalc.exe", "--headless", "--convert-to ods", input_filepath, "--outdir " + output_folder);
+        ProcessBuilder Conversion = new ProcessBuilder ("C:\\Program Files\\LibreOffice\\program\\scalc.exe", "--headless", "--convert-to xlsx", input_filepath, "--outdir " + output_folder);
         Process process = Conversion.start();
         process.waitFor();
     }

@@ -1,5 +1,6 @@
 package archivalRequirements;
 
+import java.io.*;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
 
@@ -84,8 +85,8 @@ public class application {
 		System.out.println("PERFORM OPERATIONS ON INPUT");
 
 		// Check I/O of user inputs
-		checkIO IO = new checkIO();
-		String filepath = IO.Filepath(parsed_input_filepath, parsed_output_filepath);
+		IO IO = new IO();
+		String filepath = IO.CheckIO(parsed_input_filepath, parsed_output_filepath);
 
 		// Perform operations based on file format extension
 		String input_extension = FilenameUtils.getExtension(parsed_input_filepath).toLowerCase();
@@ -164,5 +165,9 @@ public class application {
 				}
 				break;
 		}
+		if (parsed_delete == true) {
+			IO.DeleteInputFile(parsed_input_filepath);
+		}
+		System.out.println("APPLICATION FINISHED");
 	}
 }
