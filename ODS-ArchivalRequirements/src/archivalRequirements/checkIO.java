@@ -1,8 +1,7 @@
 package archivalRequirements;
 
-import org.apache.commons.io.FileUtils;
-import java.io.File;
-import java.io.IOException;
+import org.apache.commons.io.*;
+import java.io.*;
 
 public class checkIO {
     public String Filepath(String input_filepath, String output_filepath) throws IOException {
@@ -28,7 +27,7 @@ public class checkIO {
         }
 
         // Check for accepted file format extension
-        String input_extension = input_filepath.substring(input_filepath.lastIndexOf('.') + 1);
+        String input_extension = FilenameUtils.getExtension(input_filepath);
         switch (input_extension.toLowerCase()) {
 
             case "fods":

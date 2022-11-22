@@ -14,46 +14,67 @@ public class check {
     int externalObjects = 0;
     boolean absolutePath = false;
 
-    // Perform check of archival requirements
-    public List<check> Check(String filepath) throws Exception {
+    // Method for class data types
+    public check(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean abspath) {
+        this.cellValuesExist = cellvalues;
+        this.dataConnections = conns;
+        this.externalCellReferences = cellrefs;
+        this.RTDFunctions = rtd;
+        this.printerSettings = printers;
+        this.embeddedObjects = embedsobjs;
+        this.externalObjects = extobjs;
+        this.absolutePath = abspath;
+    }
+
+    // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
+    public List<check> Check_ODFToolkit(String filepath) throws Exception {
         // Create list to return
         check che = new check();
         List<check> results = new ArrayList<>();
 
         // CELL VALUES
         cellValues cellValue = new cellValues();
-        Boolean hasCellValue = cellValue.Check(filepath);
+        Boolean hasCellValue = cellValue.Check_ODFToolkit(filepath);
 
         // DATA CONNECTIONS
         dataConnections dataConnection = new dataConnections();
-        int conns = dataConnection.Check(filepath);
+        int conns = dataConnection.Check_ODFToolkit(filepath);
 
         // EXTERNAL CELL REFERENCES
         externalCellReferences externalCellReference = new externalCellReferences();
-        int extCellRefs = externalCellReference.Check(filepath);
+        int extCellRefs = externalCellReference.Check_ODFToolkit(filepath);
 
         // RTD FUNCTIONS
         RTDFunctions RTDFunction = new RTDFunctions();
-        int rtdFunctions = RTDFunction.Check(filepath);
+        int rtdFunctions = RTDFunction.Check_ODFToolkit(filepath);
 
         // PRINTER SETTINGS
         printerSettings printersetting = new printerSettings();
-        int printers = printersetting.Check(filepath);
+        int printers = printersetting.Check_ODFToolkit(filepath);
 
         // EMBEDDED OBJECTS
         embeddedObjects embeddedObject = new embeddedObjects();
-        int embedObjs = embeddedObject.Check(filepath);
+        int embedObjs = embeddedObject.Check_ODFToolkit(filepath);
 
         // EXTERNAL OBJECTS
         externalObjects externalObject = new externalObjects();
-        int extObjs = externalObject.Check(filepath);
+        int extObjs = externalObject.Check_ODFToolkit(filepath);
 
         // ABSOLUTE PATH
         absolutePath absPath = new absolutePath();
-        boolean hasAbsolutePath = absPath.Check(filepath);
+        boolean hasAbsolutePath = absPath.Check_ODFToolkit(filepath);
 
         // Add to list and return it
-        results.add(new check(che.cellValuesExist = hasCellValue, cellValuesExist = hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        results.add(new check(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        return results;
+    }
+
+    // Perform check of archival requirements on OOXML spreadsheets using Apache POI
+    public List<check> Check_ApachePOI(String filepath) throws Exception {
+        // Create list to return
+        check che = new check();
+        List<check> results = new ArrayList<>();
+
         return results;
     }
 }

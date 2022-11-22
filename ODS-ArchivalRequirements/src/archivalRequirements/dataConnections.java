@@ -6,7 +6,7 @@ import org.odftoolkit.odfdom.*;
 public class dataConnections {
 
 	// Check for data connections
-	public int Check(String filepath) {
+	public int Check_ODFToolkit(String filepath) {
 		int dataConnections = 0;
 		
 
@@ -14,7 +14,7 @@ public class dataConnections {
 	}
 
 	// Remove data connections
-	public int Change(String filepath) {
+	public int Change_ODFToolkit(String filepath) {
 		int dataConnections = 0;
 
 

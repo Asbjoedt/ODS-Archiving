@@ -14,37 +14,37 @@ public class change {
     boolean absolutePath = false;
 
     // Perform check of archival requirements
-    public List<change> Change(String filepath) {
+    public List<change> Change_ODFToolkit(String filepath) {
         // Create list to return
         List<change> results = new ArrayList<>();
 
         // DATA CONNECTIONS
         dataConnections dataConnection = new dataConnections();
-        int conns = dataConnection.Change(filepath);
+        int conns = dataConnection.Change_ODFToolkit(filepath);
 
         // EXTERNAL CELL REFERENCES
         externalCellReferences externalCellReference = new externalCellReferences();
-        int extCellRefs = externalCellReference.Change(filepath);
+        int extCellRefs = externalCellReference.Change_ODFToolkit(filepath);
 
         // RTD FUNCTIONS
         RTDFunctions RTDFunction = new RTDFunctions();
-        int rtdFunctions = RTDFunction.Change(filepath);
+        int rtdFunctions = RTDFunction.Change_ODFToolkit(filepath);
 
         // PRINTER SETTINGS
         printerSettings printersetting = new printerSettings();
-        int printers = printersetting.Change(filepath);
+        int printers = printersetting.Change_ODFToolkit(filepath);
 
         // EMBEDDED OBJECTS
         embeddedObjects embeddedObject = new embeddedObjects();
-        int embedObjs = embeddedObject.Change(filepath);
+        int embedObjs = embeddedObject.Change_ODFToolkit(filepath);
 
         // EXTERNAL OBJECTS
         externalObjects externalObject = new externalObjects();
-        int extObjs = externalObject.Change(filepath);
+        int extObjs = externalObject.Change_ODFToolkit(filepath);
 
         // ABSOLUTE PATH
         absolutePath absPath = new absolutePath();
-        boolean hasAbsolutePath = absPath.Change(filepath);
+        boolean hasAbsolutePath = absPath.Change_ODFToolkit(filepath);
 
         // Add to list and return it
         results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);

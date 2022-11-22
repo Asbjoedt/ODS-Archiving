@@ -1,6 +1,8 @@
 package archivalRequirements;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FilenameUtils;
+
 import java.io.IOException;
 
 public class application {
@@ -13,7 +15,9 @@ public class application {
 		options.addOption(check);
 		Option change = new Option("cha", "change", false, "Change spreadsheet according to archival requirements");
 		options.addOption(change);
-		Option validate = new Option("val", "validate", false, "Validate spreadsheet for archival requirements and file format standard");
+		Option convert = new Option("con", "convert", false, "Convert spreadsheet to .ods file format");
+		options.addOption(convert);
+		Option validate = new Option("val", "validate", false, "Validate OpenDocument Spreadsheets file format standard");
 		options.addOption(validate);
 		Option input_filepath = Option.builder("inp").longOpt("inputfilepath")
 				.argName("inputfilepath")
@@ -36,6 +40,7 @@ public class application {
 		// Parse arguments
 		boolean parsed_check = false;
 		boolean parsed_change = false;
+		boolean parsed_convert = false;
 		boolean parsed_validate = false;
 		String parsed_input_filepath = "";
 		String parsed_output_filepath = "";
@@ -46,6 +51,9 @@ public class application {
 			}
 			if (cmd.hasOption("cha")) {
 				parsed_change = true;
+			}
+			if (cmd.hasOption("con")) {
+				parsed_convert = true;
 			}
 			if (cmd.hasOption("val")) {
 				parsed_validate = true;
@@ -64,7 +72,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
+		System.out.println("Methods: " + "Convert: " + parsed_convert + "Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
 		System.out.println("Input filepath: " + parsed_input_filepath);
 		System.out.println("Output filepath: " + parsed_output_filepath);
 		System.out.println("PERFORM OPERATIONS ON INPUT");
@@ -73,18 +81,55 @@ public class application {
 		checkIO IO = new checkIO();
 		String filepath = IO.Filepath(parsed_input_filepath, parsed_output_filepath);
 
-		// Perform user-chosen operations
-		if (parsed_check == true) {
-			check Perform = new check();
-			Perform.Check(filepath);
-		}
-		if (parsed_change == true) {
-			change Perform = new change();
-			Perform.Change(filepath);
-		}
-		if (parsed_validate == true) {
-			validation Perform = new validation();
-			Perform.Validation(filepath);
+		// Perform operations based on file format extension
+		String input_extension = FilenameUtils.getExtension(parsed_input_filepath);
+		switch (input_extension.toLowerCase()) {
+
+			case "fods":
+			case "ods":
+			case "ots":
+				// Perform user-chosen operations
+				if (parsed_convert == true) {
+					convert Perform = new convert();
+					Perform.ConvertToODS_LibreOffice(filepath);
+				}
+				if (parsed_check == true) {
+					check Perform = new check();
+					Perform.Check_ODFToolkit(filepath);
+				}
+				if (parsed_change == true) {
+					change Perform = new change();
+					Perform.Change_ODFToolkit(filepath);
+				}
+				if (parsed_validate == true) {
+					validation Perform = new validation();
+					Perform.Validation_ODFToolkit(filepath);
+				}
+				break;
+
+			case "xlsx":
+			case "xlsm":
+			case "xltm":
+			case "xltx":
+			case "xlam":
+				// Perform user-chosen operations
+				if (parsed_check == true) {
+					check Perform = new check();
+					Perform.Check_ApachePOI(filepath);
+				}
+				if (parsed_change == true) {
+					change Perform = new change();
+					Perform.Change_ApachePOI(filepath);
+				}
+				if (parsed_convert == true) {
+					convert Perform = new convert();
+					Perform.ConvertToODS_LibreOffice(filepath);
+				}
+				if (parsed_validate == true) {
+					validation Perform = new validation();
+					Perform.Validation_ODFToolkit(filepath);
+				}
+				break;
 		}
 	}
 }

@@ -15,7 +15,7 @@ public class cellValues {
 		}
 	}
 
-	public Boolean Check(String filepath) throws Exception {
+	public Boolean Check_ODFToolkit(String filepath) throws Exception {
 		
 		Boolean hasCellValue = false;
 
