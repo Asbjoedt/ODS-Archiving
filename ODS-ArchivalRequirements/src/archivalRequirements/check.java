@@ -75,6 +75,41 @@ public class check {
         check che = new check();
         List<check> results = new ArrayList<>();
 
+        // CELL VALUES
+        cellValues cellValue = new cellValues();
+        Boolean hasCellValue = cellValue.Check_ApachePOI(filepath);
+
+        // DATA CONNECTIONS
+        dataConnections dataConnection = new dataConnections();
+        int conns = dataConnection.Check_ApachePOI(filepath);
+
+        // EXTERNAL CELL REFERENCES
+        externalCellReferences externalCellReference = new externalCellReferences();
+        int extCellRefs = externalCellReference.Check_ApachePOI(filepath);
+
+        // RTD FUNCTIONS
+        RTDFunctions RTDFunction = new RTDFunctions();
+        int rtdFunctions = RTDFunction.Check_ApachePOI(filepath);
+
+        // PRINTER SETTINGS
+        printerSettings printersetting = new printerSettings();
+        int printers = printersetting.Check_ApachePOI(filepath);
+
+        // EMBEDDED OBJECTS
+        embeddedObjects embeddedObject = new embeddedObjects();
+        int embedObjs = embeddedObject.Check_ApachePOI(filepath);
+
+        // EXTERNAL OBJECTS
+        externalObjects externalObject = new externalObjects();
+        int extObjs = externalObject.Check_ApachePOI(filepath);
+
+        // ABSOLUTE PATH
+        absolutePath absPath = new absolutePath();
+        boolean hasAbsolutePath = absPath.Check_ApachePOI(filepath);
+
+        // Add to list and return it
+        results.add(new check(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+
         return results;
     }
 }

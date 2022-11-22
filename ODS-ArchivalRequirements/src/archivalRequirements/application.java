@@ -107,6 +107,33 @@ public class application {
 				}
 				break;
 
+			case "xls":
+			case "xla":
+			case "xlt":
+				// Perform user-chosen operations
+				if (parsed_convert == true) {
+					convert Perform = new convert();
+					Perform.ConvertToXLSX_LibreOffice(filepath);
+				}
+				if (parsed_check == true) {
+					check Perform = new check();
+					Perform.Check_ApachePOI(filepath);
+				}
+				if (parsed_change == true) {
+					change Perform = new change();
+					Perform.Change_ApachePOI(filepath);
+				}
+				// Perform user-chosen operations
+				if (parsed_convert == true) {
+					convert Perform = new convert();
+					Perform.ConvertToODS_LibreOffice(filepath);
+				}
+				if (parsed_validate == true) {
+					validation Perform = new validation();
+					Perform.Validation_ODFToolkit(filepath);
+				}
+				break;
+				
 			case "xlsx":
 			case "xlsm":
 			case "xltm":

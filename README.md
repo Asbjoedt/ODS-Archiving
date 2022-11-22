@@ -10,7 +10,7 @@ The application requires input and output filepaths as arguments and you then ha
 --outputfilepath (optional, if not set, filepath is identical to input filepath)
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
---convert (optional, converts spreadsheet to .ods)
+--convert (optional, converts spreadsheet to .ods using LibreOffice)
 --validate (optional, validates OpenDocument Spreadsheets file format standard)
 ```
 

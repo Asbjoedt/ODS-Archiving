@@ -13,7 +13,7 @@ public class change {
     int externalObjects = 0;
     boolean absolutePath = false;
 
-    // Perform check of archival requirements
+    // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
     public List<change> Change_ODFToolkit(String filepath) {
         // Create list to return
         List<change> results = new ArrayList<>();
@@ -45,6 +45,45 @@ public class change {
         // ABSOLUTE PATH
         absolutePath absPath = new absolutePath();
         boolean hasAbsolutePath = absPath.Change_ODFToolkit(filepath);
+
+        // Add to list and return it
+        results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);
+        return results;
+    }
+
+    // Perform change of archival requirements on OOXML spreadsheets using Apache POI
+    public List<change> Change_ApachePOI(String filepath) {
+        // Create list to return
+        change cha = new change();
+        List<change> results = new ArrayList<>();
+
+        // DATA CONNECTIONS
+        dataConnections dataConnection = new dataConnections();
+        int conns = dataConnection.Change_ApachePOI(filepath);
+
+        // EXTERNAL CELL REFERENCES
+        externalCellReferences externalCellReference = new externalCellReferences();
+        int extCellRefs = externalCellReference.Change_ApachePOI(filepath);
+
+        // RTD FUNCTIONS
+        RTDFunctions RTDFunction = new RTDFunctions();
+        int rtdFunctions = RTDFunction.Change_ApachePOI(filepath);
+
+        // PRINTER SETTINGS
+        printerSettings printersetting = new printerSettings();
+        int printers = printersetting.Change_ApachePOI(filepath);
+
+        // EMBEDDED OBJECTS
+        embeddedObjects embeddedObject = new embeddedObjects();
+        int embedObjs = embeddedObject.Change_ApachePOI(filepath);
+
+        // EXTERNAL OBJECTS
+        externalObjects externalObject = new externalObjects();
+        int extObjs = externalObject.Change_ApachePOI(filepath);
+
+        // ABSOLUTE PATH
+        absolutePath absPath = new absolutePath();
+        boolean hasAbsolutePath = absPath.Change_ApachePOI(filepath);
 
         // Add to list and return it
         results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);

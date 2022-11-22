@@ -1,22 +1,29 @@
 package archivalRequirements;
 
+import java.io.IOException;
 import java.lang.ProcessBuilder;
 import java.io.File;
 
 public class convert {
-    public void ConvertToODS_LibreOffice(String input_filepath) {
 
-        Map<String, String> env = Conversion.environment();
-        env.put("VAR1", "myValue");
-        env.remove("OTHERVAR");
-        env.put("VAR2", env.get("VAR1") + "suffix");
-        Conversion.directory("myDir");
+    // Convert spreadsheet to .ods file format using LibreOffice
+    public void ConvertToODS_LibreOffice(String input_filepath) throws IOException, InterruptedException {
 
         File file = new File(input_filepath);
         String output_folder = file.getParent();
 
         ProcessBuilder Conversion = new ProcessBuilder ("C:\\Program Files\\LibreOffice\\program\\scalc.exe", "--headless", "--convert-to ods", input_filepath, "--outdir " + output_folder);
-        Map<String, String> env = Conversion.environment();
+        Process process = Conversion.start();
+        process.waitFor();
+    }
+
+    // Convert spreadsheet to .xlsx file format using LibreOffice
+    public void ConvertToXLSX_LibreOffice(String input_filepath) throws IOException, InterruptedException {
+
+        File file = new File(input_filepath);
+        String output_folder = file.getParent();
+
+        ProcessBuilder Conversion = new ProcessBuilder ("C:\\Program Files\\LibreOffice\\program\\scalc.exe", "--headless", "--convert-to ods", input_filepath, "--outdir " + output_folder);
         Process process = Conversion.start();
         process.waitFor();
     }
