@@ -13,6 +13,17 @@ public class change {
     int externalObjects = 0;
     boolean absolutePath = false;
 
+    // Method for class data types
+    public change(int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean abspath) {
+        this.dataConnections = conns;
+        this.externalCellReferences = cellrefs;
+        this.RTDFunctions = rtd;
+        this.printerSettings = printers;
+        this.embeddedObjects = embedsobjs;
+        this.externalObjects = extobjs;
+        this.absolutePath = abspath;
+    }
+
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
     public List<change> Change_ODFToolkit(String filepath) {
         // Create list to return
@@ -47,14 +58,13 @@ public class change {
         boolean hasAbsolutePath = absPath.Change_ODFToolkit(filepath);
 
         // Add to list and return it
-        results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);
+        results.add(new change(conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
         return results;
     }
 
     // Perform change of archival requirements on OOXML spreadsheets using Apache POI
     public List<change> Change_ApachePOI(String filepath) {
         // Create list to return
-        change cha = new change();
         List<change> results = new ArrayList<>();
 
         // DATA CONNECTIONS
@@ -86,7 +96,7 @@ public class change {
         boolean hasAbsolutePath = absPath.Change_ApachePOI(filepath);
 
         // Add to list and return it
-        results.add(dataConnections = conns, externalCellReferences = extCellRefs, RTDFunctions = rtdFunctions, printerSettings = printers, embeddedObjects = embedObjs, externalObjects = extObjs, absolutePath = hasAbsolutePath);
+        results.add(new change(conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
         return results;
     }
 }

@@ -29,7 +29,6 @@ public class check {
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
     public List<check> Check_ODFToolkit(String filepath) throws Exception {
         // Create list to return
-        check che = new check();
         List<check> results = new ArrayList<>();
 
         // CELL VALUES
@@ -72,7 +71,6 @@ public class check {
     // Perform check of archival requirements on OOXML spreadsheets using Apache POI
     public List<check> Check_ApachePOI(String filepath) throws Exception {
         // Create list to return
-        check che = new check();
         List<check> results = new ArrayList<>();
 
         // CELL VALUES

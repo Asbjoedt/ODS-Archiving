@@ -3,7 +3,7 @@ A Java console application, easy to integrate in workflows to convert spreadshee
 
 * For more information, see repository **[CLISC](https://github.com/Asbjoedt/CLISC)**
 
-## Methods
+## How to use
 The application requires input and output filepaths as arguments and you then have to choose one or more optional arguments for processing the filepaths.
 ```
 --inputfilepath (required, spreadsheet to perform operations on)
@@ -13,19 +13,18 @@ The application requires input and output filepaths as arguments and you then ha
 --convert (optional, converts spreadsheet to .ods using LibreOffice)
 --validate (optional, validates OpenDocument Spreadsheets file format standard)
 ```
-
 Example of usage:
-
 ```
---check --change --convert --validate --inputfilepath "C:\Users\%USERNAME%\Desktop\TestSpreadsheet.xlsx" --outputfilepath "C:\Users\%USERNAME%\Desktop\TestSpreadsheet.ods"
+--check --change --convert --validate --inputfilepath "C:\Users\%USERNAME%\Desktop\Spreadsheet.xlsx" --outputfilepath "C:\Users\%USERNAME%\Desktop\Spreadsheet.ods"
 ```
 Or shorter:
 ```
--che -cha -con -val -inp "C:\TestSpreadsheet.xlsx" -out "C:\TestSpreadsheet.ods"
+-che -cha -con -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
 ```
 
 ## Dependencies
-* [Apache POI](https://poi.apache.org/): Apache POI is used for checking and changing Office Open XML file formats before conversion to .ods file format
+The application uses the following software.
+* [Apache POI](https://poi.apache.org/): Apache POI is used for checking and changing Office Open XML file formats before conversion to .ods file format. No installation required.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
 
