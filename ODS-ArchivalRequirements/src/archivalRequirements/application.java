@@ -23,9 +23,6 @@ public class application {
 		Option change = new Option("cha", "change", false, "Change spreadsheet according to archival requirements");
 		options.addOption(change);
 
-		Option convert = new Option("con", "convert", false, "Convert spreadsheet to .ods file format");
-		options.addOption(convert);
-
 		Option validate = new Option("val", "validate", false, "Validate OpenDocument Spreadsheets file format standard");
 		options.addOption(validate);
 
@@ -34,6 +31,13 @@ public class application {
 
 		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
 		options.addOption(recurse);
+
+		Option convert = Option.builder("con").longOpt("convert")
+				.argName("convert")
+				.hasArg()
+				.required(false)
+				.desc("Convert spreadsheet, set extension for output file format").build();
+		options.addOption(convert);
 
 		Option input_filepath = Option.builder("inp").longOpt("inputfilepath")
 				.argName("inputfilepath")
@@ -71,10 +75,10 @@ public class application {
 		// Parse arguments
 		boolean parsed_check = false;
 		boolean parsed_change = false;
-		boolean parsed_convert = false;
 		boolean parsed_validate = false;
 		boolean parsed_delete = false;
 		boolean parsed_recurse = false;
+		String parsed_convert = null;
 		String parsed_input_filepath = null;
 		String parsed_output_filepath = null;
 		String parsed_input_folder = null;
@@ -88,14 +92,14 @@ public class application {
 			if (cmd.hasOption("cha")) {
 				parsed_change = true;
 			}
-			if (cmd.hasOption("con")) {
-				parsed_convert = true;
-			}
 			if (cmd.hasOption("val")) {
 				parsed_validate = true;
 			}
 			if (cmd.hasOption("del")) {
 				parsed_delete = true;
+			}
+			if (cmd.hasOption("con")) {
+				parsed_convert = cmd.getOptionValue("convert");
 			}
 			if (cmd.hasOption("inp")) {
 				parsed_input_filepath = cmd.getOptionValue("inputfilepath");
@@ -117,7 +121,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert: " + parsed_convert + ", Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
+		System.out.println("Methods: " + "Convert to: " + parsed_convert + ", Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
 		if (parsed_input_filepath != null) {
 			System.out.println("Input filepath: " + parsed_input_filepath);
 		}

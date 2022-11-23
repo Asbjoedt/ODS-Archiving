@@ -7,21 +7,25 @@ import java.util.*;
 public class Operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, String convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
         IO IO = new IO();
 
         // Get file format extension output filepath
+        String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
         String output_extension = FilenameUtils.getExtension(output_filepath).toLowerCase();
 
         // Perform convert operations, if selected
-        if (convert == true) {
+        if (convert != null) {
             convert Perform = new convert();
             Perform.Convert_LibreOffice(input_filepath, output_filepath, output_extension);
         }
         // If not selected, copy to output filepath if it is set
-        if (!convert) {
-            if (output_filepath != null && output_filepath != input_filepath) {
+        if (convert == null) {
+            if (output_filepath != null && output_filepath != input_filepath && output_extension.equals(input_extension)) {
                 IO.CopyFile(input_filepath, output_filepath);
+            }
+            else if (output_filepath != null && output_filepath != input_filepath && !output_extension.equals(input_extension)) {
+                throw new IOException("Spreadsheet must be converted to designated output extension");
             }
         }
 
@@ -87,7 +91,7 @@ public class Operations {
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, String convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);

@@ -26,7 +26,7 @@ Folder method
 ```
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
---convert (optional, converts spreadsheet to .ods using LibreOffice)
+--convert <extension> (optional, converts spreadsheet to set file format using LibreOffice)
 --validate (optional, validates OpenDocument Spreadsheets file format standard)
 --delete (optional, if you want to delete the original input spreadsheet)
 ```
