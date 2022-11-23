@@ -24,8 +24,8 @@ public class RTDFunctions {
     public int Check_ApachePOI(String filepath) throws IOException {
         int rtdfunctions = 0;
 
-        FileInputStream file = new FileInputStream(new File(filepath));
-        Workbook wb = new XSSFWorkbook(file);
+        FileInputStream fileInput = new FileInputStream(new File(filepath));
+        Workbook wb = new XSSFWorkbook(fileInput);
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {
@@ -40,11 +40,13 @@ public class RTDFunctions {
                 }
             }
         }
+        wb.close();
+        fileInput.close();
+
         // Inform user and return number
         if (rtdfunctions > 0) {
             System.out.println(rtdfunctions + " RTD functions detected");
         }
-
         return rtdfunctions;
     }
 
@@ -52,8 +54,8 @@ public class RTDFunctions {
     public int Change_ApachePOI(String filepath) throws IOException {
         int rtdfunctions = 0;
 
-        FileInputStream file = new FileInputStream(new File(filepath));
-        Workbook wb = new XSSFWorkbook(file);
+        FileInputStream fileInput = new FileInputStream(new File(filepath));
+        Workbook wb = new XSSFWorkbook(fileInput);
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {
@@ -91,11 +93,17 @@ public class RTDFunctions {
                 }
             }
         }
+        // Save and close file
+        FileOutputStream fileOutput = new FileOutputStream(new File(filepath));
+        wb.write(fileOutput);
+        wb.close();
+        fileOutput.close();
+        fileInput.close();
+
         // Inform user and return number
         if (rtdfunctions > 0) {
             System.out.println(rtdfunctions + " RTD functions removed");
         }
-
         return rtdfunctions;
     }
 }

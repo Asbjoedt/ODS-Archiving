@@ -2,37 +2,38 @@ package archivalRequirements;
 
 import org.apache.commons.io.*;
 import java.io.*;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
 public class Operations {
 
     // Perform operations on input filepath
     public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
-
-        // Copy file, if output filepath is set
         IO IO = new IO();
-        if (output_filepath != null && output_filepath != input_filepath) {
-            IO.CopyFile(input_filepath, output_filepath);
+
+        // Get file format extension output filepath
+        String output_extension = FilenameUtils.getExtension(output_filepath).toLowerCase();
+
+        // Perform convert operations, if selected
+        if (convert == true) {
+            convert Perform = new convert();
+            Perform.Convert_LibreOffice(input_filepath, output_filepath, output_extension);
+        }
+        // If not selected, copy to output filepath if it is set
+        if (!convert) {
+            if (output_filepath != null && output_filepath != input_filepath) {
+                IO.CopyFile(input_filepath, output_filepath);
+            }
         }
 
-        // Get file format extension of input filepath
-        String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
-
         // Perform operations based on file format extension
-        switch (input_extension) {
+        switch (output_extension) {
 
             case "fods":
             case "ods":
             case "ots":
-                // Perform user-chosen operations
-                if (convert == true) {
-                    convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(input_filepath, output_filepath);
-                }
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ODFToolkit(input_filepath);
+                    Perform.Check_ODFToolkit(output_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
@@ -47,26 +48,16 @@ public class Operations {
             case "xls":
             case "xla":
             case "xlt":
-                // Perform user-chosen operations
-                if (convert == true) {
-                    convert Perform = new convert();
-                    Perform.ConvertToXLSX_LibreOffice(input_filepath, output_filepath);
-                }
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(input_filepath);
+                    Perform.Check_ApachePOI(output_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
                     Perform.Change_ApachePOI(output_filepath);
                 }
-                if (convert == true) {
-                    convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(input_filepath, output_filepath);
-                }
                 if (validate == true) {
-                    validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(output_filepath);
+                    System.out.println("Validation of legacy Excel file formats is not supported");
                 }
                 break;
 
@@ -78,22 +69,18 @@ public class Operations {
                 // Perform user-chosen operations
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(input_filepath);
+                    Perform.Check_ApachePOI(output_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
                     Perform.Change_ApachePOI(output_filepath);
                 }
-                if (convert == true) {
-                    convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(output_filepath, output_filepath);
-                }
                 if (validate == true) {
-                    validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(output_filepath);
+                    System.out.println("Validation of OOXML file formats is not supported");
                 }
                 break;
         }
+        // Delete original file, if selected
         if (delete == true) {
             IO.DeleteInputFile(input_filepath);
         }
@@ -104,7 +91,7 @@ public class Operations {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
-        String[] extensions = {"fods", "ods", "ots", "xls", "xla", "xlt", "xlsx", "xlsm", "xltm", "xltx", "xlam" };
+        String[] extensions = {"fods", "ods", "ots", "xls", "xla", "xlt", "xlsx", "xlsm", "xltm", "xltx", "xlam"};
         Collection<File> enumeration = FileUtils.listFiles(inputfolder, extensions, recurse);
         
         // Iterate files in enumeration

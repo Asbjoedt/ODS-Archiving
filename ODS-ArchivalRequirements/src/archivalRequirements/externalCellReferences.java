@@ -1,8 +1,10 @@
 package archivalRequirements;
 
 import java.io.*;
+import org.apache.commons.io.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class externalCellReferences {
 
@@ -24,8 +26,16 @@ public class externalCellReferences {
     public int Check_ApachePOI(String filepath) throws IOException {
         int extCellRefs = 0;
 
-        FileInputStream file = new FileInputStream(new File(filepath));
-        Workbook wb = new XSSFWorkbook(file);
+        // Find spreadsheet and create workbook instance
+        FileInputStream fileInput = new FileInputStream(new File(filepath));
+        Workbook wb;
+        String extension = FilenameUtils.getExtension(filepath).toLowerCase();
+        if (extension == "xls" || extension == "xla" || extension == "xlt") {
+            wb = new HSSFWorkbook(fileInput);
+        }
+        else {
+            wb = new XSSFWorkbook(fileInput);
+        }
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {
@@ -40,6 +50,9 @@ public class externalCellReferences {
                 }
             }
         }
+        wb.close();
+        fileInput.close();
+
         // Inform user and return number
         if (extCellRefs > 0) {
             System.out.println(extCellRefs + " external cell references detected");
@@ -51,8 +64,16 @@ public class externalCellReferences {
     public int Change_ApachePOI(String filepath) throws IOException {
         int extCellRefs = 0;
 
-        FileInputStream file = new FileInputStream(new File(filepath));
-        Workbook wb = new XSSFWorkbook(file);
+        // Find spreadsheet and create workbook instance
+        FileInputStream fileInput = new FileInputStream(new File(filepath));
+        Workbook wb;
+        String extension = FilenameUtils.getExtension(filepath).toLowerCase();
+        if (extension == "xls" || extension == "xla" || extension == "xlt") {
+            wb = new HSSFWorkbook(fileInput);
+        }
+        else {
+            wb = new XSSFWorkbook(fileInput);
+        }
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {
@@ -90,6 +111,13 @@ public class externalCellReferences {
                 }
             }
         }
+        // Save and close file
+        FileOutputStream fileOutput = new FileOutputStream(new File(filepath));
+        wb.write(fileOutput);
+        wb.close();
+        fileOutput.close();
+        fileInput.close();
+
         // Inform user and return number
         if (extCellRefs > 0) {
             System.out.println(extCellRefs + " external cell references removed");

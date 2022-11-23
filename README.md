@@ -12,7 +12,7 @@ The application requires input filepath as argument, and then you have to choose
 
 Filepath method
 ```
---inputfilepath "<filepath>" (optional, spreadsheet to to process)
+--inputfilepath "<filepath>" (optional, spreadsheet to process)
 --outputfilepath "<filepath>" (optional, if not set, filepath is identical to input filepath)
 ```
 Folder method
