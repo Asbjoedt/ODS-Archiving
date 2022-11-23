@@ -4,32 +4,35 @@ import java.util.*;
 
 public class check {
 
-    // Class data types
-    boolean cellValuesExist = false;
-    int dataConnections = 0;
-    int externalCellReferences = 0;
-    int RTDFunctions = 0;
-    int printerSettings = 0;
-    int embeddedObjects = 0;
-    int externalObjects = 0;
-    boolean absolutePath = false;
+    // Class for creating list of checks
+    public class checkList {
+        // Class data types
+        boolean cellValuesExist = false;
+        int dataConnections = 0;
+        int externalCellReferences = 0;
+        int RTDFunctions = 0;
+        int printerSettings = 0;
+        int embeddedObjects = 0;
+        int externalObjects = 0;
+        boolean absolutePath = false;
 
-    // Method for class data types
-    public check(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean abspath) {
-        this.cellValuesExist = cellvalues;
-        this.dataConnections = conns;
-        this.externalCellReferences = cellrefs;
-        this.RTDFunctions = rtd;
-        this.printerSettings = printers;
-        this.embeddedObjects = embedsobjs;
-        this.externalObjects = extobjs;
-        this.absolutePath = abspath;
+        // Method for class data types
+        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean abspath) {
+            this.cellValuesExist = cellvalues;
+            this.dataConnections = conns;
+            this.externalCellReferences = cellrefs;
+            this.RTDFunctions = rtd;
+            this.printerSettings = printers;
+            this.embeddedObjects = embedsobjs;
+            this.externalObjects = extobjs;
+            this.absolutePath = abspath;
+        }
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<check> Check_ODFToolkit(String filepath) throws Exception {
+    public List<checkList> Check_ODFToolkit(String filepath) throws Exception {
         // Create list to return
-        List<check> results = new ArrayList<>();
+        List<checkList> results = new ArrayList<>();
 
         // CELL VALUES
         cellValues cellValue = new cellValues();
@@ -64,14 +67,14 @@ public class check {
         boolean hasAbsolutePath = absPath.Check_ODFToolkit(filepath);
 
         // Add to list and return it
-        results.add(new check(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
         return results;
     }
 
     // Perform check of archival requirements on OOXML spreadsheets using Apache POI
-    public List<check> Check_ApachePOI(String filepath) throws Exception {
+    public List<checkList> Check_ApachePOI(String filepath) throws Exception {
         // Create list to return
-        List<check> results = new ArrayList<>();
+        List<checkList> results = new ArrayList<>();
 
         // CELL VALUES
         cellValues cellValue = new cellValues();
@@ -106,7 +109,7 @@ public class check {
         boolean hasAbsolutePath = absPath.Check_ApachePOI(filepath);
 
         // Add to list and return it
-        results.add(new check(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
 
         return results;
     }

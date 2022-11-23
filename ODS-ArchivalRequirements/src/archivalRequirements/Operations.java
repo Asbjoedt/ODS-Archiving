@@ -3,8 +3,15 @@ package archivalRequirements;
 import org.apache.commons.io.*;
 
 public class Operations {
+
     // Perform operations on input filepath
     public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
+
+        // Copy file, if output filepath is set
+        IO IO = new IO();
+        if (output_filepath != null && output_filepath == input_filepath) {
+            IO.CopyFile(input_filepath, output_filepath);
+        }
 
         // Get file format extension of input filepath
         String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
@@ -18,7 +25,7 @@ public class Operations {
                 // Perform user-chosen operations
                 if (convert == true) {
                     convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(input_filepath, filepath);
+                    Perform.ConvertToODS_LibreOffice(input_filepath, output_filepath);
                 }
                 if (check == true) {
                     check Perform = new check();
@@ -40,24 +47,23 @@ public class Operations {
                 // Perform user-chosen operations
                 if (convert == true) {
                     convert Perform = new convert();
-                    Perform.ConvertToXLSX_LibreOffice(input_filepath, filepath);
+                    Perform.ConvertToXLSX_LibreOffice(input_filepath, output_filepath);
                 }
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(input_filepath);
+                    Perform.Check_ApachePOI(output_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
-                    Perform.Change_ApachePOI(input_filepath);
+                    Perform.Change_ApachePOI(output_filepath);
                 }
-                // Perform user-chosen operations
                 if (convert == true) {
                     convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(input_filepath, filepath);
+                    Perform.ConvertToODS_LibreOffice(input_filepath, output_filepath);
                 }
                 if (validate == true) {
                     validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(input_filepath);
+                    Perform.Validation_ODFToolkit(output_filepath);
                 }
                 break;
 
@@ -69,24 +75,23 @@ public class Operations {
                 // Perform user-chosen operations
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(input_filepath);
+                    Perform.Check_ApachePOI(output_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
-                    Perform.Change_ApachePOI(input_filepath);
+                    Perform.Change_ApachePOI(output_filepath);
                 }
                 if (convert == true) {
                     convert Perform = new convert();
-                    Perform.ConvertToODS_LibreOffice(input_filepath, filepath);
+                    Perform.ConvertToODS_LibreOffice(output_filepath, output_filepath);
                 }
                 if (validate == true) {
                     validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(input_filepath);
+                    Perform.Validation_ODFToolkit(output_filepath);
                 }
                 break;
         }
         if (delete == true) {
-            IO IO = new IO();
             IO.DeleteInputFile(input_filepath);
         }
 

@@ -118,9 +118,27 @@ public class application {
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
 		System.out.println("Methods: " + "Convert: " + parsed_convert + "Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
-		System.out.println("Input filepath: " + parsed_input_filepath);
-		System.out.println("Output filepath: " + parsed_output_filepath);
+		if (parsed_input_filepath != null) {
+			System.out.println("Input filepath: " + parsed_input_filepath);
+		}
+		if (parsed_output_filepath != null) {
+			System.out.println("Output filepath: " + parsed_output_filepath);
+		}
+		if (parsed_input_folder != null) {
+			System.out.println("Input folder: " + parsed_input_folder);
+		}
+		if (parsed_output_folder != null) {
+			System.out.println("Output folder: " + parsed_output_folder);
+		}
 		System.out.println("PERFORM OPERATIONS ON INPUT");
+
+		// Correct outputs if outputs are identical to inputs or null
+		if (parsed_input_filepath == parsed_output_filepath || parsed_output_filepath == null) {
+			parsed_output_filepath = parsed_input_filepath;
+		}
+		if (parsed_input_folder == parsed_output_folder || parsed_output_folder == null) {
+			parsed_output_folder = parsed_input_folder;
+		}
 
 		// Check I/O of user inputs
 		IO IO = new IO();
@@ -129,14 +147,6 @@ public class application {
 		}
 		else if (parsed_input_folder != null && parsed_input_filepath == null) {
 			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
-		}
-
-		// Correct outputs if outputs are identical to inputs or null
-		if (parsed_input_filepath == parsed_output_filepath || parsed_output_filepath == null) {
-			parsed_output_filepath = parsed_input_filepath;
-		}
-		if (parsed_input_folder == parsed_output_folder || parsed_output_folder == null) {
-			parsed_output_folder = parsed_input_folder;
 		}
 
 		// Perform operations

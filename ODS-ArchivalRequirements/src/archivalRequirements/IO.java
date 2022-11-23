@@ -4,6 +4,7 @@ import org.apache.commons.io.*;
 import java.io.*;
 
 public class IO {
+
     // Method for checking availability of input and output filepaths
     public void CheckFilepathIO(String input_filepath, String output_filepath) throws IOException {
         String filepath = "";
@@ -38,35 +39,26 @@ public class IO {
             throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
         }
 
-        // Check for accepted file format extensions and copy file
+        // Check for accepted file format extensions
         String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
         switch (input_extension) {
 
-            case "ods":
-                // Copy file, if output filepath is set
-                if (output_filepath != null && output_filepath == input_filepath) {
-                    filepath = CopyFile(input_filepath, output_filepath);
-                }
-
+            // OpenDocument Spreadsheet file formats
             case "fods":
+            case "ods":
             case "ots":
-                // Copy file, if output filepath is set
-                if (output_filepath != null && output_filepath == input_filepath) {
-                    filepath = CopyFile(input_filepath, output_filepath);
-                }
 
-            case "xls":
+            // Legacy Excel file formats
             case "xla":
+            case "xls":
             case "xlt":
-            case "xlsx":
+
+            // OOXML file formats
+            case "xlam":
             case "xlsm":
+            case "xlsx":
             case "xltm":
             case "xltx":
-            case "xlam":
-                // Copy file, if output filepath is set
-                if (output_filepath != null) {
-                    filepath = CopyFile(input_filepath, output_filepath);
-                }
 
             default:
                 throw new IOException("Input filepath does not have an accepted file format extension");
@@ -110,11 +102,10 @@ public class IO {
     }
 
     // Method for copying a file
-    private static String CopyFile(String input_filepath, String output_filepath) throws IOException {
+    public void CopyFile(String input_filepath, String output_filepath) throws IOException {
         File input_file = new File(input_filepath);
         File output_file = new File(output_filepath);
         FileUtils.copyFile(input_file, output_file);
-        return output_filepath;
     }
 
     // Method for deleting input file
