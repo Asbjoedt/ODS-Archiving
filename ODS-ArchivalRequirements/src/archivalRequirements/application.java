@@ -124,7 +124,20 @@ public class application {
 
 		// Check I/O of user inputs
 		IO IO = new IO();
-		String filepath = IO.CheckIO(parsed_input_filepath, parsed_output_filepath);
+		if (parsed_input_filepath != null && parsed_input_folder == null) {
+			IO.CheckFilepathIO(parsed_input_filepath, parsed_output_filepath);
+		}
+		else if (parsed_input_folder != null && parsed_input_filepath == null) {
+			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
+		}
+
+		// Correct outputs if outputs are identical to inputs or null
+		if (parsed_input_filepath == parsed_output_filepath || parsed_output_filepath == null) {
+			parsed_output_filepath = parsed_input_filepath;
+		}
+		if (parsed_input_folder == parsed_output_folder || parsed_output_folder == null) {
+			parsed_output_folder = parsed_input_folder;
+		}
 
 		// Perform operations
 		Operations OperateOn = new Operations();

@@ -4,7 +4,8 @@ import org.apache.commons.io.*;
 import java.io.*;
 
 public class IO {
-    public Pair<String, String> CheckIO(String input_filepath, String output_filepath) throws IOException {
+    // Method for checking availability of input and output filepaths
+    public void CheckFilepathIO(String input_filepath, String output_filepath) throws IOException {
         String filepath = "";
 
         // Check if input filepath exists
@@ -46,11 +47,6 @@ public class IO {
                 if (output_filepath != null && output_filepath == input_filepath) {
                     filepath = CopyFile(input_filepath, output_filepath);
                 }
-                // Else use input filepath for operations
-                else if (output_filepath == null || output_filepath == input_filepath) {
-                    filepath = input_filepath;
-                }
-                return filepath;
 
             case "fods":
             case "ots":
@@ -58,11 +54,6 @@ public class IO {
                 if (output_filepath != null && output_filepath == input_filepath) {
                     filepath = CopyFile(input_filepath, output_filepath);
                 }
-                // Else use input filepath for operations
-                else if (output_filepath == null || output_filepath == input_filepath) {
-                    filepath = FilenameUtils.getFullPath(input_filepath) + FilenameUtils.getBaseName(input_filepath) + ".ods";
-                }
-                return filepath;
 
             case "xls":
             case "xla":
@@ -76,14 +67,45 @@ public class IO {
                 if (output_filepath != null) {
                     filepath = CopyFile(input_filepath, output_filepath);
                 }
-                // Else use input filepath for operations
-                else if (output_filepath == null) {
-                    filepath = FilenameUtils.getFullPath(input_filepath) + FilenameUtils.getBaseName(input_filepath) + ".ods";
-                }
-                return filepath;
 
             default:
                 throw new IOException("Input filepath does not have an accepted file format extension");
+        }
+    }
+
+    // Method for checking availability of input and output folders
+    public void CheckFolderIO(String input_folder, String output_folder) throws IOException {
+
+        // Check if input directory exists
+        File inputfolder = new File(input_folder);
+        if (!inputfolder.exists()) {
+            throw new IOException("Input directory does not exist");
+        }
+
+        // Check if output directory exists
+        File outputfolder = new File(output_folder);
+        if (!outputfolder.exists()) {
+            throw new IOException("Output directory does not exist");
+        }
+
+        // Check for input directory protection
+        boolean inputfolder_readable = inputfolder.canRead();
+        boolean inputfolder_writeable = inputfolder.canWrite();
+        if (!inputfolder_readable) {
+            throw new IOException("Input folder cannot be processed e.g. has password protection");
+        }
+        if (!inputfolder_writeable) {
+            throw new IOException("Input folder cannot be processed e.g. has password protection");
+        }
+
+        // Check for output directory protection
+        boolean outputfolder_readable = inputfolder.canRead();
+        boolean outputfolder_writeable = inputfolder.canWrite();
+        if (!outputfolder_readable) {
+            throw new IOException("Output folder cannot be processed e.g. has password protection");
+        }
+        if (!outputfolder_writeable) {
+            throw new IOException("Output folder cannot be processed e.g. has password protection");
         }
     }
 
