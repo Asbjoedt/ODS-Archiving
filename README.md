@@ -7,20 +7,32 @@ A Java console application, easy to integrate in workflows to convert spreadshee
 In your terminal, change to the directory where the application is located.
 
 The application requires input filepath as argument, and then you have to choose one or more optional arguments for processing the filepath.
+
+**Choose input/output method**
 ```
---inputfilepath (required, spreadsheet to perform operations on)
---outputfilepath (optional, if not set, filepath is identical to input filepath)
+1. Filepath method
+--inputfilepath <filepath> (optional, spreadsheet to to process)
+--outputfilepath <filepath> (optional, if not set, filepath is identical to input filepath)
+
+2. Folder method
+--inputfolder <folder> (optional, folder to enumerate for input spreadsheets)
+--outputfolder <folder> (optional, if not set, folder is identical to input folder)
+--recurse (optional, set if subdirectories should be included)
+```
+
+**Choose operation methods**
+```
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --convert (optional, converts spreadsheet to .ods using LibreOffice)
 --validate (optional, validates OpenDocument Spreadsheets file format standard)
 --delete (optional, if you want to delete the original input spreadsheet)
 ```
-Example of usage:
+**Example of filepath usage**
 ```
 .\ODS-ArchivalRequirements.jar --check --change --convert --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfilepath "C:\AnyFolder\ThisIsFun.ods"
 ```
-Or shorter:
+Or shorter
 ```
 .\ODS-ArchivalRequirements.jar -che -cha -con -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
 ```
