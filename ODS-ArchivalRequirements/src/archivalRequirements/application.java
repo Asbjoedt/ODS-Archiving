@@ -134,7 +134,6 @@ public class application {
 		if (parsed_output_folder != null) {
 			System.out.println("Output folder: " + parsed_output_folder);
 		}
-		System.out.println("PERFORM OPERATIONS ON INPUT");
 
 		// Correct outputs if outputs are identical to inputs or null
 		if (parsed_input_filepath == parsed_output_filepath || parsed_output_filepath == null) {
@@ -152,8 +151,12 @@ public class application {
 		else if (parsed_input_folder != null && parsed_input_filepath == null) {
 			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
 		}
+		else {
+			throw new IOException("No input filepath or input folder has been set");
+		}
 
 		// Perform operations
+		System.out.println("PERFORM OPERATIONS ON INPUT");
 		Operations OperateOn = new Operations();
 		if (parsed_input_filepath != null && parsed_input_folder == null) {
 			OperateOn.Filepath(parsed_input_filepath, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_delete);

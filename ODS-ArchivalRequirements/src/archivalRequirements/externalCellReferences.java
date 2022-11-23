@@ -28,14 +28,8 @@ public class externalCellReferences {
 
         // Find spreadsheet and create workbook instance
         FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Workbook wb;
-        String extension = FilenameUtils.getExtension(filepath).toLowerCase();
-        if (extension == "xls" || extension == "xla" || extension == "xlt") {
-            wb = new HSSFWorkbook(fileInput);
-        }
-        else {
-            wb = new XSSFWorkbook(fileInput);
-        }
+        Operations Fetch = new Operations();
+        Workbook wb = Fetch.workbookType(filepath, fileInput);
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {

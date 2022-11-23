@@ -6,7 +6,7 @@ A Java console application, easy to integrate in workflows to convert spreadshee
 ## How to use
 In your terminal, change to the directory where the application is located.
 
-The application requires input filepath as argument, and then you have to choose one or more optional arguments for processing the filepath.
+The application requires input filepath or input folder as argument, and then you have to choose one or more optional arguments for processing the filepath.
 
 **Choose input/output method**
 
@@ -34,11 +34,11 @@ Folder method
 
 Filepath usage
 ```
-.\ODS-ArchivalRequirements.jar --check --change --convert --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfilepath "C:\AnyFolder\ThisIsFun.ods"
+.\ODS-ArchivalRequirements.jar --convert ods --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfilepath "C:\AnyFolder\ThisIsFun.ods"
 ```
 Or shorter
 ```
-.\ODS-ArchivalRequirements.jar -che -cha -con -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
+.\ODS-ArchivalRequirements.jar -con ods -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
 ```
 
 ## Dependencies

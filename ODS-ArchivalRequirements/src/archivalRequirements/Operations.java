@@ -1,6 +1,11 @@
 package archivalRequirements;
 
 import org.apache.commons.io.*;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.*;
 
@@ -103,5 +108,18 @@ public class Operations {
         {
             // Do something
         }
+    }
+
+    // Perform operations on workbook
+    public Workbook workbookType(String filepath, FileInputStream fileInput) throws IOException {
+        Workbook wb;
+        String extension = FilenameUtils.getExtension(filepath).toLowerCase();
+        if (extension == "xls" || extension == "xla" || extension == "xlt") {
+            wb = new HSSFWorkbook(fileInput);
+        }
+        else {
+            wb = new XSSFWorkbook(fileInput);
+        }
+        return wb;
     }
 }
