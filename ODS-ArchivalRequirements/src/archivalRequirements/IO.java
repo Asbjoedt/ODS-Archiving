@@ -7,7 +7,6 @@ public class IO {
 
     // Method for checking availability of input and output filepaths
     public void CheckFilepathIO(String input_filepath, String output_filepath) throws IOException {
-        String filepath = "";
 
         // Check if input filepath exists
         File input_file = new File(input_filepath);
@@ -25,7 +24,7 @@ public class IO {
         // Check if output filepath has .ods file format extension
         File output_file = new File(output_filepath);
         String output_extension = FilenameUtils.getExtension(output_filepath).toLowerCase();
-        if (output_extension != "ods" && !output_file.isDirectory()) {
+        if (!"ods".equals(output_extension) && !output_file.isDirectory()) {
             throw new IOException("Output filepath does not have accepted file format extension .ods");
         }
 
@@ -43,22 +42,19 @@ public class IO {
         String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
         switch (input_extension) {
 
-            // OpenDocument Spreadsheet file formats
             case "fods":
             case "ods":
             case "ots":
-
-            // Legacy Excel file formats
             case "xla":
             case "xls":
             case "xlt":
-
-            // OOXML file formats
             case "xlam":
             case "xlsm":
             case "xlsx":
             case "xltm":
             case "xltx":
+                // Do nothing
+                break;
 
             default:
                 throw new IOException("Input filepath does not have an accepted file format extension");

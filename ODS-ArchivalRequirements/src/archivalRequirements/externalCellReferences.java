@@ -33,7 +33,7 @@ public class externalCellReferences {
             for (Row row : sheet) {
                 for (Cell cell : row) {
                     if (cell.getCellType() == CellType.FORMULA) {
-                        if (cell.getCellFormula().substring(0, 2) == "='") {
+                        if (cell.getCellFormula().startsWith("='") || cell.getCellFormula().startsWith("[")) {
                             extCellRefs++;
                         }
                     }
@@ -60,8 +60,8 @@ public class externalCellReferences {
             for (Row row : sheet) {
                 for (Cell cell : row) {
                     if (cell.getCellType() == CellType.FORMULA) {
-                        if (cell.getCellFormula().substring(0, 2) == "='") {
-                            String cellValue = "";
+                        if (cell.getCellFormula().startsWith("='") || cell.getCellFormula().startsWith("[")) {
+                            String cellValue = null;
                             switch (cell.getCellType()) {
                                 case BOOLEAN:
                                     cellValue = Boolean.toString(cell.getBooleanCellValue());
@@ -92,7 +92,7 @@ public class externalCellReferences {
         }
         // Inform user and return number
         if (extCellRefs > 0) {
-            System.out.println(extCellRefs + " external cell references detected");
+            System.out.println(extCellRefs + " external cell references removed");
         }
         return extCellRefs;
     }

@@ -1,6 +1,9 @@
 package archivalRequirements;
 
 import org.apache.commons.io.*;
+import java.io.*;
+import java.util.Collection;
+import java.util.Iterator;
 
 public class Operations {
 
@@ -9,7 +12,7 @@ public class Operations {
 
         // Copy file, if output filepath is set
         IO IO = new IO();
-        if (output_filepath != null && output_filepath == input_filepath) {
+        if (output_filepath != null && output_filepath != input_filepath) {
             IO.CopyFile(input_filepath, output_filepath);
         }
 
@@ -33,11 +36,11 @@ public class Operations {
                 }
                 if (change == true) {
                     change Perform = new change();
-                    Perform.Change_ODFToolkit(input_filepath);
+                    Perform.Change_ODFToolkit(output_filepath);
                 }
                 if (validate == true) {
                     validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(input_filepath);
+                    Perform.Validation_ODFToolkit(output_filepath);
                 }
                 break;
 
@@ -51,7 +54,7 @@ public class Operations {
                 }
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(output_filepath);
+                    Perform.Check_ApachePOI(input_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
@@ -75,7 +78,7 @@ public class Operations {
                 // Perform user-chosen operations
                 if (check == true) {
                     check Perform = new check();
-                    Perform.Check_ApachePOI(output_filepath);
+                    Perform.Check_ApachePOI(input_filepath);
                 }
                 if (change == true) {
                     change Perform = new change();
@@ -94,11 +97,20 @@ public class Operations {
         if (delete == true) {
             IO.DeleteInputFile(input_filepath);
         }
-
     }
 
     // Perform operations on input folder
     public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
 
+        // Enumerate files in folder based on extension and optionally recursively
+        File inputfolder = new File(input_folder);
+        String[] extensions = {"fods", "ods", "ots", "xls", "xla", "xlt", "xlsx", "xlsm", "xltm", "xltx", "xlam" };
+        Collection<File> enumeration = FileUtils.listFiles(inputfolder, extensions, recurse);
+        
+        // Iterate files in enumeration
+        for (File spreadsheet : enumeration)
+        {
+            // Do something
+        }
     }
 }

@@ -12,13 +12,13 @@ The application requires input filepath as argument, and then you have to choose
 
 Filepath method
 ```
---inputfilepath <filepath> (optional, spreadsheet to to process)
---outputfilepath <filepath> (optional, if not set, filepath is identical to input filepath)
+--inputfilepath "<filepath>" (optional, spreadsheet to to process)
+--outputfilepath "<filepath>" (optional, if not set, filepath is identical to input filepath)
 ```
 Folder method
 ```
---inputfolder <folder> (optional, folder to enumerate for input spreadsheets)
---outputfolder <folder> (optional, if not set, folder is identical to input folder)
+--inputfolder "<folder>" (optional, folder to enumerate for input spreadsheets)
+--outputfolder "<folder>" (optional, if not set, folder is identical to input folder)
 --recurse (optional, set if subdirectories should be included)
 ```
 

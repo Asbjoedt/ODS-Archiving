@@ -75,10 +75,10 @@ public class application {
 		boolean parsed_validate = false;
 		boolean parsed_delete = false;
 		boolean parsed_recurse = false;
-		String parsed_input_filepath = "";
-		String parsed_output_filepath = "";
-		String parsed_input_folder = "";
-		String parsed_output_folder = "";
+		String parsed_input_filepath = null;
+		String parsed_output_filepath = null;
+		String parsed_input_folder = null;
+		String parsed_output_folder = null;
 
 		try {
 			cmd = parser.parse(options, args);
@@ -117,7 +117,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert: " + parsed_convert + "Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
+		System.out.println("Methods: " + "Convert: " + parsed_convert + ", Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
 		if (parsed_input_filepath != null) {
 			System.out.println("Input filepath: " + parsed_input_filepath);
 		}
