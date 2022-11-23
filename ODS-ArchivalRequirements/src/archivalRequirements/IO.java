@@ -44,7 +44,7 @@ public class IO {
             case "ods":
                 // Copy file, if output filepath is set
                 if (output_filepath != null && output_filepath == input_filepath) {
-                    filepath = copyFile(input_filepath, output_filepath);
+                    filepath = CopyFile(input_filepath, output_filepath);
                 }
                 // Else use input filepath for operations
                 else if (output_filepath == null || output_filepath == input_filepath) {
@@ -56,7 +56,7 @@ public class IO {
             case "ots":
                 // Copy file, if output filepath is set
                 if (output_filepath != null && output_filepath == input_filepath) {
-                    filepath = copyFile(input_filepath, output_filepath);
+                    filepath = CopyFile(input_filepath, output_filepath);
                 }
                 // Else use input filepath for operations
                 else if (output_filepath == null || output_filepath == input_filepath) {
@@ -74,7 +74,7 @@ public class IO {
             case "xlam":
                 // Copy file, if output filepath is set
                 if (output_filepath != null) {
-                    filepath = copyFile(input_filepath, output_filepath);
+                    filepath = CopyFile(input_filepath, output_filepath);
                 }
                 // Else use input filepath for operations
                 else if (output_filepath == null) {
@@ -87,13 +87,11 @@ public class IO {
         }
     }
 
-    // Method for copying files
+    // Method for copying a file
     private static String CopyFile(String input_filepath, String output_filepath) throws IOException {
-
         File input_file = new File(input_filepath);
         File output_file = new File(output_filepath);
         FileUtils.copyFile(input_file, output_file);
-
         return output_filepath;
     }
 

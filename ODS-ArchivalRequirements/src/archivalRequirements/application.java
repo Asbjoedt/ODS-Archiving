@@ -10,6 +10,10 @@ public class application {
 
 	public static void main(String[] args) throws Exception, ParseException, IOException {
 
+		// Inform user of beginning of application
+		System.out.println("ODS-ArchivalRequirements v1.0");
+		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-ArchivalRequirements");
+
 		//define argument options
 		Options options = new Options();
 		Option check = new Option("che", "check", false, "Check spreadsheet for archival requirements");
