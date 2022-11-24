@@ -2,8 +2,6 @@ package archivalRequirements;
 
 import org.apache.commons.io.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
@@ -26,11 +24,11 @@ public class Operations {
         }
         // If not selected, copy to output filepath if it is set
         if (convert == null) {
-            if (output_filepath != null && output_filepath != input_filepath && output_extension.equals(input_extension)) {
+            if (output_filepath != null && !output_filepath.equals(input_filepath) && output_extension.equals(input_extension)) {
                 IO.CopyFile(input_filepath, output_filepath);
             }
-            else if (output_filepath != null && output_filepath != input_filepath && !output_extension.equals(input_extension)) {
-                throw new IOException("Spreadsheet must be converted to designated output extension");
+            else if (output_filepath != null && !output_filepath.equals(input_filepath) && !output_extension.equals(input_extension)) {
+                throw new IOException("You must convert spreadsheet to designated output extension. Use argument --convert " + output_extension);
             }
         }
 
@@ -40,15 +38,15 @@ public class Operations {
             case "fods":
             case "ods":
             case "ots":
-                if (check == true) {
+                if (check) {
                     check Perform = new check();
                     Perform.Check_ODFToolkit(output_filepath);
                 }
-                if (change == true) {
+                if (change) {
                     change Perform = new change();
                     Perform.Change_ODFToolkit(output_filepath);
                 }
-                if (validate == true) {
+                if (validate) {
                     validation Perform = new validation();
                     Perform.Validation_ODFToolkit(output_filepath);
                 }
@@ -57,15 +55,15 @@ public class Operations {
             case "xls":
             case "xla":
             case "xlt":
-                if (check == true) {
+                if (check) {
                     check Perform = new check();
                     Perform.Check_ApachePOI(output_filepath);
                 }
-                if (change == true) {
+                if (change) {
                     change Perform = new change();
                     Perform.Change_ApachePOI(output_filepath);
                 }
-                if (validate == true) {
+                if (validate) {
                     System.out.println("Validation of legacy Excel file formats is not supported");
                 }
                 break;
@@ -76,27 +74,27 @@ public class Operations {
             case "xltx":
             case "xlam":
                 // Perform user-chosen operations
-                if (check == true) {
+                if (check) {
                     check Perform = new check();
                     Perform.Check_ApachePOI(output_filepath);
                 }
-                if (change == true) {
+                if (change) {
                     change Perform = new change();
                     Perform.Change_ApachePOI(output_filepath);
                 }
-                if (validate == true) {
+                if (validate) {
                     System.out.println("Validation of OOXML file formats is not supported");
                 }
                 break;
         }
         // Delete original file, if selected
-        if (delete == true) {
+        if (delete) {
             IO.DeleteInputFile(input_filepath);
         }
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, String convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, String convert, boolean check, boolean change, boolean validate, boolean delete) {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -114,7 +112,7 @@ public class Operations {
     public Workbook workbookType(String filepath, FileInputStream fileInput) throws IOException {
         Workbook wb;
         String extension = FilenameUtils.getExtension(filepath).toLowerCase();
-        if (extension == "xls" || extension == "xla" || extension == "xlt") {
+        if (extension.equals("xls") || extension.equals("xla") || extension.equals("xlt")) {
             wb = new HSSFWorkbook(fileInput);
         }
         else {
