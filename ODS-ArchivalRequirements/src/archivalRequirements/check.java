@@ -15,9 +15,10 @@ public class check {
         int embeddedObjects = 0;
         int externalObjects = 0;
         boolean absolutePath = false;
+        boolean activeSheet = false;
 
         // Method for class data types
-        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean abspath) {
+        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean absolutePath, boolean activeSheet) {
             this.cellValuesExist = cellvalues;
             this.dataConnections = conns;
             this.externalCellReferences = cellrefs;
@@ -25,7 +26,8 @@ public class check {
             this.printerSettings = printers;
             this.embeddedObjects = embedsobjs;
             this.externalObjects = extobjs;
-            this.absolutePath = abspath;
+            this.absolutePath = absolutePath;
+            this.activeSheet = activeSheet;
         }
     }
 
@@ -66,8 +68,12 @@ public class check {
         absolutePath absPath = new absolutePath();
         boolean hasAbsolutePath = absPath.Check_ODFToolkit(filepath);
 
+        // ACTIVE SHEET
+        activeSheet activeSheet = new activeSheet();
+        boolean hasActivesheet = activeSheet.Check_ODFToolkit(filepath);
+
         // Add to list and return it
-        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet));
         return results;
     }
 
@@ -108,8 +114,12 @@ public class check {
         absolutePath absPath = new absolutePath();
         boolean hasAbsolutePath = absPath.Check_ApachePOI(filepath);
 
+        // ACTIVE SHEET
+        activeSheet activeSheet = new activeSheet();
+        boolean hasActivesheet = activeSheet.Check_ApachePOI(filepath);
+
         // Add to list and return it
-        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet));
 
         return results;
     }
