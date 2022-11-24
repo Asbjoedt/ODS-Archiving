@@ -12,7 +12,11 @@ public class activeSheet {
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
+        spreadsheet.close();
 
+        if (activeSheet) {
+            System.out.println("Active sheet was detected");
+        }
         return activeSheet;
     }
 
@@ -22,6 +26,12 @@ public class activeSheet {
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
+        spreadsheet.save(filepath);
+        spreadsheet.close();
+
+        if (activeSheet) {
+            System.out.println("Active sheet was changed");
+        }
         return  activeSheet;
     }
 
@@ -43,6 +53,9 @@ public class activeSheet {
         // Close spreadsheet and return result
         wb.close();
         fileInput.close();
+        if (activeSheet) {
+            System.out.println("Active sheet was detected");
+        }
         return  activeSheet;
     }
 
@@ -65,6 +78,9 @@ public class activeSheet {
         // Close spreadsheet and return result
         wb.close();
         fileInput.close();
+        if (activeSheet) {
+            System.out.println("Active sheet was changed");
+        }
         return  activeSheet;
     }
 }

@@ -1,17 +1,23 @@
 package archivalRequirements;
 
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+
 public class embeddedObjects {
 
     // Check for embedded objects using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) {
+    public int Check_ODFToolkit(String filepath) throws Exception {
         int embedObjs = 0;
+
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
         return  embedObjs;
     }
 
     // Remove embedded objects using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) {
+    public int Change_ODFToolkit(String filepath) throws Exception {
         int embedObjs = 0;
+
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
         return  embedObjs;
     }

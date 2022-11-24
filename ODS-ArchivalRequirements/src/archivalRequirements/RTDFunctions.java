@@ -1,14 +1,21 @@
 package archivalRequirements;
 
 import java.io.*;
+import java.util.List;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
 
 public class RTDFunctions {
 
     // Check for RTD functions using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) {
+    public int Check_ODFToolkit(String filepath) throws Exception {
         int rtdfunctions = 0;
+
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+
+        List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
 
         return rtdfunctions;
     }

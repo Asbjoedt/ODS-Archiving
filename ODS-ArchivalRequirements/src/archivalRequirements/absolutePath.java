@@ -16,9 +16,12 @@ public class absolutePath {
         String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
         if (absolutePath != null) {
             absPath = true;
-            System.out.println("Absolute filepath detected");
         }
+        spreadsheet.close();
 
+        if (absPath) {
+            System.out.println("Absolute path was detected");
+        }
         return  absPath;
     }
 
@@ -31,9 +34,12 @@ public class absolutePath {
         if (absolutePath != null) {
             absPath = true;
             // DO SOMETHING HERE
-            //System.out.println("Absolute filepath removed");
         }
+        spreadsheet.close();
 
+        if (absPath) {
+            System.out.println("Absolute path was removed");
+        }
         return  absPath;
     }
 

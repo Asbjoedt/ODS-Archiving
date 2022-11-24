@@ -3,6 +3,7 @@ package archivalRequirements;
 import org.apache.commons.io.*;
 import java.lang.ProcessBuilder;
 import java.io.*;
+import java.nio.file.*;
 
 public class convert {
 
@@ -25,16 +26,16 @@ public class convert {
         int exitCode = process.waitFor();
 
         // Rename file, if set
-        File input_file = new File(input_filepath);
-        String output_filename = output_file.getName();
-        String new_filename = output_file.getParent() + input_file.getName() + output_extension;
-        System.out.println(new_filename);
-        File newfilename = new File(new_filename);
-        String input_filename = input_file.getName();
+        String output_filename = FilenameUtils.getBaseName(output_filepath);
+        String input_filename = FilenameUtils.getBaseName(input_filepath);
+        Path old_filename = Paths.get(output_file.getParent() + "\\" + input_filename + "." + output_extension);
+        String new_filename = output_file.getParent() + "\\" + output_filename + "." + output_extension;
         if (!output_filename.equals(input_filename)) {
-            output_file.renameTo(newfilename);
+            Files.move(old_filename, old_filename.resolveSibling(new_filename));
+            if (!output_file.exists()) {
+                throw new IOException("Converted spreadsheet could not be renamed to output filepath");
+            }
         }
-
         return exitCode;
     }
 }

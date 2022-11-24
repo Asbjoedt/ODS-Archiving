@@ -4,7 +4,7 @@ A Java console application, easy to integrate in workflows to convert spreadshee
 * For more information, see repository **[CLISC](https://github.com/Asbjoedt/CLISC)**
 
 ## How to use
-In your terminal, change to the directory where the application is located.
+Start the application in your console with your chosen arguments.
 
 The application requires input filepath or input folder as argument, and then you have to choose one or more optional arguments for processing the filepath.
 
@@ -34,11 +34,11 @@ Folder method
 
 Filepath usage
 ```
-.\ODS-ArchivalRequirements.jar --convert ods --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfilepath "C:\AnyFolder\ThisIsFun.ods"
+java -jar <PATH>\ODS-ArchivalRequirements.jar --convert ods --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfilepath "C:\AnyFolder\ThisIsFun.ods"
 ```
 Or shorter
 ```
-.\ODS-ArchivalRequirements.jar -con ods -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
+java -jar <PATH>\ODS-ArchivalRequirements.jar -con ods -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\Spreadsheet.ods"
 ```
 
 ## Dependencies

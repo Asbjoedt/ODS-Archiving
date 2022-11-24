@@ -1,24 +1,77 @@
 package archivalRequirements;
 
 import java.io.*;
+import java.util.List;
 import org.apache.commons.io.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
+import org.odftoolkit.odfdom.doc.table.OdfTableCell;
+import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 
 public class externalCellReferences {
 
     // Check for external cell references using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) {
+    public int Check_ODFToolkit(String filepath) throws Exception {
         int extCellRefs = 0;
 
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
+        for (OdfTable table : tables) {
+            List<OdfTableRow> rows = table.getRowList();
+            for (OdfTableRow row : rows) {
+                for (int i = 1; i < 2; i++) {
+                    OdfTableCell cell = row.getCellByIndex(i);
+                    String cellFormula = cell.getFormula();
+                    if (cellFormula != null) {
+                        if (cellFormula.startsWith("'=") || cellFormula.startsWith("[")) {
+                            extCellRefs++;
+                        }
+                    }
+                }
+            }
+        }
+        spreadsheet.close();
+
+        // Inform user and return number
+        if (extCellRefs > 0) {
+            System.out.println(extCellRefs + " external cell references detected");
+        }
         return extCellRefs;
     }
 
     // Remove external cell references using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) {
+    public int Change_ODFToolkit(String filepath) throws Exception {
         int extCellRefs = 0;
 
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
+        for (OdfTable table : tables) {
+            List<OdfTableRow> rows = table.getRowList();
+            for (OdfTableRow row : rows) {
+                for (int i = 1; i < 2; i++) {
+                    OdfTableCell cell = row.getCellByIndex(i);
+                    String cellFormula = cell.getFormula();
+                    if (cellFormula != null) {
+                        if (cellFormula.startsWith("'=") || cellFormula.startsWith("[")) {
+                            String savedValue = cell.getStringValue();
+                            cell.setFormula(null);
+                            cell.setStringValue(savedValue);
+                            extCellRefs++;
+                        }
+                    }
+                }
+            }
+        }
+        spreadsheet.save(filepath);
+        spreadsheet.close();
+
+        // Inform user and return number
+        if (extCellRefs > 0) {
+            System.out.println(extCellRefs + " external cell references removed");
+        }
         return extCellRefs;
     }
 
@@ -60,14 +113,8 @@ public class externalCellReferences {
 
         // Find spreadsheet and create workbook instance
         FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Workbook wb;
-        String extension = FilenameUtils.getExtension(filepath).toLowerCase();
-        if (extension == "xls" || extension == "xla" || extension == "xlt") {
-            wb = new HSSFWorkbook(fileInput);
-        }
-        else {
-            wb = new XSSFWorkbook(fileInput);
-        }
+        Operations Fetch = new Operations();
+        Workbook wb = Fetch.workbookType(filepath, fileInput);
 
         // Iterate each sheet, row and cell
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {
