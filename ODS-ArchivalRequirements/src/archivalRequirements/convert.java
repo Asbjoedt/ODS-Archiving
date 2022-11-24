@@ -1,8 +1,8 @@
 package archivalRequirements;
 
-import java.io.IOException;
+import org.apache.commons.io.*;
 import java.lang.ProcessBuilder;
-import java.io.File;
+import java.io.*;
 
 public class convert {
 
@@ -22,8 +22,19 @@ public class convert {
                 input_filepath);
 
         Process process = Conversion.start();
-
         int exitCode = process.waitFor();
+
+        // Rename file, if set
+        File input_file = new File(input_filepath);
+        String output_filename = output_file.getName();
+        String new_filename = output_file.getParent() + input_file.getName() + output_extension;
+        System.out.println(new_filename);
+        File newfilename = new File(new_filename);
+        String input_filename = input_file.getName();
+        if (!output_filename.equals(input_filename)) {
+            output_file.renameTo(newfilename);
+        }
+
         return exitCode;
     }
 }
