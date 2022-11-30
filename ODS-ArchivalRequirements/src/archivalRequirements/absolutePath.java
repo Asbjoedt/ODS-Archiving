@@ -1,10 +1,8 @@
 package archivalRequirements;
 
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class absolutePath {
 
@@ -48,22 +46,41 @@ public class absolutePath {
         boolean absPath = false;
 
         // Find spreadsheet and create workbook instance
-        FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Operations Fetch = new Operations();
-        Workbook wb = Fetch.workbookType(filepath, fileInput);
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
 
 
-        wb.close();
+        workbook.close();
         fileInput.close();
 
+        // Inform user and return result
+        if (absPath) {
+            System.out.println("Absolute path to local directory was detected");
+        }
         return  absPath;
     }
 
     // Remove absolute path to local directory using Apache POI
-    public boolean Change_ApachePOI(String filepath) {
+    public boolean Change_ApachePOI(String filepath) throws IOException {
         boolean absPath = false;
 
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
+
+
+
+        // Save and close file
+        FileOutputStream fileOutput = new FileOutputStream(filepath);
+        workbook.write(fileOutput);
+        workbook.close();
+        fileOutput.close();
+        fileInput.close();
+
+        // Inform user and return result
+        if (absPath) {
+            System.out.println("Absolute path to local directory was removed");
+        }
         return  absPath;
     }
 }

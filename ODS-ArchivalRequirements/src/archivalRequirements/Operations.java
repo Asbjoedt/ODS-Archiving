@@ -56,15 +56,13 @@ public class Operations {
             case "xla":
             case "xlt":
                 if (check) {
-                    check Perform = new check();
-                    Perform.Check_ApachePOI(output_filepath);
+                    System.out.println("Check of legacy Excel output file formats is not supported");
                 }
                 if (change) {
-                    change Perform = new change();
-                    Perform.Change_ApachePOI(output_filepath);
+                    System.out.println("Change of legacy Excel output file formats is not supported");
                 }
                 if (validate) {
-                    System.out.println("Validation of legacy Excel file formats is not supported");
+                    System.out.println("Validation of legacy Excel output file formats is not supported");
                 }
                 break;
 
@@ -108,16 +106,25 @@ public class Operations {
         }
     }
 
-    // Perform operations on workbook
-    public Workbook workbookType(String filepath, FileInputStream fileInput) throws IOException {
-        Workbook wb;
+    // Identify extensions
+    public boolean legacyExcelExtension(String filepath) {
+        boolean legacyExtension = false;
         String extension = FilenameUtils.getExtension(filepath).toLowerCase();
         if (extension.equals("xls") || extension.equals("xla") || extension.equals("xlt")) {
-            wb = new HSSFWorkbook(fileInput);
+            legacyExtension = true;
         }
-        else {
-            wb = new XSSFWorkbook(fileInput);
-        }
-        return wb;
+        return legacyExtension;
+    }
+
+    // Create XSSF workbook
+    public XSSFWorkbook workbookXSSF(FileInputStream fileInput) throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
+        return workbook;
+    }
+
+    // Create HSSF workbook
+    public HSSFWorkbook workbookHSSF(FileInputStream fileInput) throws IOException {
+        HSSFWorkbook workbook = new HSSFWorkbook(fileInput);
+        return workbook;
     }
 }

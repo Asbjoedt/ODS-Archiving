@@ -1,6 +1,7 @@
 package archivalRequirements;
 
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import java.io.*;
 
@@ -40,18 +41,17 @@ public class activeSheet {
         boolean activeSheet = false;
 
         // Find spreadsheet and create workbook instance
-        FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Operations Fetch = new Operations();
-        Workbook wb = Fetch.workbookType(filepath, fileInput);
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
         // Perform check
-        int activatedsheet = wb.getActiveSheetIndex();
+        int activatedsheet = workbook.getActiveSheetIndex();
         if (activatedsheet > 0) {
             activeSheet = true;
         }
 
         // Close spreadsheet and return result
-        wb.close();
+        workbook.close();
         fileInput.close();
         if (activeSheet) {
             System.out.println("Active sheet was detected");
@@ -65,19 +65,23 @@ public class activeSheet {
 
         // Find spreadsheet and create workbook instance
         FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Operations Fetch = new Operations();
-        Workbook wb = Fetch.workbookType(filepath, fileInput);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
         // Perform check and change if not first sheet
-        int activatedsheet = wb.getActiveSheetIndex();
+        int activatedsheet = workbook.getActiveSheetIndex();
         if (activatedsheet > 0) {
             activeSheet = true;
-            wb.setActiveSheet(0);
+            workbook.setActiveSheet(0);
         }
 
-        // Close spreadsheet and return result
-        wb.close();
+        // Save and close file
+        FileOutputStream fileOutput = new FileOutputStream(filepath);
+        workbook.write(fileOutput);
+        workbook.close();
+        fileOutput.close();
         fileInput.close();
+
+        // Inform user and return result
         if (activeSheet) {
             System.out.println("Active sheet was changed");
         }

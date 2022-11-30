@@ -2,14 +2,10 @@ package archivalRequirements;
 
 import java.io.*;
 import java.util.List;
-import org.apache.commons.io.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.doc.table.OdfTableCell;
-import org.odftoolkit.odfdom.doc.table.OdfTableRow;
+import org.odftoolkit.odfdom.doc.table.*;
 
 public class externalCellReferences {
 
@@ -80,13 +76,12 @@ public class externalCellReferences {
         int extCellRefs = 0;
 
         // Find spreadsheet and create workbook instance
-        FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Operations Fetch = new Operations();
-        Workbook wb = Fetch.workbookType(filepath, fileInput);
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
         // Iterate each sheet, row and cell
-        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-            Sheet sheet = wb.getSheetAt(i);
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            Sheet sheet = workbook.getSheetAt(i);
             for (Row row : sheet) {
                 for (Cell cell : row) {
                     if (cell.getCellType() == CellType.FORMULA) {
@@ -97,7 +92,7 @@ public class externalCellReferences {
                 }
             }
         }
-        wb.close();
+        workbook.close();
         fileInput.close();
 
         // Inform user and return number
@@ -112,13 +107,12 @@ public class externalCellReferences {
         int extCellRefs = 0;
 
         // Find spreadsheet and create workbook instance
-        FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Operations Fetch = new Operations();
-        Workbook wb = Fetch.workbookType(filepath, fileInput);
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
         // Iterate each sheet, row and cell
-        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-            Sheet sheet = wb.getSheetAt(i);
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            Sheet sheet = workbook.getSheetAt(i);
             for (Row row : sheet) {
                 for (Cell cell : row) {
                     if (cell.getCellType() == CellType.FORMULA) {
@@ -131,7 +125,8 @@ public class externalCellReferences {
                                 case NUMERIC:
                                     if (DateUtil.isCellDateFormatted(cell)) {
                                         cellValue = cell.getDateCellValue().toString();
-                                    } else {
+                                    }
+                                    else {
                                         cellValue = Double.toString(cell.getNumericCellValue());
                                     }
                                     break;
@@ -153,9 +148,9 @@ public class externalCellReferences {
             }
         }
         // Save and close file
-        FileOutputStream fileOutput = new FileOutputStream(new File(filepath));
-        wb.write(fileOutput);
-        wb.close();
+        FileOutputStream fileOutput = new FileOutputStream(filepath);
+        workbook.write(fileOutput);
+        workbook.close();
         fileOutput.close();
         fileInput.close();
 

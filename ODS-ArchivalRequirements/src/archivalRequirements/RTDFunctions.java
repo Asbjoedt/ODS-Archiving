@@ -61,12 +61,12 @@ public class RTDFunctions {
     public int Change_ApachePOI(String filepath) throws IOException {
         int rtdfunctions = 0;
 
-        FileInputStream fileInput = new FileInputStream(new File(filepath));
-        Workbook wb = new XSSFWorkbook(fileInput);
+        FileInputStream fileInput = new FileInputStream(filepath);
+        XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
         // Iterate each sheet, row and cell
-        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-            Sheet sheet = wb.getSheetAt(i);
+        for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+            Sheet sheet = workbook.getSheetAt(i);
             for (Row row : sheet) {
                 for (Cell cell : row) {
                     if (cell.getCellType() == CellType.FORMULA) {
@@ -102,8 +102,8 @@ public class RTDFunctions {
         }
         // Save and close file
         FileOutputStream fileOutput = new FileOutputStream(new File(filepath));
-        wb.write(fileOutput);
-        wb.close();
+        workbook.write(fileOutput);
+        workbook.close();
         fileOutput.close();
         fileInput.close();
 
