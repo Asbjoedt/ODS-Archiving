@@ -1,5 +1,8 @@
 package archivalRequirements;
 
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+
+import java.io.*;
 import java.util.*;
 
 public class check {
@@ -78,7 +81,7 @@ public class check {
     }
 
     // Perform check of archival requirements on OOXML spreadsheets using Apache POI
-    public List<checkList> Check_ApachePOI(String filepath) throws Exception {
+    public List<checkList> Check_ApachePOI(String filepath) throws IOException, OpenXML4JException {
         // Create list to return
         List<checkList> results = new ArrayList<>();
 

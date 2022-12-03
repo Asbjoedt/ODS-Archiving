@@ -2,7 +2,6 @@ package archivalRequirements;
 
 import org.apache.commons.io.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.*;
@@ -92,7 +91,7 @@ public class Operations {
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, String convert, boolean check, boolean change, boolean validate, boolean delete) {
+    public void Folder(String input_folder, String output_folder, boolean recurse, String convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -102,7 +101,12 @@ public class Operations {
         // Iterate files in enumeration
         for (File spreadsheet : enumeration)
         {
-            // Do something
+            // Find input and output filepaths
+            String input_filepath = spreadsheet.getAbsolutePath();
+            String output_filepath = output_folder + "\\" + spreadsheet.getName();
+
+            // Perform operations on each spreadsheet
+            Filepath(input_filepath, output_filepath, convert, check, change, validate, delete);
         }
     }
 

@@ -41,29 +41,28 @@ public class cellValues {
 	}
 
 	// Check if cell values exist using Apache POI
-	public Boolean Check_ApachePOI(String filepath) throws Exception {
+	public Boolean Check_ApachePOI(String filepath) throws IOException, UserDefinedException {
 		boolean hasCellValue = false;
 
 		// Find spreadsheet and create workbook instance
-		FileInputStream fileInput = new FileInputStream(new File(filepath));
-		Operations Fetch = new Operations();
-		Workbook wb = Fetch.workbookType(filepath, fileInput);
+		FileInputStream fileInput = new FileInputStream(filepath);
+		XSSFWorkbook workbook = new XSSFWorkbook(fileInput);
 
 		// Iterate each sheet, row and cell
-		for (int i = 0; i < wb.getNumberOfSheets(); i++) {
-			Sheet sheet = wb.getSheetAt(i);
+		for (int i = 0; i < workbook.getNumberOfSheets(); i++) {
+			Sheet sheet = workbook.getSheetAt(i);
 			for (Row row : sheet) {
 				for (Cell cell : row) {
 					if (cell.getCellType() != CellType.BLANK) {
 						hasCellValue = true;
-						wb.close();
+						workbook.close();
 						fileInput.close();
 						return hasCellValue;
 					}
 				}
 			}
 		}
-		wb.close();
+		workbook.close();
 		fileInput.close();
 
 		// Throw exception if no cell values
