@@ -35,7 +35,7 @@ public class cellValues {
 
 		// throw exception if no cell values exist or return
 		if (hasCellValue == false) {
-			throw new UserDefinedException("Spreadsheet has no cell values");
+			throw new UserDefinedException("CHECK: Spreadsheet has no cell values");
 		}
 		return hasCellValue;
 	}
@@ -67,7 +67,7 @@ public class cellValues {
 
 		// Throw exception if no cell values
 		if (hasCellValue == false) {
-			throw new UserDefinedException("Spreadsheet has no cell values");
+			throw new UserDefinedException("CHECK: Spreadsheet has no cell values");
 		}
 		return hasCellValue;
 	}

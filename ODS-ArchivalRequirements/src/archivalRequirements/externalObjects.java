@@ -36,7 +36,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0) {
-            System.out.println(extObjs + " external objects detected");
+            System.out.println("CHECK: " + extObjs + " external objects detected");
         }
         return extObjs;
     }
@@ -59,7 +59,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0) {
-            System.out.println(extObjs + " external objects detected");
+            System.out.println("CHANGE: " + extObjs + " external objects detected");
         }
         return extObjs;
     }

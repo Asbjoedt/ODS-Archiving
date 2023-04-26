@@ -1,5 +1,7 @@
 package archivalRequirements;
 
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+
 import java.io.IOException;
 import java.util.*;
 
@@ -74,7 +76,7 @@ public class change {
     }
 
     // Perform change of archival requirements on OOXML spreadsheets using Apache POI
-    public List<changeList> Change_ApachePOI(String filepath) throws IOException {
+    public List<changeList> Change_ApachePOI(String filepath) throws IOException, OpenXML4JException {
         // Create list to return
         List<changeList> results = new ArrayList<>();
 

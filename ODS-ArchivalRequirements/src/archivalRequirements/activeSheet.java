@@ -16,7 +16,7 @@ public class activeSheet {
         spreadsheet.close();
 
         if (activeSheet) {
-            System.out.println("Active sheet was detected");
+            System.out.println("CHECK: Active sheet was detected");
         }
         return activeSheet;
     }
@@ -31,7 +31,7 @@ public class activeSheet {
         spreadsheet.close();
 
         if (activeSheet) {
-            System.out.println("Active sheet was changed");
+            System.out.println("CHANGE: Active sheet was changed");
         }
         return  activeSheet;
     }

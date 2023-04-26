@@ -52,7 +52,7 @@ public class RTDFunctions {
 
         // Inform user and return number
         if (rtdfunctions > 0) {
-            System.out.println(rtdfunctions + " RTD functions detected");
+            System.out.println("CHECK:" + rtdfunctions + " RTD functions detected");
         }
         return rtdfunctions;
     }
@@ -109,7 +109,7 @@ public class RTDFunctions {
 
         // Inform user and return number
         if (rtdfunctions > 0) {
-            System.out.println(rtdfunctions + " RTD functions removed");
+            System.out.println("CHANGE:" + rtdfunctions + " RTD functions removed");
         }
         return rtdfunctions;
     }

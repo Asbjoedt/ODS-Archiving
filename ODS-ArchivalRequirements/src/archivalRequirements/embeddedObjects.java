@@ -16,9 +16,7 @@ public class embeddedObjects {
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
-        spreadsheet.getPackage().getDom("content.xml");
-        spreadsheet.getContentDom().getDocument();
-        spreadsheet.getSettingsDom();
+
 
         return  embedObjs;
     }
@@ -49,7 +47,7 @@ public class embeddedObjects {
 
         // Inform user and return number
         if (embedObjs> 0) {
-            System.out.println(embedObjs + " embedded objects detected");
+            System.out.println("CHECK: " + embedObjs + " embedded objects detected");
         }
         return  embedObjs;
     }
@@ -75,7 +73,7 @@ public class embeddedObjects {
 
         // Inform user and return number
         if (embedObjs> 0) {
-            System.out.println(embedObjs + " embedded objects removed");
+            System.out.println("CHANGE: " + embedObjs + " embedded objects removed");
         }
         return  embedObjs;
     }

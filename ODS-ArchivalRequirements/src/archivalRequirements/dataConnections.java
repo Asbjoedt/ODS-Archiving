@@ -47,7 +47,7 @@ public class dataConnections {
 
 		// Inform user and return number
 		if (dataConnections > 0) {
-			System.out.println(dataConnections + " data connections detected");
+			System.out.println("CHECK: " + dataConnections + " data connections detected");
 		}
 		return dataConnections;
 	}
@@ -60,7 +60,7 @@ public class dataConnections {
 
 		// Inform user and return number
 		if (dataConnections > 0) {
-			System.out.println(dataConnections + " data connections removed");
+			System.out.println("CHANGE: " + dataConnections + " data connections removed");
 		}
 		return dataConnections;
 	}

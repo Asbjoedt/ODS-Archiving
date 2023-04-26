@@ -6,6 +6,12 @@ public class printerSettings {
     public int Check_ODFToolkit(String filepath) {
         int printers = 0;
 
+
+
+        // Inform user and return number
+        if (printers > 0) {
+            System.out.println("CHECK: " + printers + " detected");
+        }
         return printers;
     }
 
@@ -13,6 +19,12 @@ public class printerSettings {
     public int Change_ODFToolkit(String filepath) {
         int printers = 0;
 
+
+
+        // Inform user and return number
+        if (printers > 0) {
+            System.out.println("CHANGE: " + printers + " removed");
+        }
         return printers;
     }
 
@@ -20,6 +32,12 @@ public class printerSettings {
     public int Check_ApachePOI(String filepath) {
         int printers = 0;
 
+
+
+        // Inform user and return number
+        if (printers > 0) {
+            System.out.println("CHECK: " + printers + " detected");
+        }
         return printers;
     }
 
@@ -27,6 +45,12 @@ public class printerSettings {
     public int Change_ApachePOI(String filepath) {
         int printers = 0;
 
+
+
+        // Inform user and return number
+        if (printers > 0) {
+            System.out.println("CHANGE: " + printers + " removed");
+        }
         return printers;
     }
 }

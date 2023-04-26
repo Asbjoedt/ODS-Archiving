@@ -16,15 +16,22 @@
     </plugins>
   </build>
   <dependencies>
-	<dependency>
+    <dependency>
+      <groupId>org.odftoolkit</groupId>
+      <artifactId>odftoolkit</artifactId>
+      <version>0.11.0</version>
+      <type>pom</type>
+    </dependency>
+    <dependency>
 	    <groupId>org.odftoolkit</groupId>
 	    <artifactId>odfdom-java</artifactId>
-	    <version>0.10.0</version>
+	    <version>0.11.0</version>
 	</dependency>
     <dependency>
       <groupId>org.odftoolkit</groupId>
       <artifactId>odfvalidator</artifactId>
-      <version>0.10.0</version>
+      <version>0.11.0</version>
+      <type>pom</type>
     </dependency>
     <dependency>
         <groupId>commons-cli</groupId>

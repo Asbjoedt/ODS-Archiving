@@ -18,22 +18,14 @@ public class externalCellReferences {
         for (OdfTable table : tables) {
             List<OdfTableRow> rows = table.getRowList();
             for (OdfTableRow row : rows) {
-                for (int i = 1; i < 2; i++) {
-                    OdfTableCell cell = row.getCellByIndex(i);
-                    String cellFormula = cell.getFormula();
-                    if (cellFormula != null) {
-                        if (cellFormula.startsWith("'=") || cellFormula.startsWith("[")) {
-                            extCellRefs++;
-                        }
-                    }
-                }
+
             }
         }
         spreadsheet.close();
 
         // Inform user and return number
         if (extCellRefs > 0) {
-            System.out.println(extCellRefs + " external cell references detected");
+            System.out.println("CHECK: " + extCellRefs + " external cell references detected");
         }
         return extCellRefs;
     }
@@ -48,16 +40,7 @@ public class externalCellReferences {
             List<OdfTableRow> rows = table.getRowList();
             for (OdfTableRow row : rows) {
                 for (int i = 1; i < 2; i++) {
-                    OdfTableCell cell = row.getCellByIndex(i);
-                    String cellFormula = cell.getFormula();
-                    if (cellFormula != null) {
-                        if (cellFormula.startsWith("'=") || cellFormula.startsWith("[")) {
-                            String savedValue = cell.getStringValue();
-                            cell.setFormula(null);
-                            cell.setStringValue(savedValue);
-                            extCellRefs++;
-                        }
-                    }
+
                 }
             }
         }
@@ -66,7 +49,7 @@ public class externalCellReferences {
 
         // Inform user and return number
         if (extCellRefs > 0) {
-            System.out.println(extCellRefs + " external cell references removed");
+            System.out.println("CHANGE: " + extCellRefs + " external cell references removed");
         }
         return extCellRefs;
     }

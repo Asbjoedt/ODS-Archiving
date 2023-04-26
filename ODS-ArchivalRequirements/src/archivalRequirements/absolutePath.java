@@ -11,14 +11,14 @@ public class absolutePath {
         boolean absPath = false;
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
-        if (absolutePath != null) {
-            absPath = true;
-        }
+
+        // The below gives abspath to the spreadsheet file, and not the abspath the file was latest saved on
+        // String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
+
         spreadsheet.close();
 
         if (absPath) {
-            System.out.println("Absolute path was detected");
+            System.out.println("CHECK: Absolute path was detected");
         }
         return  absPath;
     }
@@ -28,15 +28,14 @@ public class absolutePath {
         boolean absPath = false;
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
-        if (absolutePath != null) {
-            absPath = true;
-            // DO SOMETHING HERE
-        }
+
+        // The below gives abspath to the spreadsheet file, and not the abspath the file was latest saved on
+        // String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
+
         spreadsheet.close();
 
         if (absPath) {
-            System.out.println("Absolute path was removed");
+            System.out.println("CHANGE: Absolute path was removed");
         }
         return  absPath;
     }
@@ -56,7 +55,7 @@ public class absolutePath {
 
         // Inform user and return result
         if (absPath) {
-            System.out.println("Absolute path to local directory was detected");
+            System.out.println("CHECK: Absolute path to local directory was detected");
         }
         return  absPath;
     }
@@ -79,7 +78,7 @@ public class absolutePath {
 
         // Inform user and return result
         if (absPath) {
-            System.out.println("Absolute path to local directory was removed");
+            System.out.println("CHANGE: Absolute path to local directory was removed");
         }
         return  absPath;
     }
