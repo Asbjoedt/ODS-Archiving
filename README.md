@@ -1,4 +1,4 @@
-# ODS-ArchivalRequirements
+# ODS-ArchivalRequirements - WORK IN PROGRESS
 A Java console application, easy to integrate in workflows to convert spreadsheet to .ods file format, check if the spreadsheet is compliant with archival requirements, change it to be compliant and validate the OpenDocument Spreadsheets file format standard.
 
 * For more information, see repository **[CLISC](https://github.com/Asbjoedt/CLISC)**
