@@ -6,6 +6,12 @@ import org.odftoolkit.odfdom.doc.*;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
+import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class cellValues {
 
@@ -19,25 +25,32 @@ public class cellValues {
 
 	// Check if cell values exist using ODF Toolkit
 	public boolean Check_ODFToolkit(String filepath) throws Exception {
-		boolean hasCellValue = false;
+		boolean hasNoCellValues = false;
 
 		OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-		List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
-
-		for (OdfTable table : tables) {
-			int count = table.getRowCount();
-			if (count > 0) {
-				hasCellValue = true;
+		OdfContentDom contentDom = spreadsheet.getContentDom();
+		OdfMetaDom metaDom = spreadsheet.getMetaDom();
+		NodeList statistics = metaDom.getElementsByTagName("meta:document-statistic");
+		for (int i = 0; i < statistics.getLength(); i++) {
+			Node currentNode = statistics.item(i);
+			NamedNodeMap currentAttributes = currentNode.getAttributes();
+			for (int ii = 0; ii < currentAttributes.getLength(); ii++) {
+				Node currentAttribute = currentAttributes.item(i);
+				if (currentAttribute.getNodeName().equals("meta:cell-count")) {
+					String value = currentAttribute.getNodeValue();
+					if (value == null || value.equals("0")) {
+						hasNoCellValues = true;
+					}
+				}
 			}
 		}
-
 		spreadsheet.close();
 
-		// throw exception if no cell values exist or return
-		if (hasCellValue == false) {
-			throw new UserDefinedException("CHECK: Spreadsheet has no cell values");
+		// Inform user and return boolean
+		if (hasNoCellValues) {
+			System.out.println("CHECK: No cell values detected");
 		}
-		return hasCellValue;
+		return hasNoCellValues;
 	}
 
 	// Check if cell values exist using Apache POI

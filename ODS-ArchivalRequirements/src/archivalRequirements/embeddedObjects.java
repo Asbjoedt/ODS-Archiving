@@ -5,7 +5,11 @@ import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-
+import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import java.io.*;
 
 public class embeddedObjects {
@@ -15,9 +19,31 @@ public class embeddedObjects {
         int embedObjs = 0;
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfContentDom contentDom = spreadsheet.getContentDom();
+        OdfMetaDom metaDom = spreadsheet.getMetaDom();
+        NodeList docStatistics = metaDom.getElementsByTagName("meta:document-statistic");
+        for (int i = 0; i < docStatistics.getLength(); i++) {
+            Node currentNode = docStatistics.item(i);
+            System.out.println(currentNode.getNodeName());
+            NamedNodeMap currentAttributes = currentNode.getAttributes();
+            for (int ii = 0; ii < currentAttributes.getLength(); ii++) {
+                Node currentAttribute = currentAttributes.item(i);
+                System.out.println(currentAttributes.getLength());
+                if (currentAttribute.getNodeName().equals("meta:object-count")) {
+                    String value = currentAttribute.getNodeValue();
+                    System.out.println(value);
+                    if (value != null || value != "0") {
+                        embedObjs = Integer.parseInt(value);
+                    }
+                }
+            }
+        }
+        spreadsheet.close();
 
-
-
+        // Inform user and return number
+        if (embedObjs> 0) {
+            System.out.println("CHECK: " + embedObjs + " embedded objects detected");
+        }
         return  embedObjs;
     }
 
@@ -27,6 +53,10 @@ public class embeddedObjects {
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
+        // Inform user and return number
+        if (embedObjs> 0) {
+            System.out.println("CHANGE: " + embedObjs + " embedded objects removed");
+        }
         return  embedObjs;
     }
 

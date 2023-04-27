@@ -19,18 +19,20 @@ public class check {
         int externalObjects = 0;
         boolean absolutePath = false;
         boolean activeSheet = false;
+        boolean embedFonts = false;
 
         // Method for class data types
-        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean absolutePath, boolean activeSheet) {
+        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedobjs, int extobjs, boolean absolutePath, boolean activeSheet, boolean embedFonts) {
             this.cellValuesExist = cellvalues;
             this.dataConnections = conns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
             this.printerSettings = printers;
-            this.embeddedObjects = embedsobjs;
+            this.embeddedObjects = embedobjs;
             this.externalObjects = extobjs;
             this.absolutePath = absolutePath;
             this.activeSheet = activeSheet;
+            this.embedFonts = embedFonts;
         }
     }
 
@@ -75,8 +77,12 @@ public class check {
         activeSheet activeSheet = new activeSheet();
         boolean hasActivesheet = activeSheet.Check_ODFToolkit(filepath);
 
+        // EMBEDDED FONTS
+        embedFonts embedFonts = new embedFonts();
+        boolean hasEmbedFonts = embedFonts.Check_ODFToolkit(filepath);
+
         // Add to list and return it
-        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet, hasEmbedFonts));
         return results;
     }
 
@@ -121,8 +127,11 @@ public class check {
         activeSheet activeSheet = new activeSheet();
         boolean hasActivesheet = activeSheet.Check_ApachePOI(filepath);
 
+        // EMBEDDED FONTS - NOT RELEVANT FOR OOXML - CAN IGNORE
+        boolean hasEmbedFonts = false;
+
         // Add to list and return it
-        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet));
+        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet, hasEmbedFonts));
 
         return results;
     }

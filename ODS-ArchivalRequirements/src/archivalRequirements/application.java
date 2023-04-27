@@ -121,7 +121,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert: " + parsed_convert + ", Check: " + parsed_check + ", Change: " + parsed_change + ", Validate: " + parsed_validate);
+		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + parsed_validate);
 		if (parsed_input_filepath != null) {
 			System.out.println("Input filepath: " + parsed_input_filepath);
 		}

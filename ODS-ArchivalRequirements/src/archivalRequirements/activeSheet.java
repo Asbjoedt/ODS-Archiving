@@ -3,6 +3,12 @@ package archivalRequirements;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.xpath.XPathConstants;
 import java.io.*;
 
 public class activeSheet {
@@ -12,8 +18,24 @@ public class activeSheet {
         boolean activeSheet = false;
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
 
+        NodeList nodeList = settingsDom.getChildNodes();
+        if (nodeList != null && nodeList.getLength() > 0) {
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                Node node = nodeList.item(i);
+                if (node instanceof Element) {
+                    if ("ActiveTable".equals(node.getNodeName())) {
+                        String activeSheetName = node.getNodeValue();
+                        System.out.println(activeSheetName);
+                    }
+                }
+            }
+        }
         spreadsheet.close();
+
+
+
 
         if (activeSheet) {
             System.out.println("CHECK: Active sheet was detected");
@@ -54,7 +76,7 @@ public class activeSheet {
         workbook.close();
         fileInput.close();
         if (activeSheet) {
-            System.out.println("Active sheet was detected");
+            System.out.println("CHECK: Active sheet was detected");
         }
         return  activeSheet;
     }
@@ -83,7 +105,7 @@ public class activeSheet {
 
         // Inform user and return result
         if (activeSheet) {
-            System.out.println("Active sheet was changed");
+            System.out.println("CHANGE: Active sheet was changed");
         }
         return  activeSheet;
     }
