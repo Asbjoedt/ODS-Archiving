@@ -18,30 +18,19 @@ public class embeddedObjects {
     public int Check_ODFToolkit(String filepath) throws Exception {
         int embedObjs = 0;
 
+        // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfContentDom contentDom = spreadsheet.getContentDom();
         OdfMetaDom metaDom = spreadsheet.getMetaDom();
         NodeList docStatistics = metaDom.getElementsByTagName("meta:document-statistic");
-        for (int i = 0; i < docStatistics.getLength(); i++) {
-            Node currentNode = docStatistics.item(i);
-            System.out.println(currentNode.getNodeName());
-            NamedNodeMap currentAttributes = currentNode.getAttributes();
-            for (int ii = 0; ii < currentAttributes.getLength(); ii++) {
-                Node currentAttribute = currentAttributes.item(i);
-                System.out.println(currentAttributes.getLength());
-                if (currentAttribute.getNodeName().equals("meta:object-count")) {
-                    String value = currentAttribute.getNodeValue();
-                    System.out.println(value);
-                    if (value != null || value != "0") {
-                        embedObjs = Integer.parseInt(value);
-                    }
-                }
-            }
-        }
+        Node node = docStatistics.item(0);
+        NamedNodeMap currentAttributes = node.getAttributes();
+        var objectsCount = currentAttributes.getNamedItem("meta:object-count").getNodeValue();
+        embedObjs = Integer.parseInt(objectsCount);
         spreadsheet.close();
 
         // Inform user and return number
-        if (embedObjs> 0) {
+        if (embedObjs > 0) {
             System.out.println("CHECK: " + embedObjs + " embedded objects detected");
         }
         return  embedObjs;

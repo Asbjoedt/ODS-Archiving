@@ -1,7 +1,6 @@
 package archivalRequirements;
 
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-
 import java.io.*;
 import java.util.*;
 
@@ -10,7 +9,7 @@ public class check {
     // Class for creating list of checks
     public class checkList {
         // Class data types
-        boolean cellValuesExist = false;
+        boolean content = false;
         int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
@@ -22,8 +21,8 @@ public class check {
         boolean embedFonts = false;
 
         // Method for class data types
-        public checkList(boolean cellvalues, int conns, int cellrefs, int rtd, int printers, int embedobjs, int extobjs, boolean absolutePath, boolean activeSheet, boolean embedFonts) {
-            this.cellValuesExist = cellvalues;
+        public checkList(boolean hasContent, int conns, int cellrefs, int rtd, int printers, int embedobjs, int extobjs, boolean absolutePath, boolean activeSheet, boolean embedFonts) {
+            this.content = hasContent;
             this.dataConnections = conns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
@@ -41,9 +40,9 @@ public class check {
         // Create list to return
         List<checkList> results = new ArrayList<>();
 
-        // CELL VALUES
-        cellValues cellValue = new cellValues();
-        Boolean hasCellValue = cellValue.Check_ODFToolkit(filepath);
+        // CONTENT
+        content Content = new content();
+        boolean content = Content.Check_ODFToolkit(filepath);
 
         // DATA CONNECTIONS
         dataConnections dataConnection = new dataConnections();
@@ -82,17 +81,17 @@ public class check {
         boolean hasEmbedFonts = embedFonts.Check_ODFToolkit(filepath);
 
         // Add to list and return it
-        results.add(new checkList(hasCellValue, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet, hasEmbedFonts));
+        results.add(new checkList(content, conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasAbsolutePath, hasActivesheet, hasEmbedFonts));
         return results;
     }
 
     // Perform check of archival requirements on OOXML spreadsheets using Apache POI
-    public List<checkList> Check_ApachePOI(String filepath) throws IOException, OpenXML4JException, cellValues.UserDefinedException {
+    public List<checkList> Check_ApachePOI(String filepath) throws IOException, OpenXML4JException {
         // Create list to return
         List<checkList> results = new ArrayList<>();
 
         // CELL VALUES
-        cellValues cellValue = new cellValues();
+        content cellValue = new content();
         Boolean hasCellValue = cellValue.Check_ApachePOI(filepath);
 
         // DATA CONNECTIONS
