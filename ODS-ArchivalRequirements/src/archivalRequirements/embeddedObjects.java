@@ -20,10 +20,7 @@ public class embeddedObjects {
 
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        OdfContentDom contentDom = spreadsheet.getContentDom();
-        OdfMetaDom metaDom = spreadsheet.getMetaDom();
-        NodeList docStatistics = metaDom.getElementsByTagName("meta:document-statistic");
-        Node node = docStatistics.item(0);
+        Node node = spreadsheet.getMetaDom().getElementsByTagName("meta:document-statistic").item(0);
         NamedNodeMap currentAttributes = node.getAttributes();
         var objectsCount = currentAttributes.getNamedItem("meta:object-count").getNodeValue();
         embedObjs = Integer.parseInt(objectsCount);

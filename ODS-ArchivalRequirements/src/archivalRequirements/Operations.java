@@ -46,8 +46,8 @@ public class Operations {
                     Perform.Change_ODFToolkit(output_filepath);
                 }
                 if (validate) {
-                    validation Perform = new validation();
-                    Perform.Validation_ODFToolkit(output_filepath);
+                    archivalRequirements.validate Perform = new validate();
+                    Perform.Validate_OPFODFValidator(output_filepath);
                 }
                 break;
 

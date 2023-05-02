@@ -40,7 +40,7 @@ public class printerSettings {
     public int Change_ODFToolkit(String filepath) throws Exception {
         int printers = 0;
 
-        // Perform check
+        // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node firstNode = settingsDom.getFirstChild();

@@ -20,10 +20,7 @@ public class content {
 
 		// Perform check
 		OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-		OdfContentDom contentDom = spreadsheet.getContentDom();
-		OdfMetaDom metaDom = spreadsheet.getMetaDom();
-		NodeList docStatistics = metaDom.getElementsByTagName("meta:document-statistic");
-		Node node = docStatistics.item(0);
+		Node node = spreadsheet.getMetaDom().getElementsByTagName("meta:document-statistic").item(0);
 		NamedNodeMap currentAttributes = node.getAttributes();
 		var cellCount = currentAttributes.getNamedItem("meta:cell-count").getNodeValue();
 		var objectsCount = currentAttributes.getNamedItem("meta:object-count").getNodeValue();
@@ -37,7 +34,7 @@ public class content {
 
 		// Inform user and return boolean
 		if (!hasCellValues && !hasObjects) {
-			System.out.println("CHECK: No cell values or objects detected");
+			System.out.println("CHECK: Cell values or objects NOT detected");
 		}
 		if (hasCellValues || hasObjects) {
 			hasContent = true;
