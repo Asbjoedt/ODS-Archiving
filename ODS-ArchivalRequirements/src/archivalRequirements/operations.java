@@ -6,7 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.*;
 import java.util.*;
 
-public class Operations {
+public class operations {
 
     // Perform operations on input filepath
     public void Filepath(String input_filepath, String output_filepath, String convert, boolean check, boolean change, boolean validate, boolean delete) throws Exception {

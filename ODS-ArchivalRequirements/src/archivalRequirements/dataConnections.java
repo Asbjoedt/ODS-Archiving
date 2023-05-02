@@ -20,6 +20,8 @@ public class dataConnections {
 		OdfContentDom content = spreadsheet.getContentDom();
 
 
+		spreadsheet.close();
+
 		// Inform user and return number
 		if (dataConnections > 0) {
 			System.out.println("CHECK: " + dataConnections + " data connections detected");

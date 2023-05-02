@@ -62,6 +62,7 @@ public class printerSettings {
                 }
             }
         }
+        spreadsheet.save(filepath);
         spreadsheet.close();
 
         // Inform user and return number

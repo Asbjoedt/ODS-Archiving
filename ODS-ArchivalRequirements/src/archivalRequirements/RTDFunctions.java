@@ -34,6 +34,7 @@ public class RTDFunctions {
                 }
             }
         }
+        spreadsheet.close();
 
         // Inform user and return number
         if (rtdfunctions > 0) {

@@ -1,9 +1,6 @@
 package archivalRequirements;
 
-import java.io.*;
 import org.apache.commons.cli.*;
-import org.apache.commons.io.FilenameUtils;
-
 import java.io.IOException;
 
 public class application {
@@ -11,7 +8,7 @@ public class application {
 	public static void main(String[] args) throws Exception, ParseException, IOException {
 
 		// Inform user of beginning of application
-		System.out.println("ODS-ArchivalRequirements v1.0");
+		System.out.println("ODS-ArchivalRequirements v1.0.0");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-ArchivalRequirements");
 
 		//define argument options
@@ -157,7 +154,7 @@ public class application {
 
 		// Perform operations
 		System.out.println("PERFORM OPERATIONS ON INPUT");
-		Operations OperateOn = new Operations();
+		operations OperateOn = new operations();
 		if (parsed_input_filepath != null && parsed_input_folder == null) {
 			OperateOn.Filepath(parsed_input_filepath, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_delete);
 		}
