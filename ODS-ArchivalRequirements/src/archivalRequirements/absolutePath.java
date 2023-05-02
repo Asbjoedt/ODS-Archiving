@@ -10,13 +10,6 @@ public class absolutePath {
     public boolean Check_ODFToolkit(String filepath) throws Exception {
         boolean absPath = false;
 
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-
-        // The below gives abspath to the spreadsheet file, and not the abspath the file was latest saved on
-        // String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
-
-        spreadsheet.close();
-
         if (absPath) {
             System.out.println("CHECK: Absolute path was detected");
         }
@@ -26,13 +19,6 @@ public class absolutePath {
     // Remove absolute path to local directory using ODF Toolkit
     public boolean Change_ODFToolkit(String filepath) throws Exception {
         boolean absPath = false;
-
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-
-        // The below gives abspath to the spreadsheet file, and not the abspath the file was latest saved on
-        // String absolutePath = spreadsheet.getAbsoluteFilePath(filepath);
-
-        spreadsheet.close();
 
         if (absPath) {
             System.out.println("CHANGE: Absolute path was removed");

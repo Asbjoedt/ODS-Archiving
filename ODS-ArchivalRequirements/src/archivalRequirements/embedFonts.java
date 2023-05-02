@@ -2,6 +2,7 @@ package archivalRequirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -13,19 +14,25 @@ public class embedFonts {
         boolean FirstCheck = false;
         boolean SecondCheck = false;
 
+        // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        NodeList nodeList = settingsDom.getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node currentNode = nodeList.item(i);
-            if (currentNode.getNodeName().equals("EmbedFonts") && currentNode.getNodeValue().equals("false")) {
-                System.out.println("ddd");
+        Node firstNode = settingsDom.getFirstChild();
+        Node secondNode = firstNode.getFirstChild();
+        Node thirdNode = secondNode.getLastChild();
+        NodeList fourthNode = thirdNode.getChildNodes();
+        for (int i = 0; i < fourthNode.getLength(); i++) {
+            Node theNode = fourthNode.item(i);
+            String attributeName = theNode.getAttributes().item(0).getNodeValue();
+            if (attributeName.equals("EmbedFonts")) {
+                if (theNode.getTextContent().equals("true")) {
+                    FirstCheck = true;
+                }
             }
-            if (currentNode.getNodeName().equals("EmbedFonts") && currentNode.getNodeValue().equals("true")) {
-                FirstCheck = true;
-            }
-            if (currentNode.getNodeName().equals("EmbedOnlyUsedFonts") && currentNode.getNodeValue().equals("true")) {
-                SecondCheck = true;
+            if (attributeName.equals("EmbedOnlyUsedFonts")) {
+                if (theNode.getTextContent().equals("true")) {
+                    SecondCheck = true;
+                }
             }
         }
         spreadsheet.close();
