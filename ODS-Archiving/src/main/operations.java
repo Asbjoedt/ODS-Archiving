@@ -1,4 +1,4 @@
-package archivalRequirements;
+package main;
 
 import org.apache.commons.io.*;
 import java.io.*;
@@ -38,7 +38,7 @@ public class operations {
             Perform.Change_ODFToolkit(output_filepath);
         }
         if (validate) {
-            archivalRequirements.validate Perform = new validate();
+            main.validate Perform = new validate();
             Perform.Validate_OPFODFValidator(output_filepath);
         }
     }

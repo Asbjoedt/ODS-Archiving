@@ -1,6 +1,6 @@
-# ODS-ArchivalRequirements
+# ODS Archiving
 
-A Java console application, easy to integrate in workflows to convert spreadsheet to .ods file format, check if the spreadsheet is compliant with archival requirements, change it to be compliant and validate the OpenDocument Spreadsheets file format standard.
+A Java console application, easy to integrate in workflows to convert any spreadsheet to .ods file format, check if the spreadsheet is compliant with archival requirements, change it to be compliant and validate the OpenDocument Spreadsheets file format standard.
 
 * For information on .ods archival requirements, see **[OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets)**
 * For more information, see repository **[CLISC](https://github.com/Asbjoedt/CLISC)**
@@ -41,19 +41,19 @@ Folder method
 
 Filepath usage
 ```
-java -jar <PATH>\ODS-ArchivalRequirements.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
+java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-ArchivalRequirements.jar -con -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
+java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
 ```
 Folder usage
 ```
-java -jar <PATH>\ODS-ArchivalRequirements.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
+java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-ArchivalRequirements.jar -con -che -cha -val -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
+java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
 ```
 
 ## Dependencies

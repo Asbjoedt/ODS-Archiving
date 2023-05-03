@@ -1,4 +1,4 @@
-package archivalRequirements;
+package main;
 
 import org.odftoolkit.odfdom.doc.*;
 import org.w3c.dom.NamedNodeMap;

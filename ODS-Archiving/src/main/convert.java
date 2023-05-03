@@ -1,4 +1,4 @@
-package archivalRequirements;
+package main;
 
 import org.apache.commons.io.*;
 import java.lang.ProcessBuilder;

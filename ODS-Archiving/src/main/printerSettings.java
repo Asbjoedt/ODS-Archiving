@@ -1,4 +1,4 @@
-package archivalRequirements;
+package main;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
