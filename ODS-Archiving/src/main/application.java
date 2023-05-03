@@ -31,12 +31,12 @@ public class application {
 		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
 		options.addOption(recurse);
 
-		Option input_filepath = Option.builder("inp").longOpt("inputfilepath")
-				.argName("inputfilepath")
+		Option input_file = Option.builder("inp").longOpt("inputfile")
+				.argName("inputfile")
 				.hasArg()
 				.required(false)
-				.desc("Set spreadsheet input filepath").build();
-		options.addOption(input_filepath);
+				.desc("Set spreadsheet input file").build();
+		options.addOption(input_file);
 
 		Option input_folder = Option.builder("inf").longOpt("inputfolder")
 				.argName("inputfolder")
@@ -63,7 +63,7 @@ public class application {
 		boolean parsed_change = false;
 		boolean parsed_validate = false;
 		boolean parsed_recurse = false;
-		String parsed_input_filepath = null;
+		String parsed_input_file = null;
 		String parsed_input_folder = null;
 		String parsed_output_folder = null;
 
@@ -82,7 +82,7 @@ public class application {
 				parsed_validate = true;
 			}
 			if (cmd.hasOption("inp")) {
-				parsed_input_filepath = cmd.getOptionValue("inputfilepath");
+				parsed_input_file = cmd.getOptionValue("inputfile");
 			}
 			if (cmd.hasOption("inf")) {
 				parsed_input_folder = cmd.getOptionValue("inputfolder");
@@ -91,11 +91,11 @@ public class application {
 				parsed_output_folder = cmd.getOptionValue("outputfolder");
 			}
 			// Check if both input filepath and input folder are set and throw exception
-			if (parsed_input_filepath != null && parsed_input_folder != null) {
+			if (parsed_input_file != null && parsed_input_folder != null) {
 				throw new ParseException("Both input filepath and input folder are set");
 			}
 			// Check if either input filepath or input folder are not set and throw exception
-			if (parsed_input_filepath == null && parsed_input_folder == null) {
+			if (parsed_input_file == null && parsed_input_folder == null) {
 				throw new ParseException("Input filepath or input folder are NOT set");
 			}
 		} catch (ParseException e) {
@@ -107,8 +107,8 @@ public class application {
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
 		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + parsed_validate);
-		if (parsed_input_filepath != null) {
-			System.out.println("Input filepath: " + parsed_input_filepath);
+		if (parsed_input_file != null) {
+			System.out.println("Input file: " + parsed_input_file);
 		}
 		if (parsed_input_folder != null) {
 			System.out.println("Input folder: " + parsed_input_folder);
@@ -124,22 +124,22 @@ public class application {
 			}
 			parsed_output_folder = parsed_input_folder;
 		}
-		if (parsed_output_folder == null && parsed_input_filepath != null) {
-			parsed_output_folder = FilenameUtils.getPath(parsed_input_filepath);
+		if (parsed_output_folder == null && parsed_input_file != null) {
+			parsed_output_folder = FilenameUtils.getPath(parsed_input_file);
 		}
 
 		// Create output filepath
 		String parsed_output_filepath = null;
-		if (parsed_input_filepath != null) {
-			parsed_output_filepath = parsed_output_folder + FilenameUtils.getName(parsed_input_filepath);
+		if (parsed_input_file != null) {
+			parsed_output_filepath = parsed_output_folder + FilenameUtils.getName(parsed_input_file);
 		}
 
 		// Check I/O of user inputs
 		IO IO = new IO();
-		if (parsed_input_filepath != null && parsed_input_folder == null) {
-			IO.CheckFilepathIO(parsed_input_filepath, parsed_output_filepath);
+		if (parsed_input_file != null && parsed_input_folder == null) {
+			IO.CheckFilepathIO(parsed_input_file, parsed_output_filepath);
 		}
-		else if (parsed_input_folder != null && parsed_input_filepath == null) {
+		else if (parsed_input_folder != null && parsed_input_file == null) {
 			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
 		}
 		else {
@@ -149,10 +149,10 @@ public class application {
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
-		if (parsed_input_filepath != null && parsed_input_folder == null) {
-			OperateOn.Filepath(parsed_input_filepath, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate);
+		if (parsed_input_file != null && parsed_input_folder == null) {
+			OperateOn.Filepath(parsed_input_file, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
-		else if (parsed_input_folder != null && parsed_input_filepath == null) {
+		else if (parsed_input_folder != null && parsed_input_file == null) {
 			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
 
