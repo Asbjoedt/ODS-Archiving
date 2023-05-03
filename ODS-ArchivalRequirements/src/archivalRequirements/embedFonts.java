@@ -2,7 +2,6 @@ package archivalRequirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -20,18 +19,20 @@ public class embedFonts {
         Node firstNode = settingsDom.getFirstChild();
         Node secondNode = firstNode.getFirstChild();
         Node thirdNode = secondNode.getLastChild();
-        NodeList fourthNode = thirdNode.getChildNodes();
-        for (int i = 0; i < fourthNode.getLength(); i++) {
-            Node theNode = fourthNode.item(i);
-            String attributeName = theNode.getAttributes().item(0).getNodeValue();
-            if (attributeName.equals("EmbedFonts")) {
-                if (theNode.getTextContent().equals("true")) {
-                    FirstCheck = true;
+        if (thirdNode != null) {
+            NodeList fourthNode = thirdNode.getChildNodes();
+            for (int i = 0; i < fourthNode.getLength(); i++) {
+                Node theNode = fourthNode.item(i);
+                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                if (attributeName.equals("EmbedFonts")) {
+                    if (theNode.getTextContent().equals("true")) {
+                        FirstCheck = true;
+                    }
                 }
-            }
-            if (attributeName.equals("EmbedOnlyUsedFonts")) {
-                if (theNode.getTextContent().equals("true")) {
-                    SecondCheck = true;
+                if (attributeName.equals("EmbedOnlyUsedFonts")) {
+                    if (theNode.getTextContent().equals("true")) {
+                        SecondCheck = true;
+                    }
                 }
             }
         }

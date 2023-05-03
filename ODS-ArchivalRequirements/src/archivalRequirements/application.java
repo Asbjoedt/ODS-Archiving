@@ -1,10 +1,12 @@
 package archivalRequirements;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FilenameUtils;
 import java.io.IOException;
 
 public class application {
 
+	// Main method of the application
 	public static void main(String[] args) throws Exception, ParseException, IOException {
 
 		// Inform user of beginning of application
@@ -13,6 +15,9 @@ public class application {
 
 		//define argument options
 		Options options = new Options();
+
+		Option convert = new Option("con", "convert", false, "Convert spreadsheet to .ods file format");
+		options.addOption(convert);
 
 		Option check = new Option("che", "check", false, "Check spreadsheet for archival requirements");
 		options.addOption(check);
@@ -23,18 +28,8 @@ public class application {
 		Option validate = new Option("val", "validate", false, "Validate OpenDocument Spreadsheets file format standard");
 		options.addOption(validate);
 
-		Option delete = new Option("del", "delete", false, "Delete original input spreadsheet file");
-		options.addOption(delete);
-
 		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
 		options.addOption(recurse);
-
-		Option convert = Option.builder("con").longOpt("convert")
-				.argName("convert")
-				.hasArg()
-				.required(false)
-				.desc("Convert spreadsheet, set extension for output file format").build();
-		options.addOption(convert);
 
 		Option input_filepath = Option.builder("inp").longOpt("inputfilepath")
 				.argName("inputfilepath")
@@ -43,13 +38,6 @@ public class application {
 				.desc("Set spreadsheet input filepath").build();
 		options.addOption(input_filepath);
 
-		Option output_filepath = Option.builder("out").longOpt("outputfilepath")
-				.argName("outputfilepath")
-				.hasArg()
-				.required(false)
-				.desc("Set spreadsheet output filepath").build();
-		options.addOption(output_filepath);
-
 		Option input_folder = Option.builder("inf").longOpt("inputfolder")
 				.argName("inputfolder")
 				.hasArg()
@@ -57,7 +45,7 @@ public class application {
 				.desc("Set spreadsheet input folder path").build();
 		options.addOption(input_folder);
 
-		Option output_folder = Option.builder("ouf").longOpt("outputfolder")
+		Option output_folder = Option.builder("out").longOpt("outputfolder")
 				.argName("outputfolder")
 				.hasArg()
 				.required(false)
@@ -70,19 +58,20 @@ public class application {
 		HelpFormatter helper = new HelpFormatter();
 
 		// Parse arguments
+		boolean parsed_convert = false;
 		boolean parsed_check = false;
 		boolean parsed_change = false;
 		boolean parsed_validate = false;
-		boolean parsed_delete = false;
 		boolean parsed_recurse = false;
-		String parsed_convert = null;
 		String parsed_input_filepath = null;
-		String parsed_output_filepath = null;
 		String parsed_input_folder = null;
 		String parsed_output_folder = null;
 
 		try {
 			cmd = parser.parse(options, args);
+			if (cmd.hasOption("con")) {
+				parsed_convert = true;
+			}
 			if (cmd.hasOption("che")) {
 				parsed_check = true;
 			}
@@ -92,23 +81,22 @@ public class application {
 			if (cmd.hasOption("val")) {
 				parsed_validate = true;
 			}
-			if (cmd.hasOption("del")) {
-				parsed_delete = true;
-			}
-			if (cmd.hasOption("con")) {
-				parsed_convert = cmd.getOptionValue("convert");
-			}
 			if (cmd.hasOption("inp")) {
 				parsed_input_filepath = cmd.getOptionValue("inputfilepath");
-			}
-			if (cmd.hasOption("out")) {
-				parsed_output_filepath = cmd.getOptionValue("outputfilepath");
 			}
 			if (cmd.hasOption("inf")) {
 				parsed_input_folder = cmd.getOptionValue("inputfolder");
 			}
-			if (cmd.hasOption("ouf")) {
+			if (cmd.hasOption("out")) {
 				parsed_output_folder = cmd.getOptionValue("outputfolder");
+			}
+			// Check if both input filepath and input folder are set and throw exception
+			if (parsed_input_filepath != null && parsed_input_folder != null) {
+				throw new ParseException("Both input filepath and input folder are set");
+			}
+			// Check if either input filepath or input folder are not set and throw exception
+			if (parsed_input_filepath == null && parsed_input_folder == null) {
+				throw new ParseException("Input filepath or input folder are NOT set");
 			}
 		} catch (ParseException e) {
 			System.out.println(e.getMessage());
@@ -122,9 +110,6 @@ public class application {
 		if (parsed_input_filepath != null) {
 			System.out.println("Input filepath: " + parsed_input_filepath);
 		}
-		if (parsed_output_filepath != null) {
-			System.out.println("Output filepath: " + parsed_output_filepath);
-		}
 		if (parsed_input_folder != null) {
 			System.out.println("Input folder: " + parsed_input_folder);
 		}
@@ -132,13 +117,19 @@ public class application {
 			System.out.println("Output folder: " + parsed_output_folder);
 		}
 
-		// Correct outputs if outputs are identical to inputs or null
-		if (parsed_input_filepath == parsed_output_filepath || parsed_output_filepath == null) {
-			parsed_output_filepath = parsed_input_filepath;
-		}
-		if (parsed_input_folder == parsed_output_folder || parsed_output_folder == null) {
+		// Set output folder to input folder, if output folder is not set by user
+		if (parsed_output_folder == null && parsed_input_folder != null) {
+			if (!parsed_input_folder.endsWith("\\")) {
+				parsed_input_folder = parsed_input_folder + "\\";
+			}
 			parsed_output_folder = parsed_input_folder;
 		}
+		if (parsed_output_folder == null && parsed_input_filepath != null) {
+			parsed_output_folder = FilenameUtils.getPath(parsed_input_filepath);
+		}
+
+		// Create output filepath
+		String output_filepath = parsed_output_folder + FilenameUtils.getName();
 
 		// Check I/O of user inputs
 		IO IO = new IO();
@@ -153,13 +144,13 @@ public class application {
 		}
 
 		// Perform operations
-		System.out.println("PERFORM OPERATIONS ON INPUT");
+		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
 		if (parsed_input_filepath != null && parsed_input_folder == null) {
-			OperateOn.Filepath(parsed_input_filepath, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_delete);
+			OperateOn.Filepath(parsed_input_filepath, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
 		else if (parsed_input_folder != null && parsed_input_filepath == null) {
-			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_delete);
+			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
 
 		// Inform user of end of application

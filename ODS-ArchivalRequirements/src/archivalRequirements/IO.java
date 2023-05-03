@@ -36,6 +36,7 @@ public class IO {
         switch (input_extension) {
 
             case "fods":
+            case "numbers":
             case "ods":
             case "ots":
             case "xla":
@@ -51,28 +52,6 @@ public class IO {
 
             default:
                 throw new IOException("Input filepath does not have an accepted file format extension");
-        }
-
-        // Check for accepted output file format extensions
-        String output_extension = FilenameUtils.getExtension(output_filepath).toLowerCase();
-        switch (output_extension) {
-
-            case "fods":
-            case "ods":
-            case "ots":
-            case "xla":
-            case "xls":
-            case "xlt":
-            case "xlam":
-            case "xlsm":
-            case "xlsx":
-            case "xltm":
-            case "xltx":
-                // Do nothing
-                break;
-
-            default:
-                throw new IOException("Output filepath does not have an accepted file format extension");
         }
     }
 
@@ -117,16 +96,5 @@ public class IO {
         File input_file = new File(input_filepath);
         File output_file = new File(output_filepath);
         FileUtils.copyFile(input_file, output_file);
-    }
-
-    // Method for deleting input file
-    public void DeleteInputFile(String input_filepath) {
-        File del = new File(input_filepath);
-        boolean success = del.delete();
-        if (success == true) {
-            System.out.println("Input file was deleted");
-        } else {
-            System.out.println("Input file was NOT deleted");
-        }
     }
 }

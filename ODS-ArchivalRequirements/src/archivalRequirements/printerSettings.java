@@ -17,13 +17,15 @@ public class printerSettings {
         Node firstNode = settingsDom.getFirstChild();
         Node secondNode = firstNode.getFirstChild();
         Node thirdNode = secondNode.getLastChild();
-        NodeList fourthNode = thirdNode.getChildNodes();
-        for (int i = 0; i < fourthNode.getLength(); i++) {
-            Node theNode = fourthNode.item(i);
-            String attributeName = theNode.getAttributes().item(0).getNodeValue();
-            if (attributeName.equals("PrinterName")) {
-                if (theNode.getTextContent() != null) {
-                    printers++;
+        if (thirdNode != null) {
+            NodeList fourthNode = thirdNode.getChildNodes();
+            for (int i = 0; i < fourthNode.getLength(); i++) {
+                Node theNode = fourthNode.item(i);
+                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                if (attributeName.equals("PrinterName")) {
+                    if (theNode.getTextContent() != null) {
+                        printers++;
+                    }
                 }
             }
         }
@@ -46,54 +48,30 @@ public class printerSettings {
         Node firstNode = settingsDom.getFirstChild();
         Node secondNode = firstNode.getFirstChild();
         Node thirdNode = secondNode.getLastChild();
-        NodeList fourthNode = thirdNode.getChildNodes();
-        for (int i = 0; i < fourthNode.getLength(); i++) {
-            Node theNode = fourthNode.item(i);
-            String attributeName = theNode.getAttributes().item(0).getNodeValue();
-            if (attributeName.equals("PrinterName")) {
-                if (theNode.getTextContent() != null) {
-                    printers++;
-                    theNode.setTextContent("");
+        if (thirdNode != null) {
+            NodeList fourthNode = thirdNode.getChildNodes();
+            for (int i = 0; i < fourthNode.getLength(); i++) {
+                Node theNode = fourthNode.item(i);
+                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                if (attributeName.equals("PrinterName")) {
+                    if (theNode.getTextContent() != null) {
+                        printers++;
+                        theNode.setTextContent("");
+                    }
+                }
+                if (attributeName.equals("PrinterSetup")) {
+                    if (theNode.getTextContent() != null) {
+                        theNode.setTextContent("");
+                    }
                 }
             }
-            if (attributeName.equals("PrinterSetup")) {
-                if (theNode.getTextContent() != null) {
-                    theNode.setTextContent("");
-                }
-            }
+            spreadsheet.save(filepath);
         }
-        spreadsheet.save(filepath);
         spreadsheet.close();
 
         // Inform user and return number
         if (printers > 0) {
             System.out.println("CHANGE: " + printers + " printers removed");
-        }
-        return printers;
-    }
-
-    // Check for printer settings using Apache POI
-    public int Check_ApachePOI(String filepath) {
-        int printers = 0;
-
-
-
-        // Inform user and return number
-        if (printers > 0) {
-            System.out.println("CHECK: " + printers + " detected");
-        }
-        return printers;
-    }
-
-    // Remove printer settings using Apache POI
-    public int Change_ApachePOI(String filepath) {
-        int printers = 0;
-
-
-
-        // Inform user and return number
-        if (printers > 0) {
-            System.out.println("CHANGE: " + printers + " removed");
         }
         return printers;
     }
