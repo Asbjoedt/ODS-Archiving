@@ -25,8 +25,10 @@ Folder method
 
 **Set output folder**
 
+*You only need to set output folder if you want to convert spreadsheet to .ods file format or change data according to archival requirements.*
+
 ```
---outputfolder "<folder>" (optional, if not set, folder is identical to input folder)
+--outputfolder "<folder>" (optional)
 ```
 
 **Choose operation methods**

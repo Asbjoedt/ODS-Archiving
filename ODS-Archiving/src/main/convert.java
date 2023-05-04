@@ -9,18 +9,20 @@ public class convert {
 
     // Convert spreadsheet to .ods file format using LibreOffice
     public int Convert_LibreOffice(String input_filepath, String output_filepath) throws IOException, InterruptedException {
-
         File output_file = new File(output_filepath);
         String output_folder = output_file.getParent();
 
+        // Set arguments
         ProcessBuilder Conversion = new ProcessBuilder (
                 "C:\\Program Files\\LibreOffice\\program\\scalc.exe",
                 "--headless",
-                "--convert-to ods",
+                "--convert-to",
+                "ods",
                 "--outdir",
                 output_folder,
                 input_filepath);
 
+        // Start conversion
         Process process = Conversion.start();
         int exitCode = process.waitFor();
 
@@ -35,6 +37,9 @@ public class convert {
                 throw new IOException("Converted spreadsheet could not be renamed to output filepath");
             }
         }
+
+        // Inform user and return exit code
+        System.out.println("CONVERT: Spreadsheet converted to .ods file format");
         return exitCode;
     }
 }

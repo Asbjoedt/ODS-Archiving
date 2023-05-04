@@ -5,7 +5,7 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class embedFonts {
+public class embeddedFonts {
 
     // Check for embedding of fonts using ODF Toolkit
     public boolean Check_ODFToolkit(String filepath) throws Exception {

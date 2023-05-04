@@ -64,6 +64,7 @@ public class application {
 		boolean parsed_validate = false;
 		boolean parsed_recurse = false;
 		String parsed_input_file = null;
+		String parsed_output_file = null;
 		String parsed_input_folder = null;
 		String parsed_output_folder = null;
 
@@ -90,17 +91,25 @@ public class application {
 			if (cmd.hasOption("out")) {
 				parsed_output_folder = cmd.getOptionValue("outputfolder");
 			}
-			// Check if both input filepath and input folder are set and throw exception
+			// Check if both input filepath and input folder are set, then throw exception
 			if (parsed_input_file != null && parsed_input_folder != null) {
-				throw new ParseException("Both input filepath and input folder are set");
+				throw new ParseException("PARSE ERROR: Both input filepath and input folder are set");
 			}
-			// Check if either input filepath or input folder are not set and throw exception
+			// Check if either input filepath or input folder are not set, then throw exception
 			if (parsed_input_file == null && parsed_input_folder == null) {
-				throw new ParseException("Input filepath or input folder are NOT set");
+				throw new ParseException("PARSE ERROR: Input filepath or input folder are NOT set");
+			}
+			// Check if convert or change are set, but output folder is, then and throw exception
+			if (parsed_convert || parsed_change) {
+				if (parsed_output_folder == null) {
+					throw new ParseException("PARSE ERROR: Output folder is NOT set");
+				}
 			}
 		} catch (ParseException e) {
+			System.out.println(" ");
 			System.out.println(e.getMessage());
-			helper.printHelp("Usage:", options);
+			System.out.println(" ");
+			helper.printHelp(" ", options);
 			System.exit(0);
 		}
 
@@ -117,29 +126,17 @@ public class application {
 			System.out.println("Output folder: " + parsed_output_folder);
 		}
 
-		// Set output folder to input folder, if output folder is not set by user
-		if (parsed_output_folder == null && parsed_input_folder != null) {
-			if (!parsed_input_folder.endsWith("\\")) {
-				parsed_input_folder = parsed_input_folder + "\\";
-			}
-			parsed_output_folder = parsed_input_folder;
-		}
-		if (parsed_output_folder == null && parsed_input_file != null) {
-			parsed_output_folder = FilenameUtils.getPath(parsed_input_file);
-		}
-
-		// Create output filepath
-		String parsed_output_filepath = null;
+		// Create output filepath, if file method is chosen
 		if (parsed_input_file != null) {
-			parsed_output_filepath = parsed_output_folder + FilenameUtils.getName(parsed_input_file);
+			parsed_output_file = parsed_output_folder + "\\" + FilenameUtils.getBaseName(parsed_input_file) + ".ods";
 		}
 
 		// Check I/O of user inputs
 		IO IO = new IO();
-		if (parsed_input_file != null && parsed_input_folder == null) {
-			IO.CheckFilepathIO(parsed_input_file, parsed_output_filepath);
+		if (parsed_input_file != null) {
+			IO.CheckFilepathIO(parsed_input_file, parsed_output_file);
 		}
-		else if (parsed_input_folder != null && parsed_input_file == null) {
+		else if (parsed_input_folder != null) {
 			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
 		}
 		else {
@@ -149,10 +146,10 @@ public class application {
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
-		if (parsed_input_file != null && parsed_input_folder == null) {
-			OperateOn.Filepath(parsed_input_file, parsed_output_filepath, parsed_convert, parsed_check, parsed_change, parsed_validate);
+		if (parsed_input_file != null) {
+			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
-		else if (parsed_input_folder != null && parsed_input_file == null) {
+		else if (parsed_input_folder != null) {
 			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate);
 		}
 

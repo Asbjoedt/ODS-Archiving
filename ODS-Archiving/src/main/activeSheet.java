@@ -8,13 +8,13 @@ import org.w3c.dom.NodeList;
 
 public class activeSheet {
 
-    // Check for absolute path to local directory using ODF Toolkit
+    // Check if first sheet is active sheet using ODF Toolkit
     public boolean Check_ODFToolkit(String filepath) throws Exception {
         boolean activeSheet = false;
 
+        // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-
         NodeList nodeList = settingsDom.getChildNodes();
         if (nodeList != null && nodeList.getLength() > 0) {
             for (int i = 0; i < nodeList.getLength(); i++) {
@@ -30,15 +30,16 @@ public class activeSheet {
         spreadsheet.close();
 
         if (activeSheet) {
-            System.out.println("CHECK: Active sheet was detected");
+            System.out.println("CHECK: Active sheet NOT first sheet was detected");
         }
         return activeSheet;
     }
 
-    // Remove absolute path to local directory using ODF Toolkit
+    // Change if first sheet is not active sheet using ODF Toolkit
     public boolean Change_ODFToolkit(String filepath) throws Exception {
         boolean activeSheet = false;
 
+        // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
         spreadsheet.save(filepath);

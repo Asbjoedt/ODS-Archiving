@@ -8,27 +8,24 @@ public class operations {
 
     // Perform operations on input filepath
     public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate) throws Exception {
-        IO IO = new IO();
 
-        // Get file format extension output filepath
-        String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
-        String output_extension = FilenameUtils.getExtension(output_filepath).toLowerCase();
+        // If not convert but change, then copy spreadsheet to output filepath
+        if (!convert && change) {
+            File input_file = new File(input_filepath);
+            File output_file = new File(output_filepath);
+            FileUtils.copyFile(input_file, output_file);
+        }
 
-        // Perform convert operations, if selected
+        // If not convert and not change, then check or validate the input filepath
+        if (!convert && !change) {
+            output_filepath = input_filepath;
+        }
+
+        // Perform operations
         if (convert) {
             convert Perform = new convert();
             Perform.Convert_LibreOffice(input_filepath, output_filepath);
         }
-        // If not selected, copy to output filepath if it is set
-        if (convert == false) {
-            if (output_filepath != null && !output_filepath.equals(input_filepath) && output_extension.equals(input_extension)) {
-                IO.CopyFile(input_filepath, output_filepath);
-            }
-            else if (output_filepath != null && !output_filepath.equals(input_filepath) && !output_extension.equals(input_extension)) {
-                throw new IOException("You must convert spreadsheet to designated output extension. Use argument --convert " + output_extension);
-            }
-        }
-
         if (check) {
             check Perform = new check();
             Perform.Check_ODFToolkit(output_filepath);
@@ -38,8 +35,8 @@ public class operations {
             Perform.Change_ODFToolkit(output_filepath);
         }
         if (validate) {
-            main.validate Perform = new validate();
-            Perform.Validate_OPFODFValidator(output_filepath);
+            validate Perform = new validate();
+            Perform.Validate_ODFValidator(output_filepath);
         }
     }
 

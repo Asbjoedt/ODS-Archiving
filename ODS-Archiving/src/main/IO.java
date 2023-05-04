@@ -1,7 +1,8 @@
 package main;
 
-import org.apache.commons.io.*;
-import java.io.*;
+import org.apache.commons.io.FilenameUtils;
+import java.io.File;
+import java.io.IOException;
 
 public class IO {
 
@@ -15,20 +16,11 @@ public class IO {
         }
 
         // Check if output directory exists
-        String parent = input_file.getParent();
+        File output_file = new File(output_filepath);
+        String parent = output_file.getParent();
         File directory = new File(parent);
         if (!directory.exists()) {
             throw new IOException("Output directory does not exist");
-        }
-
-        // Check for file protection and corruption
-        boolean readable = input_file.canRead();
-        boolean writeable = input_file.canWrite();
-        if (!readable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
-        }
-        if (!writeable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
         }
 
         // Check for accepted input file format extensions
@@ -52,6 +44,16 @@ public class IO {
 
             default:
                 throw new IOException("Input filepath does not have an accepted file format extension");
+        }
+
+        // Check for file protection and corruption
+        boolean readable = input_file.canRead();
+        boolean writeable = input_file.canWrite();
+        if (!readable) {
+            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+        }
+        if (!writeable) {
+            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
         }
     }
 
@@ -89,12 +91,5 @@ public class IO {
         if (!outputfolder_writeable) {
             throw new IOException("Output folder cannot be processed e.g. has password protection");
         }
-    }
-
-    // Method for copying a file
-    public void CopyFile(String input_filepath, String output_filepath) throws IOException {
-        File input_file = new File(input_filepath);
-        File output_file = new File(output_filepath);
-        FileUtils.copyFile(input_file, output_file);
     }
 }
