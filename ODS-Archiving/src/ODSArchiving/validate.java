@@ -1,6 +1,5 @@
-package main;
+package ODSArchiving;
 
-import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 //import org.odftoolkit.odfvalidator.ODFValidator;
 //import org.odftoolkit.odfvalidator.result.ValidationResult;
 

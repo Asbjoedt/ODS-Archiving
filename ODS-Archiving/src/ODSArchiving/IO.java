@@ -1,4 +1,4 @@
-package main;
+package ODSArchiving;
 
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
@@ -15,12 +15,14 @@ public class IO {
             throw new IOException("Input file does not exist");
         }
 
-        // Check if output directory exists
-        File output_file = new File(output_filepath);
-        String parent = output_file.getParent();
-        File directory = new File(parent);
-        if (!directory.exists()) {
-            throw new IOException("Output directory does not exist");
+        // Check for file protection and corruption
+        boolean readable = input_file.canRead();
+        boolean writeable = input_file.canWrite();
+        if (!readable) {
+            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+        }
+        if (!writeable) {
+            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
         }
 
         // Check for accepted input file format extensions
@@ -46,14 +48,17 @@ public class IO {
                 throw new IOException("Input filepath does not have an accepted file format extension");
         }
 
-        // Check for file protection and corruption
-        boolean readable = input_file.canRead();
-        boolean writeable = input_file.canWrite();
-        if (!readable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+        // Check if output directory exists
+        String parent = FilenameUtils.getFullPathNoEndSeparator(output_filepath);
+        File directory = new File(parent);
+        if (!directory.exists()) {
+            throw new IOException("Output directory does not exist");
         }
-        if (!writeable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+
+        // Check if output file exists
+        File output_file = new File(output_filepath);
+        if (output_file.exists()) {
+            throw new IOException("Output file already exist");
         }
     }
 

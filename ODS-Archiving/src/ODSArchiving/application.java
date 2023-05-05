@@ -1,4 +1,4 @@
-package main;
+package ODSArchiving;
 
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
@@ -10,7 +10,7 @@ public class application {
 	public static void main(String[] args) throws Exception, ParseException, IOException {
 
 		// Inform user of beginning of application
-		System.out.println("ODS-Archiving v1.0.0");
+		System.out.println("ODS Archiving v1.0.0");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
 
 		//define argument options
@@ -52,6 +52,13 @@ public class application {
 				.desc("Set spreadsheet output folder path").build();
 		options.addOption(output_folder);
 
+		Option rename = Option.builder("ren").longOpt("rename")
+				.argName("rename")
+				.hasArg()
+				.required(false)
+				.desc("Set new name of output file").build();
+		options.addOption(rename);
+
 		// define argument parser
 		CommandLine cmd;
 		CommandLineParser parser = new DefaultParser();
@@ -67,6 +74,7 @@ public class application {
 		String parsed_output_file = null;
 		String parsed_input_folder = null;
 		String parsed_output_folder = null;
+		String parsed_rename = null;
 
 		try {
 			cmd = parser.parse(options, args);
@@ -90,6 +98,9 @@ public class application {
 			}
 			if (cmd.hasOption("out")) {
 				parsed_output_folder = cmd.getOptionValue("outputfolder");
+			}
+			if (cmd.hasOption("ren")) {
+				parsed_rename = cmd.getOptionValue("rename");
 			}
 			// Check if both input filepath and input folder are set, then throw exception
 			if (parsed_input_file != null && parsed_input_folder != null) {
@@ -119,6 +130,9 @@ public class application {
 		if (parsed_input_file != null) {
 			System.out.println("Input file: " + parsed_input_file);
 		}
+		if (parsed_rename != null) {
+			System.out.println("Rename output file: " + parsed_rename + ".ods");
+		}
 		if (parsed_input_folder != null) {
 			System.out.println("Input folder: " + parsed_input_folder);
 		}
@@ -129,6 +143,9 @@ public class application {
 		// Create output filepath, if file method is chosen
 		if (parsed_input_file != null) {
 			parsed_output_file = parsed_output_folder + "\\" + FilenameUtils.getBaseName(parsed_input_file) + ".ods";
+		}
+		if (parsed_input_file != null && parsed_rename != null) {
+			parsed_output_file = parsed_output_folder + "\\" + parsed_rename + ".ods";
 		}
 
 		// Check I/O of user inputs
@@ -147,10 +164,10 @@ public class application {
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
 		if (parsed_input_file != null) {
-			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate);
+			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename);
 		}
 		else if (parsed_input_folder != null) {
-			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate);
+			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename);
 		}
 
 		// Inform user of end of application

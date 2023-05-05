@@ -1,8 +1,8 @@
-package main;
+package ODSArchiving;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class metadata {
 
@@ -12,11 +12,13 @@ public class metadata {
 
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        Node node = spreadsheet.getMetaDom().getElementsByTagName("meta:document-statistic").item(0);
-        if (node != null) {
-            NamedNodeMap currentAttributes = node.getAttributes();
-            var objectsCount = currentAttributes.getNamedItem("meta:object-count").getNodeValue();
-            metadata = true;
+        Node cdd = spreadsheet.getMetaDom().getElementById("office:meta").getFirstChild();
+        System.out.println(cdd);
+
+        NodeList childNodes = spreadsheet.getMetaDom().getChildNodes();
+        for (int i = 0; i < childNodes.getLength(); i++) {
+            Node childNode = childNodes.item(i);
+            System.out.println(childNode.getNodeName());
         }
         spreadsheet.close();
 

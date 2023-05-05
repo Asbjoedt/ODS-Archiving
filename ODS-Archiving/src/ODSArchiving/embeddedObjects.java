@@ -1,4 +1,4 @@
-package main;
+package ODSArchiving;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.w3c.dom.NamedNodeMap;

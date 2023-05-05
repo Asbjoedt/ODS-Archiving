@@ -1,4 +1,4 @@
-package main;
+package ODSArchiving;
 
 import org.apache.commons.io.*;
 import java.io.*;
@@ -7,7 +7,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, String rename) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -24,7 +24,7 @@ public class operations {
         // Perform operations
         if (convert) {
             convert Perform = new convert();
-            Perform.Convert_LibreOffice(input_filepath, output_filepath);
+            Perform.Convert_LibreOffice(input_filepath, output_filepath, rename);
         }
         if (check) {
             check Perform = new check();
@@ -41,7 +41,7 @@ public class operations {
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, String rename) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -55,8 +55,18 @@ public class operations {
             String input_filepath = spreadsheet.getAbsolutePath();
             String output_filepath = output_folder + "\\" + spreadsheet.getName();
 
-            // Perform operations on each spreadsheet
-            Filepath(input_filepath, output_filepath, convert, check, change, validate);
+            try {
+                // Check IO of the filepaths
+                IO IO = new IO();
+                IO.CheckFilepathIO(input_filepath, output_filepath);
+
+                // Perform operations on each spreadsheet
+                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename);
+            }
+            catch (IOException e) {
+                System.out.println(e.getMessage());
+                System.out.println(input_filepath + " was skipped");
+            }
         }
     }
 }
