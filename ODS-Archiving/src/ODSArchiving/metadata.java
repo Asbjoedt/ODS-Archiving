@@ -29,7 +29,7 @@ public class metadata {
     public boolean Change_ODFToolkit(String filepath) throws Exception {
         boolean metadata = false;
 
-        // Perform check
+        // Perform change
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfMetaDom metaDom = spreadsheet.getMetaDom();
         Node creator = metaDom.getElementsByTagName("meta:initial-creator").item(0);

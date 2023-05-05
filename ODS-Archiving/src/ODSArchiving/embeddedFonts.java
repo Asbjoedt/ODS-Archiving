@@ -59,7 +59,7 @@ public class embeddedFonts {
         boolean FirstCheck = false;
         boolean SecondCheck = false;
 
-        // Perform check
+        // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node firstNode = settingsDom.getFirstChild();
@@ -92,7 +92,7 @@ public class embeddedFonts {
             embedFonts = true;
         }
 
-        // Inform user and return number
+        // Inform user and return boolean
         if (embedFonts) {
             System.out.println("CHANGE: This application does not support embedding of fonts - Process manually");
         }

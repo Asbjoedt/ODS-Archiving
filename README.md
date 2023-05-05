@@ -38,25 +38,25 @@ Folder method
 --convert (optional, converts spreadsheet to .ods file format using LibreOffice)
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
---validate (optional, validates OpenDocument Spreadsheets file format standard)
+--validate <"path to ODF Validator jar"> (optional, validates OpenDocument Spreadsheets file format standard)
 ```
 **Examples**
 
 Filepath usage
 ```
-java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
+java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
+java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
 ```
 Folder usage
 ```
-java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
+java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
+java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
 ```
 
 ## Dependencies

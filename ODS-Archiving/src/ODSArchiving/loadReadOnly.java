@@ -43,7 +43,7 @@ public class loadReadOnly {
     public boolean Change_ODFToolkit(String filepath) throws Exception {
         boolean loadReadOnly = false;
 
-        // Perform check
+        // Perform change
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node firstNode = settingsDom.getFirstChild();
@@ -65,7 +65,7 @@ public class loadReadOnly {
         spreadsheet.save(filepath);
         spreadsheet.close();
 
-        // Inform user and return number
+        // Inform user and return boolean
         if (loadReadOnly) {
             System.out.println("CHANGE: \"LoadReadOnly\" was set as true");
         }

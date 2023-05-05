@@ -6,10 +6,43 @@ package ODSArchiving;
 public class validate {
 
     // Validate OpenDocument Spreadsheets using ODF Validator
-    public boolean Validate_ODFValidator(String filepath) throws Exception {
+    public boolean Validate_ODFValidator(String filepath, String path_to_jar) throws Exception {
         boolean valid = false;
 
-        System.out.println("VALIDATE: Validation of OpenDocument Spreadsheets are currently not supported");
+        if (path_to_jar != null) {
+            // Set arguments
+            ProcessBuilder Validation = new ProcessBuilder (
+                    "javaw", "-jar", path_to_jar,
+                    filepath);
+
+            // Start validation
+            Process process = Validation.start();
+
+            // Handle results
+            int exitCode = process.waitFor();
+            System.out.println(exitCode);
+
+            if (exitCode == 0)
+            {
+                System.out.println("VALIDATE: File format is invalid. Spreadsheet has no cell values");
+            }
+            else if (exitCode == 1)
+            {
+                System.out.println("VALIDATE: File format validation could not be completed");
+            }
+            else if (exitCode == 2)
+            {
+                System.out.println("VALIDATE: File format is valid");
+                valid = true;
+            }
+            else {
+                System.out.println("VALIDATE: File format is invalid");
+                System.out.println(process.getOutputStream());
+            }
+        }
+        else {
+            System.out.println("VALIDATE: ODF Validator jar file was not found - Validation is interrupted");
+        }
 
 /*      OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         //ODFValidator validator = new ODFValidator();

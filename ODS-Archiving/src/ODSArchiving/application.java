@@ -25,9 +25,6 @@ public class application {
 		Option change = new Option("cha", "change", false, "Change spreadsheet according to archival requirements");
 		options.addOption(change);
 
-		Option validate = new Option("val", "validate", false, "Validate OpenDocument Spreadsheets file format standard");
-		options.addOption(validate);
-
 		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
 		options.addOption(recurse);
 
@@ -59,6 +56,13 @@ public class application {
 				.desc("Set new name of output file").build();
 		options.addOption(rename);
 
+		Option validate = Option.builder("val").longOpt("validate")
+				.argName("validate")
+				.hasArg()
+				.required(false)
+				.desc("Set path to ODF Validator jar to validate OpenDocument Spreadsheets file format").build();
+		options.addOption(validate);
+
 		// define argument parser
 		CommandLine cmd;
 		CommandLineParser parser = new DefaultParser();
@@ -68,8 +72,8 @@ public class application {
 		boolean parsed_convert = false;
 		boolean parsed_check = false;
 		boolean parsed_change = false;
-		boolean parsed_validate = false;
 		boolean parsed_recurse = false;
+		String parsed_validate = null;
 		String parsed_input_file = null;
 		String parsed_output_file = null;
 		String parsed_input_folder = null;
@@ -88,7 +92,7 @@ public class application {
 				parsed_change = true;
 			}
 			if (cmd.hasOption("val")) {
-				parsed_validate = true;
+				parsed_validate = cmd.getOptionValue("validate");
 			}
 			if (cmd.hasOption("inp")) {
 				parsed_input_file = cmd.getOptionValue("inputfile");
@@ -124,9 +128,16 @@ public class application {
 			System.exit(0);
 		}
 
+		// Only to be used as long as validation requires path to jar file
+		boolean doValidation = false;
+		if (parsed_validate != null) {
+			doValidation = true;
+		}
+		// Only to be used as long as validation requires path to jar file
+
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + parsed_validate);
+		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + doValidation);
 		if (parsed_input_file != null) {
 			System.out.println("Input file: " + parsed_input_file);
 		}
