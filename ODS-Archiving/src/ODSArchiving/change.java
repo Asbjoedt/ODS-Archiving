@@ -11,20 +11,24 @@ public class change {
         int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
-        int printerSettings = 0;
         int embeddedObjects = 0;
         int externalObjects = 0;
+        int printerSettings = 0;
         boolean activeSheet = false;
+        boolean metadata = false;
+        boolean loadReadOnly = false;
 
         // Method for class data types
-        public changeList(int conns, int cellrefs, int rtd, int printers, int embedsobjs, int extobjs, boolean activeSheet) {
+        public changeList(int conns, int cellrefs, int rtd, int embedsobjs, int extobjs,  int printers, boolean activeSheet, boolean metadata, boolean loadReadOnly) {
             this.dataConnections = conns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
-            this.printerSettings = printers;
             this.embeddedObjects = embedsobjs;
             this.externalObjects = extobjs;
+            this.printerSettings = printers;
             this.activeSheet = activeSheet;
+            this.metadata = metadata;
+            this.loadReadOnly = loadReadOnly;
         }
     }
 
@@ -34,35 +38,43 @@ public class change {
         List<changeList> results = new ArrayList<>();
 
         // DATA CONNECTIONS
-        dataConnections dataConnection = new dataConnections();
-        int conns = dataConnection.Change_ODFToolkit(filepath);
+        dataConnections DataConnections = new dataConnections();
+        int conns = DataConnections.Change_ODFToolkit(filepath);
 
         // EXTERNAL CELL REFERENCES
-        externalCellReferences externalCellReference = new externalCellReferences();
-        int extCellRefs = externalCellReference.Change_ODFToolkit(filepath);
+        externalCellReferences ExternalCellReferences = new externalCellReferences();
+        int extCellRefs = ExternalCellReferences.Change_ODFToolkit(filepath);
 
         // RTD FUNCTIONS
-        RTDFunctions RTDFunction = new RTDFunctions();
-        int rtdFunctions = RTDFunction.Change_ODFToolkit(filepath);
-
-        // PRINTER SETTINGS
-        printerSettings printersetting = new printerSettings();
-        int printers = printersetting.Change_ODFToolkit(filepath);
+        RTDFunctions RTDFunctions = new RTDFunctions();
+        int rtdFunctions = RTDFunctions.Change_ODFToolkit(filepath);
 
         // EMBEDDED OBJECTS
-        embeddedObjects embeddedObject = new embeddedObjects();
-        int embedObjs = embeddedObject.Change_ODFToolkit(filepath);
+        embeddedObjects EmbeddedObjects = new embeddedObjects();
+        int embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath);
 
         // EXTERNAL OBJECTS
-        externalObjects externalObject = new externalObjects();
-        int extObjs = externalObject.Change_ODFToolkit(filepath);
+        externalObjects ExternalObjects = new externalObjects();
+        int extObjs = ExternalObjects.Change_ODFToolkit(filepath);
+
+        // PRINTER SETTINGS
+        printerSettings PrinterSettings = new printerSettings();
+        int printers = PrinterSettings.Change_ODFToolkit(filepath);
 
         // ACTIVE SHEET
-        activeSheet activeSheet = new activeSheet();
-        boolean hasActivesheet = activeSheet.Change_ODFToolkit(filepath);
+        activeSheet ActiveSheet = new activeSheet();
+        boolean hasActivesheet = ActiveSheet.Change_ODFToolkit(filepath);
+
+        // METADATA
+        metadata Metadata = new metadata();
+        boolean metadata = Metadata.Change_ODFToolkit(filepath);
+
+        // LOADREADONLY
+        loadReadOnly LoadReadOnly = new loadReadOnly();
+        boolean loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath);
 
         // Add to list and return it
-        results.add(new changeList(conns, extCellRefs, rtdFunctions, printers, embedObjs, extObjs, hasActivesheet));
+        results.add(new changeList(conns, extCellRefs, rtdFunctions, embedObjs, extObjs, printers, hasActivesheet, metadata, loadReadOnly));
         return results;
     }
 }

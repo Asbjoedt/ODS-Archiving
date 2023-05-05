@@ -147,6 +147,9 @@ public class application {
 		if (parsed_input_file != null && parsed_rename != null) {
 			parsed_output_file = parsed_output_folder + "\\" + parsed_rename + ".ods";
 		}
+		if (parsed_input_file != null && parsed_output_folder == null) {
+			parsed_output_file = parsed_input_file;
+		}
 
 		// Check I/O of user inputs
 		IO IO = new IO();

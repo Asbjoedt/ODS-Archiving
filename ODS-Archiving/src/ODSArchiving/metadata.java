@@ -1,8 +1,8 @@
 package ODSArchiving;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 public class metadata {
 
@@ -11,20 +11,38 @@ public class metadata {
         boolean metadata = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        Node cdd = spreadsheet.getMetaDom().getElementById("office:meta").getFirstChild();
-        System.out.println(cdd);
-
-        NodeList childNodes = spreadsheet.getMetaDom().getChildNodes();
-        for (int i = 0; i < childNodes.getLength(); i++) {
-            Node childNode = childNodes.item(i);
-            System.out.println(childNode.getNodeName());
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
+        if (creator.hasChildNodes()) {
+            metadata = true;
         }
         spreadsheet.close();
 
         // Inform user and return boolean
         if (metadata) {
             System.out.println("CHECK: Metadata detected");
+        }
+        return metadata;
+    }
+
+    // Change metadata using ODF Toolkit
+    public boolean Change_ODFToolkit(String filepath) throws Exception {
+        boolean metadata = false;
+
+        // Perform check
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfMetaDom metaDom = spreadsheet.getMetaDom();
+        Node creator = metaDom.getElementsByTagName("meta:initial-creator").item(0);
+        if (creator.hasChildNodes()) {
+            metaDom.removeChild(creator);
+            metadata = true;
+        }
+        spreadsheet.save(filepath);
+        spreadsheet.close();
+
+        // Inform user and return boolean
+        if (metadata) {
+            System.out.println("CHANGE: Metadata removed");
         }
         return metadata;
     }

@@ -60,10 +60,6 @@ public class check {
         RTDFunctions RTDFunctions = new RTDFunctions();
         int rtdFunctions = RTDFunctions.Check_ODFToolkit(filepath);
 
-        // PRINTER SETTINGS
-        printerSettings PrinterSettings = new printerSettings();
-        int printers = PrinterSettings.Check_ODFToolkit(filepath);
-
         // EMBEDDED OBJECTS
         embeddedObjects EmbeddedObjects = new embeddedObjects();
         int embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath);
@@ -71,6 +67,10 @@ public class check {
         // EXTERNAL OBJECTS
         externalObjects ExternalObjects = new externalObjects();
         int extObjs = ExternalObjects.Check_ODFToolkit(filepath);
+
+        // PRINTER SETTINGS
+        printerSettings PrinterSettings = new printerSettings();
+        int printers = PrinterSettings.Check_ODFToolkit(filepath);
 
         // ACTIVE SHEET
         activeSheet ActiveSheet = new activeSheet();

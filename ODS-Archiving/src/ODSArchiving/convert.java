@@ -11,7 +11,7 @@ public class convert {
         String output_folder = new File(output_filepath).getParent();
         String original_output_folder = output_folder;
 
-        // To use for renaming, if true
+        // Create subdir to use if renaming
         String outdir = FilenameUtils.getFullPathNoEndSeparator(output_filepath) + "\\.tempconvert";
         File subdir = new File(outdir);
         if (rename != null) {

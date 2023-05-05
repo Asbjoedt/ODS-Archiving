@@ -56,12 +56,17 @@ public class printerSettings {
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
                         printers++;
-                        theNode.setTextContent("");
+                        settingsDom.removeChild(theNode);
+                    }
+                }
+                if (attributeName.equals("PrinterPaperFromSetup")) {
+                    if (theNode.getTextContent() != null) {
+                        settingsDom.removeChild(theNode);
                     }
                 }
                 if (attributeName.equals("PrinterSetup")) {
                     if (theNode.getTextContent() != null) {
-                        theNode.setTextContent("");
+                        settingsDom.removeChild(theNode);
                     }
                 }
             }

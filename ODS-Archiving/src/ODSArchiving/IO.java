@@ -56,9 +56,11 @@ public class IO {
         }
 
         // Check if output file exists
-        File output_file = new File(output_filepath);
-        if (output_file.exists()) {
-            throw new IOException("Output file already exist");
+        if (!input_filepath.equals(output_filepath)) {
+            File output_file = new File(output_filepath);
+            if (output_file.exists()) {
+                throw new IOException("Output file already exist");
+            }
         }
     }
 
