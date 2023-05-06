@@ -39,7 +39,7 @@ Folder method
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --validate <"path to ODF Validator jar"> (optional, validates OpenDocument Spreadsheets file format standard)
---compliance (optional, sets conformance level for archival requirements. Options are "must", "should", "may" or "test". All options contains previous compliance levels i.e. "should" also includes "must" requirements. "test" does archival requirements still under evaluation)
+--compliance <option> (optional, sets conformance level for archival requirements. Options are "must", "should", "may" or "test". All options contains previous compliance levels i.e. "should" also includes "must" requirements. "test" does archival requirements still under evaluation)
 
 ```
 **Examples**
@@ -48,19 +48,19 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --compliance must
 ```
 Or shorter
 ```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder" --com must
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --compliance must
 ```
 Or shorter
 ```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo" --com must
 ```
 
 ## Dependencies

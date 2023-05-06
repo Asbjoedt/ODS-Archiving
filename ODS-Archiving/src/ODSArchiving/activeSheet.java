@@ -1,10 +1,15 @@
 package ODSArchiving;
 
+import org.apache.jena.base.Sys;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
+import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.List;
 
 public class activeSheet {
 
@@ -13,16 +18,20 @@ public class activeSheet {
         boolean activeSheet = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfTable firstTable = spreadsheet.getSpreadsheetTables().get(0);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        NodeList nodeList = settingsDom.getChildNodes();
-        if (nodeList != null && nodeList.getLength() > 0) {
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                Node node = nodeList.item(i);
-                if (node instanceof Element) {
-                    if ("ActiveTable".equals(node.getNodeName())) {
-                        String activeSheetName = node.getNodeValue();
-                        System.out.println(activeSheetName);
+        Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
+        if (thirdNode != null) {
+            NodeList fourthNode = thirdNode.getChildNodes();
+            for (int i = 0; i < fourthNode.getLength(); i++) {
+                Node theNode = fourthNode.item(i);
+                System.out.println(theNode.getNodeName());
+                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                if (attributeName.equals("ActiveTable")) {
+                    System.out.println(attributeName);
+                    if (!theNode.getTextContent().equals(firstTable.getTableName())) {
+                        activeSheet = true;
                     }
                 }
             }
@@ -40,9 +49,26 @@ public class activeSheet {
         boolean activeSheet = false;
 
         // Perform change
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-
-        spreadsheet.save(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfTable firstTable = spreadsheet.getSpreadsheetTables().get(0);
+        OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
+        Node firstNode = settingsDom.getFirstChild();
+        Node secondNode = firstNode.getFirstChild();
+        Node thirdNode = secondNode.getLastChild();
+        if (thirdNode != null) {
+            NodeList fourthNode = thirdNode.getChildNodes();
+            for (int i = 0; i < fourthNode.getLength(); i++) {
+                Node theNode = fourthNode.item(i);
+                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                if (attributeName.equals("ActiveTable")) {
+                    if (!theNode.getTextContent().equals(firstTable.getTableName())) {
+                        activeSheet = true;
+                        theNode.setTextContent(firstTable.getTableName());
+                    }
+                }
+            }
+            spreadsheet.save(filepath);
+        }
         spreadsheet.close();
 
         if (activeSheet) {

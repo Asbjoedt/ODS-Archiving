@@ -102,7 +102,7 @@ public class application {
 			if (cmd.hasOption("val")) {
 				parsed_validate = cmd.getOptionValue("validate");
 			}
-			if (cmd.hasOption("ren")) {
+			if (cmd.hasOption("com")) {
 				parsed_compliance = cmd.getOptionValue("compliance");
 			}
 			if (cmd.hasOption("inp")) {
@@ -119,7 +119,7 @@ public class application {
 			}
 			// Check accepted compliance levels
 			if (parsed_check || parsed_change) {
-				if (parsed_compliance != "must" || parsed_compliance != "should" || parsed_compliance != "may" || parsed_compliance != "test") {
+				if (parsed_compliance == null || !parsed_compliance.equals("must") && !parsed_compliance.equals("should") && !parsed_compliance.equals("may") && !parsed_compliance.equals("test")) {
 					throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"test\"");
 				}
 			}
