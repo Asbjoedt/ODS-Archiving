@@ -63,6 +63,13 @@ public class application {
 				.desc("Set path to ODF Validator jar to validate OpenDocument Spreadsheets file format").build();
 		options.addOption(validate);
 
+		Option compliance = Option.builder("com").longOpt("compliance")
+				.argName("compliance")
+				.hasArg()
+				.required(false)
+				.desc("Set level of compliance for archival requirements").build();
+		options.addOption(compliance);
+
 		// define argument parser
 		CommandLine cmd;
 		CommandLineParser parser = new DefaultParser();
@@ -79,6 +86,7 @@ public class application {
 		String parsed_input_folder = null;
 		String parsed_output_folder = null;
 		String parsed_rename = null;
+		String parsed_compliance = null;
 
 		try {
 			cmd = parser.parse(options, args);
@@ -94,6 +102,9 @@ public class application {
 			if (cmd.hasOption("val")) {
 				parsed_validate = cmd.getOptionValue("validate");
 			}
+			if (cmd.hasOption("ren")) {
+				parsed_compliance = cmd.getOptionValue("compliance");
+			}
 			if (cmd.hasOption("inp")) {
 				parsed_input_file = cmd.getOptionValue("inputfile");
 			}
@@ -105,6 +116,12 @@ public class application {
 			}
 			if (cmd.hasOption("ren")) {
 				parsed_rename = cmd.getOptionValue("rename");
+			}
+			// Check accepted compliance levels
+			if (parsed_check || parsed_change) {
+				if (parsed_compliance != "must" || parsed_compliance != "should" || parsed_compliance != "may" || parsed_compliance != "test") {
+					throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"test\"");
+				}
 			}
 			// Check if both input filepath and input folder are set, then throw exception
 			if (parsed_input_file != null && parsed_input_folder != null) {
@@ -137,7 +154,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + doValidation);
+		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + doValidation + ", Compliance " + parsed_compliance);
 		if (parsed_input_file != null) {
 			System.out.println("Input file: " + parsed_input_file);
 		}
@@ -178,10 +195,10 @@ public class application {
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
 		if (parsed_input_file != null) {
-			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename);
+			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance);
 		}
 		else if (parsed_input_folder != null) {
-			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename);
+			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance);
 		}
 
 		// Inform user of end of application

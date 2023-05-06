@@ -7,7 +7,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename, String compliance) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -28,11 +28,11 @@ public class operations {
         }
         if (check) {
             check Perform = new check();
-            Perform.Check_ODFToolkit(output_filepath);
+            Perform.Check_ODFToolkit(output_filepath, compliance);
         }
         if (change) {
             change Perform = new change();
-            Perform.Change_ODFToolkit(output_filepath);
+            Perform.Change_ODFToolkit(output_filepath, compliance);
         }
         if (validate != null) {
             validate Perform = new validate();
@@ -41,7 +41,7 @@ public class operations {
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, String validate, String rename) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, String validate, String rename, String compliance) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -61,7 +61,7 @@ public class operations {
                 IO.CheckFilepathIO(input_filepath, output_filepath);
 
                 // Perform operations on each spreadsheet
-                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename);
+                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, compliance);
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());

@@ -42,4 +42,39 @@ public class hyperlinks {
         }
         return hyperlinks;
     }
+
+    // Change hyperlinks using ODF Toolkit
+    public int Change_ODFToolkit(String filepath) throws Exception {
+        int hyperlinks = 0;
+
+        // Perform change
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
+        for (OdfTable table : tables) {
+            List<OdfTableRow> rows = table.getRowList();
+            for (OdfTableRow row : rows) {
+                NodeList cells = row.getOdfElement().getChildNodes();
+                for (int i = 0; i < cells.getLength(); i++) {
+                    Node cell = cells.item(i);
+                    Node pNode = cell.getFirstChild();
+                    if (pNode != null) {
+                        Node aNode = pNode.getFirstChild();
+                        if (aNode != null && aNode.getNodeName().equals("text:a")) {
+                            if (aNode.getAttributes().getNamedItem("xlink:href") != null) {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        spreadsheet.save(filepath);
+        spreadsheet.close();
+
+        // Inform user and return number
+        if (hyperlinks > 0) {
+            System.out.println("CHANGE: " + hyperlinks + " hyperlinks removed");
+        }
+        return hyperlinks;
+    }
 }

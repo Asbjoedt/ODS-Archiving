@@ -39,24 +39,28 @@ Folder method
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --validate <"path to ODF Validator jar"> (optional, validates OpenDocument Spreadsheets file format standard)
+--compliance (optional, sets conformance level for archival requirements. Options are "must", "should", "may" or "test". All options contains previous compliance levels i.e. "should" also includes "must" requirements. "test" does archival requirements still under evaluation)
+
 ```
 **Examples**
 
+In your terminal change directory to the folder where you have the ```ODS-Archiving.jar``` file.
+
 Filepath usage
 ```
-java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder"
 ```
 Folder usage
 ```
-java -jar <PATH>\ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo"
 ```
 Or shorter
 ```
-java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo"
 ```
 
 ## Dependencies
@@ -64,4 +68,4 @@ java -jar <PATH>\ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -in
 The application uses the following software.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
-* [OPF ODF Validator](https://github.com/opf-labs/odf-validator): Open Preservation Foundation's ODF Validator is used for validating OpenDocument Spreadsheet files. No installation required.
+* [ODF Validator](https://github.com/tdf/odftoolkit): ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard. You must have download the jar file.
