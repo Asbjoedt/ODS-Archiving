@@ -1,4 +1,4 @@
-package ODSArchiving;
+package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
@@ -14,9 +14,7 @@ public class loadReadOnly {
         // Perform check
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        Node firstNode = settingsDom.getFirstChild();
-        Node secondNode = firstNode.getFirstChild();
-        Node thirdNode = secondNode.getLastChild();
+        Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
         if (thirdNode != null) {
             NodeList fourthNode = thirdNode.getChildNodes();
             for (int i = 0; i < fourthNode.getLength(); i++) {
@@ -46,9 +44,7 @@ public class loadReadOnly {
         // Perform change
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        Node firstNode = settingsDom.getFirstChild();
-        Node secondNode = firstNode.getFirstChild();
-        Node thirdNode = secondNode.getLastChild();
+        Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
         if (thirdNode != null) {
             NodeList fourthNode = thirdNode.getChildNodes();
             for (int i = 0; i < fourthNode.getLength(); i++) {

@@ -1,16 +1,17 @@
-package ODSArchiving;
+package requirements;
 
-import java.util.List;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.table.*;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
+import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import java.util.List;
 
-public class externalCellReferences {
+public class hyperlinks {
 
-    // Check for external cell references using ODF Toolkit
+    // Check for hyperlinks using ODF Toolkit
     public int Check_ODFToolkit(String filepath) throws Exception {
-        int extCellRefs = 0;
+        int hyperlinks = 0;
 
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
@@ -21,10 +22,13 @@ public class externalCellReferences {
                 NodeList cells = row.getOdfElement().getChildNodes();
                 for (int i = 0; i < cells.getLength(); i++) {
                     Node cell = cells.item(i);
-                    Node formulaNode = cell.getAttributes().getNamedItem("table:formula");
-                    if (formulaNode != null) {
-                        if (formulaNode.getNodeValue().startsWith("of:=['file")) {
-                            extCellRefs++;
+                    Node pNode = cell.getFirstChild();
+                    if (pNode != null) {
+                        Node aNode = pNode.getFirstChild();
+                        if (aNode != null && aNode.getNodeName().equals("text:a")) {
+                            if (aNode.getAttributes().getNamedItem("xlink:href") != null) {
+                                hyperlinks++;
+                            }
                         }
                     }
                 }
@@ -33,15 +37,15 @@ public class externalCellReferences {
         spreadsheet.close();
 
         // Inform user and return number
-        if (extCellRefs > 0) {
-            System.out.println("CHECK: " + extCellRefs + " external cell references detected");
+        if (hyperlinks > 0) {
+            System.out.println("CHECK: " + hyperlinks + " hyperlinks detected");
         }
-        return extCellRefs;
+        return hyperlinks;
     }
 
-    // Remove external cell references using ODF Toolkit
+    // Change hyperlinks using ODF Toolkit
     public int Change_ODFToolkit(String filepath) throws Exception {
-        int extCellRefs = 0;
+        int hyperlinks = 0;
 
         // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
@@ -52,12 +56,13 @@ public class externalCellReferences {
                 NodeList cells = row.getOdfElement().getChildNodes();
                 for (int i = 0; i < cells.getLength(); i++) {
                     Node cell = cells.item(i);
-                    Node formulaNode = cell.getAttributes().getNamedItem("table:formula");
-                    if (formulaNode != null) {
-                        if (formulaNode.getNodeValue().startsWith("of:=['file")) {
-                            extCellRefs++;
-                            // below results in error
-                            // cell.removeChild(formulaNode);
+                    Node pNode = cell.getFirstChild();
+                    if (pNode != null) {
+                        Node aNode = pNode.getFirstChild();
+                        if (aNode != null && aNode.getNodeName().equals("text:a")) {
+                            if (aNode.getAttributes().getNamedItem("xlink:href") != null) {
+
+                            }
                         }
                     }
                 }
@@ -67,9 +72,9 @@ public class externalCellReferences {
         spreadsheet.close();
 
         // Inform user and return number
-        if (extCellRefs > 0) {
-            System.out.println("CHANGE: " + extCellRefs + " external cell references removed");
+        if (hyperlinks > 0) {
+            System.out.println("CHANGE: " + hyperlinks + " hyperlinks removed");
         }
-        return extCellRefs;
+        return hyperlinks;
     }
 }

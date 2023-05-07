@@ -1,7 +1,8 @@
-package ODSArchiving;
+package general;
 
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
+
 import java.io.IOException;
 
 public class application {

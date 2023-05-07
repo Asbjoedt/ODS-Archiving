@@ -1,4 +1,4 @@
-package ODSArchiving;
+package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
@@ -13,7 +13,7 @@ public class metadata {
         // Perform check
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
-        if (creator.hasChildNodes()) {
+        if (creator != null) {
             metadata = true;
         }
         spreadsheet.close();

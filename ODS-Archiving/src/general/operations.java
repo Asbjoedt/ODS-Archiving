@@ -1,6 +1,7 @@
-package ODSArchiving;
+package general;
 
 import org.apache.commons.io.*;
+
 import java.io.*;
 import java.util.*;
 
@@ -23,19 +24,19 @@ public class operations {
 
         // Perform operations
         if (convert) {
-            convert Perform = new convert();
+            general.convert Perform = new convert();
             Perform.Convert_LibreOffice(input_filepath, output_filepath, rename);
         }
         if (check) {
-            check Perform = new check();
+            general.check Perform = new check();
             Perform.Check_ODFToolkit(output_filepath, compliance);
         }
         if (change) {
-            change Perform = new change();
+            general.change Perform = new change();
             Perform.Change_ODFToolkit(output_filepath, compliance);
         }
         if (validate != null) {
-            validate Perform = new validate();
+            general.validate Perform = new validate();
             Perform.Validate_ODFValidator(output_filepath, validate);
         }
     }

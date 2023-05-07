@@ -1,13 +1,13 @@
-package ODSArchiving;
+package general;
 
+import requirements.*;
 import java.util.*;
 
 public class check {
 
     // Class for creating list of checks
-    public class checkList {
+    public class changeList {
         // Class data types
-        int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
         int embeddedObjects = 0;
@@ -22,8 +22,7 @@ public class check {
         boolean activeSheet = false;
 
         // Method for class data types
-        public checkList(int conns, int cellrefs, int rtd, int embedobjs, int extobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet) {
-            this.dataConnections = conns;
+        public changeList(int cellrefs, int rtd, int embedobjs, int extobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet) {
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
             this.embeddedObjects = embedobjs;
@@ -40,10 +39,9 @@ public class check {
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<checkList> Check_ODFToolkit(String filepath, String compliance) throws Exception {
+    public List<changeList> Check_ODFToolkit(String filepath, String compliance) throws Exception {
         // Create list and data types to return
-        List<checkList> results = new ArrayList<>();
-        int conns = 0;
+        List<changeList> results = new ArrayList<>();
         int extCellRefs = 0;
         int rtdFunctions = 0;
         int embedObjs = 0;
@@ -59,10 +57,6 @@ public class check {
 
         // Perform checks based on compliance
         if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
-            // DATA CONNECTIONS
-            dataConnections DataConnection = new dataConnections();
-            conns = DataConnection.Check_ODFToolkit(filepath);
-
             // EXTERNAL CELL REFERENCES
             externalCellReferences ExternalCellReference = new externalCellReferences();
             extCellRefs = ExternalCellReference.Check_ODFToolkit(filepath);
@@ -116,7 +110,7 @@ public class check {
         }
 
         // Add to list and return it
-        results.add(new checkList(conns, extCellRefs, rtdFunctions, embedObjs, extObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new changeList(extCellRefs, rtdFunctions, embedObjs, extObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
         return results;
     }
 }

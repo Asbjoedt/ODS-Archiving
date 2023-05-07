@@ -1,8 +1,7 @@
-package ODSArchiving;
+package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
-import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -48,6 +47,7 @@ public class externalObjects {
                 Node node = nodeList.item(i);
                 if (node.getNodeName().equals("table:table-source")) {
                     tables.remove(table);
+                    spreadsheet.save(filepath);
                 }
             }
         }

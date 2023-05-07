@@ -1,12 +1,10 @@
-package ODSArchiving;
+package general;
 
 //import org.odftoolkit.odfvalidator.ODFValidator;
 //import org.odftoolkit.odfvalidator.result.ValidationResult;
-import org.apache.commons.io.IOUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 
 public class validate {
 

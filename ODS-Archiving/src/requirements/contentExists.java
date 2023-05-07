@@ -1,4 +1,4 @@
-package ODSArchiving;
+package requirements;
 
 import org.odftoolkit.odfdom.doc.*;
 import org.w3c.dom.NamedNodeMap;

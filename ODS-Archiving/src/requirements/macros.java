@@ -1,4 +1,4 @@
-package ODSArchiving;
+package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom;
