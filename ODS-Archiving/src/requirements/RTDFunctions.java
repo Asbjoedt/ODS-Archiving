@@ -10,7 +10,7 @@ import org.w3c.dom.NodeList;
 public class RTDFunctions {
 
     // Check for RTD functions using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int rtdfunctions = 0;
 
         // Perform check
@@ -26,6 +26,9 @@ public class RTDFunctions {
                         Node childNode = cell.getFirstChild();
                         if (childNode.getTextContent().startsWith(" =RTD") || childNode.getTextContent().startsWith("=RTD")) {
                             rtdfunctions++;
+                            if (verbose) {
+                                System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, RealTimeData reference:" + childNode.getTextContent());
+                            }
                         }
                     }
                 }

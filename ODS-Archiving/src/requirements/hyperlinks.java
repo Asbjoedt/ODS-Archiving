@@ -10,7 +10,7 @@ import java.util.List;
 public class hyperlinks {
 
     // Check for hyperlinks using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int hyperlinks = 0;
 
         // Perform check
@@ -28,6 +28,9 @@ public class hyperlinks {
                         if (aNode != null && aNode.getNodeName().equals("text:a")) {
                             if (aNode.getAttributes().getNamedItem("xlink:href") != null) {
                                 hyperlinks++;
+                                if (verbose) {
+                                    System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, Hyperlink URL: "  + aNode.getAttributes().getNamedItem("xlink:href").getNodeValue());
+                                }
                             }
                         }
                     }

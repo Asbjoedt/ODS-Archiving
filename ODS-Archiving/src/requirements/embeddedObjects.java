@@ -7,7 +7,7 @@ import org.w3c.dom.Node;
 public class embeddedObjects {
 
     // Check for embedded objects using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int embedObjs = 0;
 
         // Perform check

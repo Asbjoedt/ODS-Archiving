@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 public class printerSettings {
 
     // Check for printer settings using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int printers = 0;
 
         // Perform check

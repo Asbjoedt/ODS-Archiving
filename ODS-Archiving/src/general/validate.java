@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class validate {
 
     // Validate OpenDocument Spreadsheets using ODF Validator
-    public boolean Validate_ODFValidator(String filepath, String path_to_jar) throws Exception {
+    public boolean Validate_ODFValidator(String filepath, String path_to_jar, boolean verbose) throws Exception {
         boolean valid = false;
 
         // Documentation says these two commands are necessary
@@ -29,15 +29,17 @@ public class validate {
             Validation.redirectErrorStream(true);
             Process process = Validation.start();
 
-            // Handle results
+            // Handle errors
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null)
-                System.out.println("VALIDATE: " + line);
-            int exitCode = process.waitFor();
-            System.out.println("VALIDATE: ExitCode " + exitCode);
+                if (verbose) {
+                    System.out.println("VALIDATE: " + line);
+                }
 
-            // Inform user and return exit code
+            // Handle and return exit codes
+            int exitCode = process.waitFor();
+            System.out.println("VALIDATE: ODF Validator exit code " + exitCode);
             if (exitCode == 0)
             {
                 System.out.println("VALIDATE: File format is valid.");

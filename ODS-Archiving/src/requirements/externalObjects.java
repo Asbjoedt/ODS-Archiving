@@ -10,7 +10,7 @@ import java.util.List;
 public class externalObjects {
 
     // Check for external object references using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int extObjs = 0;
 
         // Perform check
@@ -22,6 +22,9 @@ public class externalObjects {
                 Node node = nodeList.item(i);
                 if (node.getNodeName().equals("table:table-source")) {
                     extObjs++;
+                    if (verbose) {
+                        System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
+                    }
                 }
             }
         }

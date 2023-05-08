@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 public class macros {
 
     // Check for macros using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int macros = 0;
 
         // Perform check

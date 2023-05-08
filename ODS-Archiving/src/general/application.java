@@ -29,6 +29,9 @@ public class application {
 		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
 		options.addOption(recurse);
 
+		Option verbose = new Option("ver", "verbose", false, "Output detailed information");
+		options.addOption(verbose);
+
 		Option input_file = Option.builder("inp").longOpt("inputfile")
 				.argName("inputfile")
 				.hasArg()
@@ -81,6 +84,7 @@ public class application {
 		boolean parsed_check = false;
 		boolean parsed_change = false;
 		boolean parsed_recurse = false;
+		boolean parsed_verbose = false;
 		String parsed_validate = null;
 		String parsed_input_file = null;
 		String parsed_output_file = null;
@@ -99,6 +103,9 @@ public class application {
 			}
 			if (cmd.hasOption("cha")) {
 				parsed_change = true;
+			}
+			if (cmd.hasOption("ver")) {
+				parsed_verbose = true;
 			}
 			if (cmd.hasOption("val")) {
 				parsed_validate = cmd.getOptionValue("validate");
@@ -155,7 +162,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + doValidation + ", Compliance " + parsed_compliance);
+		System.out.println("Methods: " + "Convert " + parsed_convert + ", Check " + parsed_check + ", Change " + parsed_change + ", Validate " + doValidation + ", Compliance " + parsed_compliance + ", Verbose " + parsed_verbose);
 		if (parsed_input_file != null) {
 			System.out.println("Input file: " + parsed_input_file);
 		}
@@ -196,10 +203,10 @@ public class application {
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		operations OperateOn = new operations();
 		if (parsed_input_file != null) {
-			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance);
+			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance, parsed_verbose);
 		}
 		else if (parsed_input_folder != null) {
-			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance);
+			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_compliance, parsed_verbose);
 		}
 
 		// Inform user of end of application

@@ -7,7 +7,7 @@ import org.w3c.dom.Node;
 public class metadata {
 
     // Check for metadata using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean metadata = false;
 
         // Perform check
@@ -15,6 +15,9 @@ public class metadata {
         Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
         if (creator != null) {
             metadata = true;
+            if (verbose) {
+                System.out.println("CHECK VERBOSE: Creator of file: " + creator.getTextContent());
+            }
         }
         spreadsheet.close();
 

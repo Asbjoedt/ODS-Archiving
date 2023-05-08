@@ -2,14 +2,18 @@ package requirements;
 
 import java.util.List;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.doc.table.*;
+import org.odftoolkit.odfdom.doc.table.OdfTable;
+import org.odftoolkit.odfdom.doc.table.OdfTableRow;
+import org.odftoolkit.odfdom.doc.table.OdfTableCell;
+import org.odftoolkit.odfdom.dom.OdfDocumentNamespace;
+import org.odftoolkit.odfdom.pkg.OdfElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class externalCellReferences {
 
     // Check for external cell references using ODF Toolkit
-    public int Check_ODFToolkit(String filepath) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int extCellRefs = 0;
 
         // Perform check
@@ -25,6 +29,9 @@ public class externalCellReferences {
                     if (formulaNode != null) {
                         if (formulaNode.getNodeValue().startsWith("of:=['file")) {
                             extCellRefs++;
+                            if (verbose) {
+                                System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, External cell reference: " + formulaNode);
+                            }
                         }
                     }
                 }
@@ -55,9 +62,9 @@ public class externalCellReferences {
                     Node formulaNode = cell.getAttributes().getNamedItem("table:formula");
                     if (formulaNode != null) {
                         if (formulaNode.getNodeValue().startsWith("of:=['file")) {
-                            extCellRefs++;
-                            cell.removeChild(formulaNode);
-                            spreadsheet.save(filepath);
+                            //extCellRefs++;
+                            //cell.removeAttributeNS(OdfDocumentNamespace.OF.getUri(), "table:formula");
+                            //spreadsheet.save(filepath);
                         }
                     }
                 }

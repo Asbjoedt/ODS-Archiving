@@ -8,7 +8,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename, String compliance) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename, String compliance, boolean verbose) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -29,20 +29,20 @@ public class operations {
         }
         if (check) {
             general.check Perform = new check();
-            Perform.Check_ODFToolkit(output_filepath, compliance);
+            Perform.Check_ODFToolkit(output_filepath, compliance, verbose);
         }
         if (change) {
             general.change Perform = new change();
-            Perform.Change_ODFToolkit(output_filepath, compliance);
+            Perform.Change_ODFToolkit(output_filepath, compliance, verbose);
         }
         if (validate != null) {
             general.validate Perform = new validate();
-            Perform.Validate_ODFValidator(output_filepath, validate);
+            Perform.Validate_ODFValidator(output_filepath, validate, verbose);
         }
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, String validate, String rename, String compliance) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, String validate, String rename, String compliance, boolean verbose) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -61,8 +61,11 @@ public class operations {
                 IO IO = new IO();
                 IO.CheckFilepathIO(input_filepath, output_filepath);
 
+                // inform user of filepath to be operated on
+                System.out.println("FILE: " + input_filepath);
+
                 // Perform operations on each spreadsheet
-                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, compliance);
+                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, compliance, verbose);
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());

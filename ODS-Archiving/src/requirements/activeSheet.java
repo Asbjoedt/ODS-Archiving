@@ -9,7 +9,7 @@ import org.w3c.dom.NodeList;
 public class activeSheet {
 
     // Check if first sheet is active sheet using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean activeSheet = false;
 
         // Perform check
@@ -25,6 +25,9 @@ public class activeSheet {
                 if (attributeName.equals("ActiveTable")) {
                     if (!theNode.getTextContent().equals(firstTable.getTableName())) {
                         activeSheet = true;
+                        if (verbose) {
+                            System.out.println("CHECK: sheet " + theNode.getTextContent() + " is active");
+                        }
                     }
                 }
             }

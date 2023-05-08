@@ -31,14 +31,13 @@ public class change {
             this.printerSettings = printers;
             this.metadata = metadata;
             this.hyperlinks = hyperlinks;
-            this.loadReadOnly = loadReadOnly;
             this.embeddedFonts = embeddedFonts;
             this.activeSheet = activeSheet;
         }
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<changeList> Change_ODFToolkit(String filepath, String compliance) throws Exception {
+    public List<changeList> Change_ODFToolkit(String filepath, String compliance, boolean verbose) throws Exception {
         // Create list to return
         List<changeList> results = new ArrayList<>();
         int extCellRefs = 0;

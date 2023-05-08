@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 public class loadReadOnly {
 
     // Check for loadReadOnly using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean loadReadOnly = false;
 
         // Perform check
@@ -23,6 +23,9 @@ public class loadReadOnly {
                 if (attributeName.equals("LoadReadonly")) {
                     if (theNode.getTextContent().equals("false")) {
                         loadReadOnly = true;
+                        if (verbose) {
+                            System.out.println("CHECK VERBOSE: Attribute \"LoadReadonly\" in settings.xml is false");
+                        }
                     }
                 }
             }
@@ -31,7 +34,7 @@ public class loadReadOnly {
 
         // Inform user and return number
         if (loadReadOnly) {
-            System.out.println("CHECK: \"LoadReadonly\" set as true was NOT detected");
+            System.out.println("CHECK: \"LoadReadonly\" was NOT detected");
         }
         return loadReadOnly;
     }

@@ -8,7 +8,7 @@ import org.w3c.dom.NodeList;
 public class embeddedFonts {
 
     // Check for embedding of fonts using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean embedFonts = false;
         boolean FirstCheck = false;
         boolean SecondCheck = false;
@@ -25,11 +25,17 @@ public class embeddedFonts {
                 if (attributeName.equals("EmbedFonts")) {
                     if (theNode.getTextContent().equals("true")) {
                         FirstCheck = true;
+                        if (verbose) {
+                            System.out.println("CHECK VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
+                        }
                     }
                 }
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
                     if (theNode.getTextContent().equals("true")) {
                         SecondCheck = true;
+                        if (verbose) {
+                            System.out.println("CHECK VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
+                        }
                     }
                 }
             }
