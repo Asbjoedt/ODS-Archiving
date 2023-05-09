@@ -57,11 +57,11 @@ public class loadReadOnly {
                     if (theNode.getTextContent().equals("false")) {
                         theNode.setTextContent("true");
                         loadReadOnly = true;
+                        spreadsheet.save(filepath);
                     }
                 }
             }
         }
-        spreadsheet.save(filepath);
         spreadsheet.close();
 
         // Inform user and return boolean

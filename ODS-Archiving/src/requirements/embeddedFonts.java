@@ -23,7 +23,7 @@ public class embeddedFonts {
                 Node theNode = fourthNode.item(i);
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("EmbedFonts")) {
-                    if (theNode.getTextContent().equals("true")) {
+                    if (theNode.getTextContent().equals("false")) {
                         FirstCheck = true;
                         if (verbose) {
                             System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedFonts\" in settings.xml is false");
@@ -31,7 +31,7 @@ public class embeddedFonts {
                     }
                 }
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
-                    if (theNode.getTextContent().equals("true")) {
+                    if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
                         if (verbose) {
                             System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
@@ -73,12 +73,12 @@ public class embeddedFonts {
                 Node theNode = fourthNode.item(i);
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("EmbedFonts")) {
-                    if (theNode.getTextContent().equals("true")) {
+                    if (theNode.getTextContent().equals("false")) {
                         FirstCheck = true;
                     }
                 }
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
-                    if (theNode.getTextContent().equals("true")) {
+                    if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
                     }
                 }

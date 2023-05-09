@@ -8,6 +8,7 @@ public class change {
     // Class for creating list of changes
     public class changeList {
         // Class data types
+        int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
         int embeddedObjects = 0;
@@ -21,7 +22,8 @@ public class change {
         boolean activeSheet = false;
 
         // Method for class data types
-        public changeList(int cellrefs, int rtd, int embedsobjs, int extobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet) {
+        public changeList(int dataConns, int cellrefs, int rtd, int embedsobjs, int extobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet) {
+            this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
             this.embeddedObjects = embedsobjs;
@@ -40,6 +42,7 @@ public class change {
     public List<changeList> Change_ODFToolkit(String filepath, String compliance, boolean verbose) throws Exception {
         // Create list to return
         List<changeList> results = new ArrayList<>();
+        int dataConns = 0;
         int extCellRefs = 0;
         int rtdFunctions = 0;
         int embedObjs = 0;
@@ -54,6 +57,10 @@ public class change {
 
         // Perform checks based on compliance
         if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
+            // DATA CONNECTIONS
+            dataConnections DataConnections = new dataConnections();
+            dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
+
             // EXTERNAL CELL REFERENCES
             externalCellReferences ExternalCellReference = new externalCellReferences();
             extCellRefs = ExternalCellReference.Change_ODFToolkit(filepath, verbose);
@@ -103,7 +110,7 @@ public class change {
         }
 
         // Add to list and return it
-        results.add(new changeList(extCellRefs, rtdFunctions, embedObjs, extObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, embedObjs, extObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
         return results;
     }
 }
