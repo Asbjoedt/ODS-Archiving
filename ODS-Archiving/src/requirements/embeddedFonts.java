@@ -26,7 +26,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("true")) {
                         FirstCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
+                            System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedFonts\" in settings.xml is false");
                         }
                     }
                 }
@@ -34,7 +34,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("true")) {
                         SecondCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
+                            System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
                         }
                     }
                 }
@@ -52,7 +52,7 @@ public class embeddedFonts {
 
         // Inform user and return number
         if (embedFonts) {
-            System.out.println("CHECK: Embedding of fonts was NOT detected");
+            System.out.println("CHECK ODS_TEST: Embedding of fonts was NOT detected");
         }
         return embedFonts;
     }
@@ -96,7 +96,7 @@ public class embeddedFonts {
 
         // Inform user and return boolean
         if (embedFonts) {
-            System.out.println("CHANGE: This application does not support embedding of fonts - Process manually");
+            System.out.println("CHANGE ODS_TEST: This application does not support embedding of fonts - Process manually");
         }
         return embedFonts;
     }

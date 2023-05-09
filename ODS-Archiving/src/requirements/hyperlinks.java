@@ -29,7 +29,7 @@ public class hyperlinks {
                             if (aNode.getAttributes().getNamedItem("xlink:href") != null) {
                                 hyperlinks++;
                                 if (verbose) {
-                                    System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, Hyperlink URL: "  + aNode.getAttributes().getNamedItem("xlink:href").getNodeValue());
+                                    System.out.println("CHECK VERBOSE ODS_11: Sheet: " + table.getTableName() + ", Cell: unknown, Hyperlink URL: "  + aNode.getAttributes().getNamedItem("xlink:href").getNodeValue());
                                 }
                             }
                         }
@@ -41,7 +41,7 @@ public class hyperlinks {
 
         // Inform user and return number
         if (hyperlinks > 0) {
-            System.out.println("CHECK: " + hyperlinks + " hyperlinks detected");
+            System.out.println("CHECK ODS_11: " + hyperlinks + " hyperlinks detected");
         }
         return hyperlinks;
     }
@@ -76,7 +76,7 @@ public class hyperlinks {
 
         // Inform user and return number
         if (hyperlinks > 0) {
-            System.out.println("CHANGE: " + hyperlinks + " hyperlinks removed");
+            System.out.println("CHANGE ODS_11: " + hyperlinks + " hyperlinks removed");
         }
         return hyperlinks;
     }

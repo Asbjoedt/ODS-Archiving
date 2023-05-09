@@ -33,7 +33,7 @@ public class printerSettings {
 
         // Inform user and return number
         if (printers > 0) {
-            System.out.println("CHECK: " + printers + " printers detected");
+            System.out.println("CHECK ODS_9: " + printers + " printers detected");
         }
         return printers;
     }
@@ -74,7 +74,7 @@ public class printerSettings {
 
         // Inform user and return number
         if (printers > 0) {
-            System.out.println("CHANGE: " + printers + " printers removed");
+            System.out.println("CHANGE ODS_9: " + printers + " printers removed");
         }
         return printers;
     }

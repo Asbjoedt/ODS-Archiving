@@ -16,14 +16,14 @@ public class metadata {
         if (creator != null) {
             metadata = true;
             if (verbose) {
-                System.out.println("CHECK VERBOSE: Creator of file: " + creator.getTextContent());
+                System.out.println("CHECK VERBOSE ODS_10: Creator of file: " + creator.getTextContent());
             }
         }
         spreadsheet.close();
 
         // Inform user and return boolean
         if (metadata) {
-            System.out.println("CHECK: Metadata detected");
+            System.out.println("CHECK ODS_10: Metadata detected");
         }
         return metadata;
     }
@@ -45,7 +45,7 @@ public class metadata {
 
         // Inform user and return boolean
         if (metadata) {
-            System.out.println("CHANGE: Metadata removed");
+            System.out.println("CHANGE ODS_10: Metadata removed");
         }
         return metadata;
     }

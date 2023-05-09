@@ -19,10 +19,10 @@ public class IO {
         boolean readable = input_file.canRead();
         boolean writeable = input_file.canWrite();
         if (!readable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. has password protection, is corrupt");
         }
         if (!writeable) {
-            throw new IOException("File cannot be processed e.g. has password protection, is corrupt");
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. has password protection, is corrupt");
         }
 
         // Check for accepted input file format extensions
@@ -45,7 +45,7 @@ public class IO {
                 break;
 
             default:
-                throw new IOException("Input filepath does not have an accepted file format extension");
+                throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension");
         }
 
         // Check if output directory exists

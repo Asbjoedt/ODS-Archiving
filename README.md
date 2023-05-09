@@ -1,5 +1,8 @@
 # ODS Archiving
 
+[![build](https://github.com/Asbjoedt/ODS-Archiving/actions/workflows/maven.yml/badge.svg)](https://github.com/Asbjoedt/ODS-Archiving/actions/workflows/maven.yml
+)
+
 A Java console application, easy to integrate in workflows to convert any spreadsheet to .ods file format, check if the spreadsheet is compliant with archival requirements, change it to be compliant and validate the OpenDocument Spreadsheets file format standard.
 
 * For information on .ods archival requirements, see **[OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets)**

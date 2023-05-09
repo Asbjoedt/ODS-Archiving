@@ -34,31 +34,31 @@ public class validate {
             String line;
             while ((line = reader.readLine()) != null)
                 if (verbose) {
-                    System.out.println("VALIDATE: " + line);
+                    System.out.println("VALIDATE ODS_2: " + line);
                 }
 
             // Handle and return exit codes
             int exitCode = process.waitFor();
-            System.out.println("VALIDATE: ODF Validator exit code " + exitCode);
+            System.out.println("VALIDATE ODS_2: ODF Validator exit code " + exitCode);
             if (exitCode == 0)
             {
-                System.out.println("VALIDATE: File format is valid.");
+                System.out.println("VALIDATE ODS_2: File format is valid.");
                 valid = true;
             }
             else if (exitCode == 1)
             {
-                System.out.println("VALIDATE: File format validation could not be completed");
+                System.out.println("VALIDATE ODS_2: File format validation could not be completed");
             }
             else if (exitCode == 2)
             {
-                System.out.println("VALIDATE: File format is invalid");
+                System.out.println("VALIDATE ODS_2: File format is invalid");
             }
             else {
-                System.out.println("VALIDATE: File format is invalid");
+                System.out.println("VALIDATE ODS_2: File format is invalid");
             }
         }
         else {
-            System.out.println("VALIDATE: ODF Validator jar file was not found - Validation is interrupted");
+            System.out.println("VALIDATE ODS_2: ODF Validator jar file was not found - Validation is interrupted");
         }
         return valid;
 

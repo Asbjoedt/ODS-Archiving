@@ -23,7 +23,7 @@ public class externalObjects {
                 if (node.getNodeName().equals("table:table-source")) {
                     extObjs++;
                     if (verbose) {
-                        System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
+                        System.out.println("CHECK VERBOSE ODS_4: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
                     }
                 }
             }
@@ -32,7 +32,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0) {
-            System.out.println("CHECK: " + extObjs + " external objects detected");
+            System.out.println("CHECK ODS_4: " + extObjs + " external objects detected");
         }
         return extObjs;
     }
@@ -58,7 +58,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0) {
-            System.out.println("CHANGE: " + extObjs + " external objects removed");
+            System.out.println("CHANGE ODS_4: " + extObjs + " external objects removed");
         }
         return extObjs;
     }

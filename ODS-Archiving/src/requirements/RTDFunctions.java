@@ -27,7 +27,7 @@ public class RTDFunctions {
                         if (childNode.getTextContent().startsWith(" =RTD") || childNode.getTextContent().startsWith("=RTD")) {
                             rtdfunctions++;
                             if (verbose) {
-                                System.out.println("CHECK VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, RealTimeData reference:" + childNode.getTextContent());
+                                System.out.println("CHECK VERBOSE ODS_4: Sheet: " + table.getTableName() + ", Cell: unknown, RealTimeData reference:" + childNode.getTextContent());
                             }
                         }
                     }
@@ -38,7 +38,7 @@ public class RTDFunctions {
 
         // Inform user and return number
         if (rtdfunctions > 0) {
-            System.out.println("CHECK: " + rtdfunctions + " RTD functions detected");
+            System.out.println("CHECK ODS_4: " + rtdfunctions + " RTD functions detected");
         }
         return rtdfunctions;
     }
@@ -71,7 +71,7 @@ public class RTDFunctions {
 
         // Inform user and return number
         if (rtdfunctions > 0) {
-            System.out.println("CHANGE: " + rtdfunctions + " RTD functions removed");
+            System.out.println("CHANGE ODS_4: " + rtdfunctions + " RTD functions removed");
         }
         return rtdfunctions;
     }
