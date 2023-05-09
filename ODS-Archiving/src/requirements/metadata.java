@@ -29,7 +29,7 @@ public class metadata {
     }
 
     // Change metadata using ODF Toolkit
-    public boolean Change_ODFToolkit(String filepath) throws Exception {
+    public boolean Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean metadata = false;
 
         // Perform change

@@ -44,8 +44,30 @@ public class RTDFunctions {
     }
 
     // Remove RTD functions using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int rtdfunctions = 0;
+
+        // Perform change
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
+        for (OdfTable table : tables) {
+            List<OdfTableRow> rows = table.getRowList();
+            for (OdfTableRow row : rows) {
+                NodeList cells = row.getOdfElement().getChildNodes();
+                for (int i = 0; i < cells.getLength(); i++) {
+                    Node cell = cells.item(i);
+                    if (cell.hasChildNodes()) {
+                        Node childNode = cell.getFirstChild();
+                        if (childNode.getTextContent().startsWith(" =RTD") || childNode.getTextContent().startsWith("=RTD")) {
+
+                            // Do something
+                            //spreadsheet.save(filepath);
+                        }
+                    }
+                }
+            }
+        }
+        spreadsheet.close();
 
         // Inform user and return number
         if (rtdfunctions > 0) {

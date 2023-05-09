@@ -47,7 +47,7 @@ public class hyperlinks {
     }
 
     // Change hyperlinks using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int hyperlinks = 0;
 
         // Perform change

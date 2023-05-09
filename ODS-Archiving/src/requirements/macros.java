@@ -33,7 +33,7 @@ public class macros {
     }
 
     // Change macros using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int macros = 0;
 
         // Perform change

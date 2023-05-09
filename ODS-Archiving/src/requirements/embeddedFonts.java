@@ -58,7 +58,7 @@ public class embeddedFonts {
     }
 
     // Change embedding of fonts using ODF Toolkit
-    public boolean Change_ODFToolkit(String filepath) throws Exception {
+    public boolean Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean embedFonts = false;
         boolean FirstCheck = false;
         boolean SecondCheck = false;

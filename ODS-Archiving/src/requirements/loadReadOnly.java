@@ -41,7 +41,7 @@ public class loadReadOnly {
 
 
     // Change loadReadOnly using ODF Toolkit
-    public boolean Change_ODFToolkit(String filepath) throws Exception {
+    public boolean Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean loadReadOnly = false;
 
         // Perform change

@@ -38,7 +38,7 @@ public class externalObjects {
     }
 
     // Remove external object references using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int extObjs = 0;
 
         // Perform change

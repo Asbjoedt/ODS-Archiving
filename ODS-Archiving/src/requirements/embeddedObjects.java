@@ -28,7 +28,7 @@ public class embeddedObjects {
     }
 
     // Remove embedded objects using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int embedObjs = 0;
 
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);

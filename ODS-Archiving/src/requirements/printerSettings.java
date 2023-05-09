@@ -39,7 +39,7 @@ public class printerSettings {
     }
 
     // Remove printer settings using ODF Toolkit
-    public int Change_ODFToolkit(String filepath) throws Exception {
+    public int Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int printers = 0;
 
         // Perform change

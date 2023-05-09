@@ -41,7 +41,7 @@ public class activeSheet {
     }
 
     // Change if first sheet is not active sheet using ODF Toolkit
-    public boolean Change_ODFToolkit(String filepath) throws Exception {
+    public boolean Change_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean activeSheet = false;
 
         // Perform change
