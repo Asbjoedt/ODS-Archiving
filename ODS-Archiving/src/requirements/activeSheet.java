@@ -26,7 +26,7 @@ public class activeSheet {
                     if (!theNode.getTextContent().equals(firstTable.getTableName())) {
                         activeSheet = true;
                         if (verbose) {
-                            System.out.println("CHECK ODS_TEST: sheet " + theNode.getTextContent() + " is active");
+                            System.out.println("CHECK ODS_TEST VERBOSE: sheet " + theNode.getTextContent() + " is active");
                         }
                     }
                 }

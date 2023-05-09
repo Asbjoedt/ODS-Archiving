@@ -27,7 +27,7 @@ public class RTDFunctions {
                         if (childNode.getTextContent().startsWith(" =RTD") || childNode.getTextContent().startsWith("=RTD")) {
                             rtdfunctions++;
                             if (verbose) {
-                                System.out.println("CHECK VERBOSE ODS_4: Sheet: " + table.getTableName() + ", Cell: unknown, RealTimeData reference:" + childNode.getTextContent());
+                                System.out.println("CHECK ODS_4 VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, RealTimeData reference:" + childNode.getTextContent());
                             }
                         }
                     }

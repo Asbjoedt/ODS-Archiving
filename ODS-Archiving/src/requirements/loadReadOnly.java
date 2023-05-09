@@ -24,7 +24,7 @@ public class loadReadOnly {
                     if (theNode.getTextContent().equals("false")) {
                         loadReadOnly = true;
                         if (verbose) {
-                            System.out.println("CHECK VERBOSE ODS_8: Attribute \"LoadReadonly\" in settings.xml is false");
+                            System.out.println("CHECK ODS_8 VERBOSE: Attribute \"LoadReadonly\" in settings.xml is false");
                         }
                     }
                 }
@@ -66,7 +66,7 @@ public class loadReadOnly {
 
         // Inform user and return boolean
         if (loadReadOnly) {
-            System.out.println("CHANGE ODS_8: \"LoadReadOnly\" was set as true");
+            System.out.println("CHANGE ODS_8: \"LoadReadonly\" was set as true");
         }
         return loadReadOnly;
     }

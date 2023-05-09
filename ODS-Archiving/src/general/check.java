@@ -11,8 +11,8 @@ public class check {
         int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
-        int embeddedObjects = 0;
         int externalObjects = 0;
+        int embeddedObjects = 0;
         boolean content = false;
         int macros = 0;
         boolean loadReadOnly = false;
@@ -23,12 +23,12 @@ public class check {
         boolean activeSheet = false;
 
         // Method for class data types
-        public checkList(int dataConns, int cellrefs, int rtd, int embedobjs, int extobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet) {
+        public checkList(int dataConns, int cellrefs, int rtd, int extobjs, int embedobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
-            this.embeddedObjects = embedobjs;
             this.externalObjects = extobjs;
+            this.embeddedObjects = embedobjs;
             this.content = hasContent;
             this.macros = macros;
             this.loadReadOnly = loadReadOnly;
@@ -47,8 +47,8 @@ public class check {
         int dataConns = 0;
         int extCellRefs = 0;
         int rtdFunctions = 0;
-        int embedObjs = 0;
         int extObjs = 0;
+        int embedObjs = 0;
         boolean content = false;
         int macros = 0;
         boolean loadReadOnly = false;
@@ -72,13 +72,13 @@ public class check {
             RTDFunctions RTDFunctions = new RTDFunctions();
             rtdFunctions = RTDFunctions.Check_ODFToolkit(filepath, verbose);
 
-            // EMBEDDED OBJECTS
-            embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
-
             // EXTERNAL OBJECTS
             externalObjects ExternalObjects = new externalObjects();
             extObjs = ExternalObjects.Check_ODFToolkit(filepath, verbose);
+
+            // EMBEDDED OBJECTS
+            embeddedObjects EmbeddedObjects = new embeddedObjects();
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
         }
         if (compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
             // CONTENT
@@ -117,7 +117,7 @@ public class check {
         }
 
         // Add to list and return it
-        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, embedObjs, extObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
         return results;
     }
 }

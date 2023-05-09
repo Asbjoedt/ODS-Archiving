@@ -54,22 +54,22 @@ public class operations {
         {
             // Find input and output filepaths
             String input_filepath = spreadsheet.getAbsolutePath();
-            String output_filepath = output_folder + "\\" + spreadsheet.getName();
+            String output_filepath = output_folder + "\\" + FilenameUtils.getBaseName(input_filepath)  + ".ods";
 
             try {
+                // inform user of filepath to be operated on
+                System.out.println("---");
+                System.out.println("FILE: " + input_filepath);
+
                 // Check IO of the filepaths
                 IO IO = new IO();
                 IO.CheckFilepathIO(input_filepath, output_filepath);
-
-                // inform user of filepath to be operated on
-                System.out.println("FILE: " + input_filepath);
 
                 // Perform operations on each spreadsheet
                 Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, compliance, verbose);
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());
-                System.out.println(input_filepath + " was skipped");
             }
         }
     }

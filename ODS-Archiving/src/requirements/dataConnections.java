@@ -20,7 +20,7 @@ public class dataConnections {
                 Node dataConnection = nodeList.item(i);
                 String name = dataConnection.getAttributes().getNamedItem("table:name").getNodeValue();
                 String range = dataConnection.getAttributes().getNamedItem("table:target-range-address").getNodeValue();
-                System.out.println("CHECK VERBOSE ODS_4: Database connection detected. Name: " + name + ", Range: " + range);
+                System.out.println("CHECK ODS_4 VERBOSE: Database connection detected. Name: " + name + ", Range: " + range);
                 conns++;
             }
         }

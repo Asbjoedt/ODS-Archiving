@@ -26,7 +26,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("false")) {
                         FirstCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedFonts\" in settings.xml is false");
+                            System.out.println("CHECK ODS_TEST VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
                         }
                     }
                 }
@@ -34,7 +34,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK VERBOSE ODS_TEST: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
+                            System.out.println("CHECK ODS_TEST VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
                         }
                     }
                 }

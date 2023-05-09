@@ -16,7 +16,7 @@ public class metadata {
         if (creator != null) {
             metadata = true;
             if (verbose) {
-                System.out.println("CHECK VERBOSE ODS_10: Creator of file: " + creator.getTextContent());
+                System.out.println("CHECK ODS_10 VERBOSE: Creator of file: " + creator.getTextContent());
             }
         }
         spreadsheet.close();

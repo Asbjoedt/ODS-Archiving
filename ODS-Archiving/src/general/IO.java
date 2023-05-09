@@ -12,7 +12,7 @@ public class IO {
         // Check if input filepath exists
         File input_file = new File(input_filepath);
         if (!input_file.exists() && !input_file.isDirectory()) {
-            throw new IOException("Input file does not exist");
+            throw new IOException("ERROR: Input file does not exist");
         }
 
         // Check for file protection and corruption
@@ -52,14 +52,14 @@ public class IO {
         String parent = FilenameUtils.getFullPathNoEndSeparator(output_filepath);
         File directory = new File(parent);
         if (!directory.exists()) {
-            throw new IOException("Output directory does not exist");
+            throw new IOException("ERROR: Output directory does not exist");
         }
 
         // Check if output file exists
         if (!input_filepath.equals(output_filepath)) {
             File output_file = new File(output_filepath);
             if (output_file.exists()) {
-                //throw new IOException("Output file already exist");
+                throw new IOException("ERROR: Output file already exists");
             }
         }
     }
@@ -70,33 +70,33 @@ public class IO {
         // Check if input directory exists
         File inputfolder = new File(input_folder);
         if (!inputfolder.exists()) {
-            throw new IOException("Input directory does not exist");
+            throw new IOException("ERROR: Input directory does not exist");
         }
 
         // Check if output directory exists
         File outputfolder = new File(output_folder);
         if (!outputfolder.exists()) {
-            throw new IOException("Output directory does not exist");
+            throw new IOException("ERROR: Output directory does not exist");
         }
 
         // Check for input directory protection
         boolean inputfolder_readable = inputfolder.canRead();
         boolean inputfolder_writeable = inputfolder.canWrite();
         if (!inputfolder_readable) {
-            throw new IOException("Input folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Input folder cannot be processed e.g. has password protection");
         }
         if (!inputfolder_writeable) {
-            throw new IOException("Input folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Input folder cannot be processed e.g. has password protection");
         }
 
         // Check for output directory protection
         boolean outputfolder_readable = inputfolder.canRead();
         boolean outputfolder_writeable = inputfolder.canWrite();
         if (!outputfolder_readable) {
-            throw new IOException("Output folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
         }
         if (!outputfolder_writeable) {
-            throw new IOException("Output folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
         }
     }
 }

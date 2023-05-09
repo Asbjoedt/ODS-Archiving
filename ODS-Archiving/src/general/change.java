@@ -11,8 +11,8 @@ public class change {
         int dataConnections = 0;
         int externalCellReferences = 0;
         int RTDFunctions = 0;
-        int embeddedObjects = 0;
         int externalObjects = 0;
+        int embeddedObjects = 0;
         int macros = 0;
         boolean loadReadOnly = false;
         int printerSettings = 0;
@@ -22,12 +22,12 @@ public class change {
         boolean activeSheet = false;
 
         // Method for class data types
-        public changeList(int dataConns, int cellrefs, int rtd, int embedsobjs, int extobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet) {
+        public changeList(int dataConns, int cellrefs, int rtd, int extobjs, int embedsobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
-            this.embeddedObjects = embedsobjs;
             this.externalObjects = extobjs;
+            this.embeddedObjects = embedsobjs;
             this.macros = macros;
             this.loadReadOnly = loadReadOnly;
             this.printerSettings = printers;
@@ -45,8 +45,8 @@ public class change {
         int dataConns = 0;
         int extCellRefs = 0;
         int rtdFunctions = 0;
-        int embedObjs = 0;
         int extObjs = 0;
+        int embedObjs = 0;
         int macros = 0;
         boolean loadReadOnly = false;
         int printers = 0;
@@ -69,13 +69,13 @@ public class change {
             RTDFunctions RTDFunctions = new RTDFunctions();
             rtdFunctions = RTDFunctions.Change_ODFToolkit(filepath, verbose);
 
-            // EMBEDDED OBJECTS
-            embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
-
             // EXTERNAL OBJECTS
             externalObjects ExternalObjects = new externalObjects();
             extObjs = ExternalObjects.Change_ODFToolkit(filepath, verbose);
+
+            // EMBEDDED OBJECTS
+            embeddedObjects EmbeddedObjects = new embeddedObjects();
+            embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
         }
         if (compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
             // MACROS
@@ -110,7 +110,7 @@ public class change {
         }
 
         // Add to list and return it
-        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, embedObjs, extObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
         return results;
     }
 }

@@ -23,7 +23,7 @@ public class externalObjects {
                 if (node.getNodeName().equals("table:table-source")) {
                     extObjs++;
                     if (verbose) {
-                        System.out.println("CHECK VERBOSE ODS_4: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
+                        System.out.println("CHECK ODS_4 VERBOSE: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
                     }
                 }
             }
