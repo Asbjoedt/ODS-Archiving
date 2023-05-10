@@ -20,9 +20,10 @@ public class change {
         int hyperlinks = 0;
         boolean embeddedFonts = false;
         boolean activeSheet = false;
+        boolean settingsDOM = false;
 
         // Method for class data types
-        public changeList(int dataConns, int cellrefs, int rtd, int extobjs, int embedsobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet) {
+        public changeList(int dataConns, int cellrefs, int rtd, int extobjs, int embedsobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet, boolean settingsDOM) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
@@ -35,6 +36,7 @@ public class change {
             this.hyperlinks = hyperlinks;
             this.embeddedFonts = embeddedFonts;
             this.activeSheet = activeSheet;
+            this.settingsDOM = settingsDOM;
         }
     }
 
@@ -54,6 +56,7 @@ public class change {
         int hyperlinks = 0;
         boolean embeddedFonts = false;
         boolean activeSheet = false;
+        boolean settingsDOM = false;
 
         // Perform checks based on compliance
         if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
@@ -107,10 +110,14 @@ public class change {
             // ACTIVE SHEET
             activeSheet ActiveSheet = new activeSheet();
             activeSheet = ActiveSheet.Change_ODFToolkit(filepath, verbose);
+
+            // SETTINGSDOM
+            settingsDOM SettingsDOM = new settingsDOM();
+            settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);
         }
 
         // Add to list and return it
-        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM));
         return results;
     }
 }

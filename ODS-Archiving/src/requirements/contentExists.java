@@ -1,6 +1,6 @@
 package requirements;
 
-import org.odftoolkit.odfdom.doc.*;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 

@@ -21,9 +21,10 @@ public class check {
         int hyperlinks = 0;
         boolean embeddedFonts = false;
         boolean activeSheet = false;
+        boolean settingsDOM = false;
 
         // Method for class data types
-        public checkList(int dataConns, int cellrefs, int rtd, int extobjs, int embedobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet) {
+        public checkList(int dataConns, int cellrefs, int rtd, int extobjs, int embedobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet, boolean settingsDOM) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
@@ -37,6 +38,7 @@ public class check {
             this.hyperlinks = hyperlinks;
             this.embeddedFonts = embedFonts;
             this.activeSheet = activeSheet;
+            this.settingsDOM = settingsDOM;
         }
     }
 
@@ -57,6 +59,7 @@ public class check {
         int hyperlinks = 0;
         boolean embeddedFonts = false;
         boolean activeSheet = false;
+        boolean settingsDOM = false;
 
         // Perform checks based on compliance
         if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
@@ -114,10 +117,14 @@ public class check {
             // ACTIVE SHEET
             activeSheet ActiveSheet = new activeSheet();
             activeSheet = ActiveSheet.Check_ODFToolkit(filepath, verbose);
+
+            // SETTINGSDOM
+            settingsDOM SettingsDOM = new settingsDOM();
+            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);
         }
 
         // Add to list and return it
-        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet));
+        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM));
         return results;
     }
 }
