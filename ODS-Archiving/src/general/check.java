@@ -43,7 +43,7 @@ public class check {
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<checkList> Check_ODFToolkit(String filepath, String compliance, boolean verbose) throws Exception {
+    public List<checkList> Check_ODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
         // Create list and data types to return
         List<checkList> results = new ArrayList<>();
         int dataConns = 0;
@@ -62,7 +62,7 @@ public class check {
         boolean settingsDOM = false;
 
         // Perform checks based on compliance
-        if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Check_ODFToolkit(filepath, verbose);
@@ -83,7 +83,7 @@ public class check {
             embeddedObjects EmbeddedObjects = new embeddedObjects();
             embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // CONTENT
             contentExists ContentExists = new contentExists();
             content = ContentExists.Check_ODFToolkit(filepath);
@@ -96,7 +96,7 @@ public class check {
             loadReadOnly LoadReadOnly = new loadReadOnly();
             loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("may") || conformance.equals("experimental")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
@@ -109,7 +109,7 @@ public class check {
             hyperlinks Hyperlinks = new hyperlinks();
             hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("test")) {
+        if (conformance.equals("experimental")) {
             // EMBEDDED FONTS
             embeddedFonts EmbeddedFonts = new embeddedFonts();
             embeddedFonts = EmbeddedFonts.Check_ODFToolkit(filepath, verbose);

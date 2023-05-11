@@ -23,7 +23,7 @@ public class externalObjects {
                 if (node.getNodeName().equals("table:table-source")) {
                     extObjs++;
                     if (verbose) {
-                        System.out.println("CHECK ODS_4 VERBOSE: Sheet: " + table.getTableName() + ", Object reference: " + node.getTextContent());
+                        System.out.println("CHECK ODS_4 VERBOSE: External object reference detected. Reference: " + table.getTableName());
                     }
                 }
             }
@@ -32,7 +32,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0) {
-            System.out.println("CHECK ODS_4: " + extObjs + " external objects detected");
+            System.out.println("CHECK ODS_4: " + extObjs + " external object references detected");
         }
         return extObjs;
     }

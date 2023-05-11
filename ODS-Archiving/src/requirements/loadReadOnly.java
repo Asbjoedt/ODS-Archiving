@@ -34,7 +34,7 @@ public class loadReadOnly {
 
         // Inform user and return number
         if (loadReadOnly) {
-            System.out.println("CHECK ODS_8: \"LoadReadonly\" was NOT detected");
+            System.out.println("CHECK ODS_8: \"LoadReadonly\" NOT detected");
         }
         return loadReadOnly;
     }

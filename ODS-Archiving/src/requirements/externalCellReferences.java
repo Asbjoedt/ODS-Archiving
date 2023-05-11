@@ -30,7 +30,7 @@ public class externalCellReferences {
                         if (formulaNode.getNodeValue().startsWith("of:=['file")) {
                             extCellRefs++;
                             if (verbose) {
-                                System.out.println("CHECK ODS_4 VERBOSE: Sheet: " + table.getTableName() + ", Cell: unknown, External cell reference: " + formulaNode.getTextContent());
+                                System.out.println("CHECK ODS_4 VERBOSE: External cell reference detected. Sheet: " + table.getTableName() + ", Cell: unknown, Reference: " + formulaNode.getTextContent());
                             }
                         }
                     }

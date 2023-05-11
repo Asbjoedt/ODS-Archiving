@@ -5,6 +5,8 @@ package general;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Stream;
 
 public class validate {
 
@@ -32,14 +34,15 @@ public class validate {
             // Handle errors
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            while ((line = reader.readLine()) != null)
+            while ((line = reader.readLine()) != null) {
                 if (verbose) {
-                    System.out.println("VALIDATE ODS_2: " + line);
+                    System.out.println("VALIDATE ODS_2 VERBOSE: " + line);
                 }
+            }
 
             // Handle and return exit codes
             int exitCode = process.waitFor();
-            System.out.println("VALIDATE ODS_2: ODF Validator exit code " + exitCode);
+            System.out.println("VALIDATE ODS_2 VERBOSE: ODF Validator exit code " + exitCode);
             if (exitCode == 0)
             {
                 System.out.println("VALIDATE ODS_2: File format is valid.");

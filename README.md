@@ -42,8 +42,8 @@ Folder method
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --validate <"path to ODF Validator jar"> (optional, validates OpenDocument Spreadsheets file format standard)
---compliance <option> (optional, sets conformance level for archival requirements. Options are "must", "should", "may" or "test". All options contains previous compliance levels i.e. "should" also includes "must" requirements. "test" does archival requirements still under evaluation)
---verbose (optional, set for detailed results of check, change and validate)
+--conformance <option> (optional, sets conformance level for archival requirements. Options are "must", "should", "may" or "experimental". All options contains previous conformance levels i.e. "should" also includes "must" requirements. "experimental" does archival requirements still under evaluation)
+--verbose (optional, outputs detailed results of check, change and validate)
 ```
 **Examples**
 
@@ -51,19 +51,19 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --compliance must --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance must --verbose
 ```
 Or shorter
 ```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder" --com must -ver
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder" --cof must -ver
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --compliance must --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose
 ```
 Or shorter
 ```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo" --com must --ver
+java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo" --cof must --ver
 ```
 
 ## Dependencies

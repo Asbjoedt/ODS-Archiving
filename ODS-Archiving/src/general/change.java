@@ -41,7 +41,7 @@ public class change {
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<changeList> Change_ODFToolkit(String filepath, String compliance, boolean verbose) throws Exception {
+    public List<changeList> Change_ODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
         // Create list to return
         List<changeList> results = new ArrayList<>();
         int dataConns = 0;
@@ -59,7 +59,7 @@ public class change {
         boolean settingsDOM = false;
 
         // Perform checks based on compliance
-        if (compliance.equals("must") || compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
@@ -80,7 +80,7 @@ public class change {
             embeddedObjects EmbeddedObjects = new embeddedObjects();
             embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("should") || compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // MACROS
             macros Macros = new macros();
             macros = Macros.Change_ODFToolkit(filepath, verbose);
@@ -89,7 +89,7 @@ public class change {
             loadReadOnly LoadReadOnly = new loadReadOnly();
             loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("may") || compliance.equals("test")) {
+        if (conformance.equals("may") || conformance.equals("experimental")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
@@ -102,7 +102,7 @@ public class change {
             hyperlinks Hyperlinks = new hyperlinks();
             hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
         }
-        if (compliance.equals("test")) {
+        if (conformance.equals("experimental")) {
             // EMBEDDED FONTS
             embeddedFonts EmbeddedFonts = new embeddedFonts();
             embeddedFonts = EmbeddedFonts.Change_ODFToolkit(filepath, verbose);

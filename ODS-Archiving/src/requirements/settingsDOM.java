@@ -16,7 +16,7 @@ public class settingsDOM {
         spreadsheet.close();
 
         if (settingsDOM) {
-            System.out.println("CHECK ODS_TEST: File settings.xml detected");
+            System.out.println("CHECK ODS_TEST: Package file settings.xml detected");
         }
         return settingsDOM;
     }
@@ -36,7 +36,7 @@ public class settingsDOM {
         spreadsheet.close();
 
         if (settingsDOM) {
-            System.out.println("CHANGE ODS_TEST: File settings.xml was removed");
+            System.out.println("CHANGE ODS_TEST: Package file settings.xml was removed");
         }
         return settingsDOM;
     }
