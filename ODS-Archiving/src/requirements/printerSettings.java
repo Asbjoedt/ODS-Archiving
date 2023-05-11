@@ -55,6 +55,7 @@ public class printerSettings {
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
                         printers++;
+                        System.out.println(theNode.getTextContent());
                         settingsDom.removeChild(theNode);
                     }
                 }

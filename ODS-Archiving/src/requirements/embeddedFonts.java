@@ -2,8 +2,12 @@ package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
+import org.odftoolkit.odfdom.dom.element.office.OfficeFontFaceDeclsElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.util.List;
+import java.util.Set;
 
 public class embeddedFonts {
 
@@ -26,7 +30,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("false")) {
                         FirstCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK ODS_TEST VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
+                            System.out.println("CHECK ODS_EXPERIMENTAL VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
                         }
                     }
                 }
@@ -34,7 +38,7 @@ public class embeddedFonts {
                     if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
                         if (verbose) {
-                            System.out.println("CHECK ODS_TEST VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
+                            System.out.println("CHECK ODS_EXPERIMENTAL VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
                         }
                     }
                 }
@@ -43,16 +47,13 @@ public class embeddedFonts {
         spreadsheet.close();
 
         // Change boolean according to checks
-        if (!FirstCheck) {
-            embedFonts = true;
-        }
-        else if (!SecondCheck) {
+        if (!FirstCheck && !SecondCheck) {
             embedFonts = true;
         }
 
         // Inform user and return number
         if (embedFonts) {
-            System.out.println("CHECK ODS_TEST: Embedding of fonts was NOT detected");
+            System.out.println("CHECK ODS_EXPERIMENTAL: Embedding of fonts was NOT detected");
         }
         return embedFonts;
     }
@@ -80,23 +81,25 @@ public class embeddedFonts {
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
                     if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
+                        theNode.setTextContent("true");
                     }
                 }
             }
         }
-        spreadsheet.close();
+        if (!FirstCheck && !SecondCheck) {
+            embedFonts = true;
 
-        // Change boolean according to checks
-        if (!FirstCheck) {
-            embedFonts = true;
+            Set<String> fonts = spreadsheet.getFontNames();
+            for (String font : fonts) {
+                System.out.println(font);
+            }
+            spreadsheet.save(filepath);
         }
-        else if (!SecondCheck) {
-            embedFonts = true;
-        }
+        spreadsheet.close();
 
         // Inform user and return boolean
         if (embedFonts) {
-            System.out.println("CHANGE ODS_TEST: This application does not support embedding of fonts - Process manually");
+            System.out.println("CHANGE ODS_EXPERIMENTAL: This application does not support embedding of fonts - Process manually");
         }
         return embedFonts;
     }

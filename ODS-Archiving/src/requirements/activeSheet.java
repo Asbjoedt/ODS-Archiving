@@ -26,7 +26,7 @@ public class activeSheet {
                     if (!theNode.getTextContent().equals(firstTable.getTableName())) {
                         activeSheet = true;
                         if (verbose) {
-                            System.out.println("CHECK ODS_TEST VERBOSE: sheet " + theNode.getTextContent() + " is active");
+                            System.out.println("CHECK ODS_EXPERIMENTAL VERBOSE: sheet " + theNode.getTextContent() + " is active");
                         }
                     }
                 }
@@ -35,7 +35,7 @@ public class activeSheet {
         spreadsheet.close();
 
         if (activeSheet) {
-            System.out.println("CHECK ODS_TEST: Active sheet NOT first sheet was detected");
+            System.out.println("CHECK ODS_EXPERIMENTAL: Active sheet NOT first sheet was detected");
         }
         return activeSheet;
     }
@@ -66,7 +66,7 @@ public class activeSheet {
         spreadsheet.close();
 
         if (activeSheet) {
-            System.out.println("CHANGE ODS_TEST: Active sheet was changed");
+            System.out.println("CHANGE ODS_EXPERIMENTAL: Active sheet was changed");
         }
         return  activeSheet;
     }

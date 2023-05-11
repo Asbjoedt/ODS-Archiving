@@ -167,7 +167,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Methods: " + "convert " + parsed_convert + ", check " + parsed_check + ", change " + parsed_change + ", validate " + doValidation + ", conformance " + parsed_conformance + ", verbose " + parsed_verbose);
+		System.out.println("Options: " + "convert " + parsed_convert + ", check " + parsed_check + ", change " + parsed_change + ", validate " + doValidation + ", conformance " + parsed_conformance + ", verbose " + parsed_verbose);
 		if (parsed_input_file != null) {
 			System.out.println("Input file: " + parsed_input_file);
 		}
@@ -182,35 +182,32 @@ public class application {
 		}
 
 		// Create output filepath, if file method is chosen
-		if (parsed_input_file != null) {
-			parsed_output_file = parsed_output_folder + "\\" + FilenameUtils.getBaseName(parsed_input_file) + ".ods";
-		}
 		if (parsed_input_file != null && parsed_rename != null) {
 			parsed_output_file = parsed_output_folder + "\\" + parsed_rename + ".ods";
 		}
-		if (parsed_input_file != null && parsed_output_folder == null) {
-			parsed_output_file = parsed_input_file;
-		}
-
-		// Check I/O of user inputs
-		IO IO = new IO();
-		if (parsed_input_file != null) {
-			IO.CheckFilepathIO(parsed_input_file, parsed_output_file);
-		}
-		else if (parsed_input_folder != null) {
-			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
+		else if (parsed_input_file != null && parsed_output_folder != null) {
+			parsed_output_file = parsed_output_folder + "\\" + FilenameUtils.getBaseName(parsed_input_file) + ".ods";
 		}
 		else {
-			throw new IOException("No input filepath or input folder has been set");
+			parsed_output_file = parsed_input_file; // Must be created if only check or validate is chosen
 		}
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
+		IO IO = new IO();
 		operations OperateOn = new operations();
 		if (parsed_input_file != null) {
+			// Check I/O of user inputs
+			IO.CheckFilepathIO(parsed_input_file, parsed_output_file);
+
+			// Operate on user input
 			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_conformance, parsed_verbose);
 		}
 		else if (parsed_input_folder != null) {
+			// Check I/O of user inputs
+			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
+
+			// Operate on user input
 			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_conformance, parsed_verbose);
 		}
 

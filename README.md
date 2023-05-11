@@ -56,17 +56,9 @@ Filepath usage
 ```
 java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance must --verbose
 ```
-Or shorter
-```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inp "C:\Spreadsheet.xlsx" -out "C:\AnyFolder" --cof must -ver
-```
 Folder usage
 ```
 java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose
-```
-Or shorter
-```
-java -jar ODS-Archiving.jar -con -che -cha -val "C:\ODFValidator.jar" -inf "C:\FolderOne" -rec -out "C:\FolderTwo" --cof must --ver
 ```
 
 ## Dependencies
