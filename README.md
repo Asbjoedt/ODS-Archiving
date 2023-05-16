@@ -47,6 +47,7 @@ Folder method
                         levels i.e. "should" also includes "must" requirements. "experimental" does 
                         archival requirements still under evaluation)
 --verbose (optional, outputs detailed results of check, change and validate)
+--archivalpackage (optional, spreadsheets are saved to an archivable data package)
 ```
 **Examples**
 

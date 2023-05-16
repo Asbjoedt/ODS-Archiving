@@ -7,7 +7,7 @@ import java.io.IOException;
 public class IO {
 
     // Method for checking availability of input and output filepaths
-    public void CheckFilepathIO(String input_filepath, String output_filepath) throws IOException {
+    public void CheckFilepathIO(String input_filepath, String output_filepath, boolean convert) throws IOException {
 
         // Check if input filepath exists
         File input_file = new File(input_filepath);
@@ -25,7 +25,7 @@ public class IO {
             throw new IOException("CHECK ODS_1: File cannot be processed e.g. has password protection, is corrupt");
         }
 
-        // Check for accepted input file format extensions
+        // Check for accepted input file format extensions for conversion
         String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
         switch (input_extension) {
 
@@ -47,6 +47,12 @@ public class IO {
             default:
                 throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension");
         }
+
+        // Check for accepted input file format extensions if NOT conversion
+        if (!convert && input_extension.equals("fods"))
+            throw new IOException("ERROR: Input extension .fods is currently not supported if convert is NOT selected");
+        if (!convert && !input_extension.equals("ods") && !input_extension.equals("ots"))
+            throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension");
 
         // Check if output directory exists
         String parent = FilenameUtils.getFullPathNoEndSeparator(output_filepath);

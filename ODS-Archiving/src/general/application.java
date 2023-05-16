@@ -1,214 +1,84 @@
 package general;
 
-import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
-import java.io.IOException;
 
 public class application {
 
 	// Main method of the application
-	public static void main(String[] args) throws Exception, ParseException, IOException {
-
+	public static void main(String[] args) throws Exception {
 		// Inform user of beginning of application
 		System.out.println("ODS Archiving v1.0.0");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
 
-		//define argument options
-		Options options = new Options();
-
-		Option convert = new Option("con", "convert", false, "Convert spreadsheet to .ods file format");
-		options.addOption(convert);
-
-		Option check = new Option("che", "check", false, "Check spreadsheet for archival requirements");
-		options.addOption(check);
-
-		Option change = new Option("cha", "change", false, "Change spreadsheet according to archival requirements");
-		options.addOption(change);
-
-		Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
-		options.addOption(recurse);
-
-		Option verbose = new Option("ver", "verbose", false, "Output detailed information");
-		options.addOption(verbose);
-
-		Option input_file = Option.builder("inp").longOpt("inputfile")
-				.argName("inputfile")
-				.hasArg()
-				.required(false)
-				.desc("Set spreadsheet input file").build();
-		options.addOption(input_file);
-
-		Option input_folder = Option.builder("inf").longOpt("inputfolder")
-				.argName("inputfolder")
-				.hasArg()
-				.required(false)
-				.desc("Set spreadsheet input folder path").build();
-		options.addOption(input_folder);
-
-		Option output_folder = Option.builder("out").longOpt("outputfolder")
-				.argName("outputfolder")
-				.hasArg()
-				.required(false)
-				.desc("Set spreadsheet output folder path").build();
-		options.addOption(output_folder);
-
-		Option rename = Option.builder("ren").longOpt("rename")
-				.argName("rename")
-				.hasArg()
-				.required(false)
-				.desc("Set new name of output file").build();
-		options.addOption(rename);
-
-		Option validate = Option.builder("val").longOpt("validate")
-				.argName("validate")
-				.hasArg()
-				.required(false)
-				.desc("Set path to ODF Validator jar to validate OpenDocument Spreadsheets file format").build();
-		options.addOption(validate);
-
-		Option conformance = Option.builder("cof").longOpt("conformance")
-				.argName("conformance")
-				.hasArg()
-				.required(false)
-				.desc("Set level of conformance for archival requirements").build();
-		options.addOption(conformance);
-
-		// define argument parser
-		CommandLine cmd;
-		CommandLineParser parser = new DefaultParser();
-		HelpFormatter helper = new HelpFormatter();
-
 		// Parse arguments
-		boolean parsed_convert = false;
-		boolean parsed_check = false;
-		boolean parsed_change = false;
-		boolean parsed_recurse = false;
-		boolean parsed_verbose = false;
-		String parsed_validate = null;
-		String parsed_input_file = null;
-		String parsed_output_file = null;
-		String parsed_input_folder = null;
-		String parsed_output_folder = null;
-		String parsed_rename = null;
-		String parsed_conformance = null;
+		parameters Parse = new parameters();
+		Parse.ArgParser(args);
 
-		try {
-			cmd = parser.parse(options, args);
-			if (cmd.hasOption("con")) {
-				parsed_convert = true;
-			}
-			if (cmd.hasOption("che")) {
-				parsed_check = true;
-			}
-			if (cmd.hasOption("cha")) {
-				parsed_change = true;
-			}
-			if (cmd.hasOption("ver")) {
-				parsed_verbose = true;
-			}
-			if (cmd.hasOption("val")) {
-				parsed_validate = cmd.getOptionValue("validate");
-			}
-			if (cmd.hasOption("cof")) {
-				parsed_conformance = cmd.getOptionValue("conformance").toLowerCase();
-			}
-			if (cmd.hasOption("inp")) {
-				parsed_input_file = cmd.getOptionValue("inputfile");
-			}
-			if (cmd.hasOption("inf")) {
-				parsed_input_folder = cmd.getOptionValue("inputfolder");
-			}
-			if (cmd.hasOption("out")) {
-				parsed_output_folder = cmd.getOptionValue("outputfolder");
-			}
-			if (cmd.hasOption("ren")) {
-				parsed_rename = cmd.getOptionValue("rename");
-			}
-			// Check accepted compliance levels
-			if (parsed_check || parsed_change) {
-				if (parsed_conformance == null || !parsed_conformance.equals("must") && !parsed_conformance.equals("should") && !parsed_conformance.equals("may") && !parsed_conformance.equals("experimental")) {
-					throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"experimental\"");
-				}
-			}
-			// Check if both input filepath and input folder are set, then throw exception
-			if (parsed_input_file != null && parsed_input_folder != null) {
-				throw new ParseException("PARSE ERROR: Both input filepath and input folder are set");
-			}
-			// Check if either input filepath or input folder are not set, then throw exception
-			if (parsed_input_file == null && parsed_input_folder == null) {
-				throw new ParseException("PARSE ERROR: Input filepath or input folder are NOT set");
-			}
-			// Check if convert or change are set, but output folder is NOT, then throw exception
-			if (parsed_convert || parsed_change) {
-				if (parsed_output_folder == null) {
-					throw new ParseException("PARSE ERROR: Output folder is NOT set");
-				}
-			}
-			// Check if convert or change are NOT set, but output folder is, then throw exception
-			if (!parsed_convert && !parsed_change) {
-				if (parsed_output_folder != null) {
-					throw new ParseException("PARSE ERROR: Output folder is set but convert or change is not chosen. Remove output folder");
-				}
-			}
-		} catch (ParseException e) {
-			System.out.println(" ");
-			System.out.println(e.getMessage());
-			System.out.println(" ");
-			helper.printHelp(" ", options);
-			System.exit(0);
-		}
+		boolean convert = parameters.p_convert;
+		boolean check = parameters.p_check;
+		boolean change = parameters.p_change;
+		boolean recurse = parameters.p_recurse;
+		boolean verbose = parameters.p_verbose;
+		boolean archival_package = parameters.p_archival_package;
+		String validate = parameters.p_validate;
+		String input_file = parameters.p_input_file;
+		String output_file = parameters.p_output_file;
+		String input_folder = parameters.p_input_folder;
+		String output_folder = parameters.p_output_folder;
+		String rename = parameters.p_rename;
+		String conformance = parameters.p_conformance;
 
 		// Only to be used as long as validation requires path to jar file
 		boolean doValidation = false;
-		if (parsed_validate != null) {
+		if (validate != null)
 			doValidation = true;
-		}
 		// Only to be used as long as validation requires path to jar file
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Options: " + "convert " + parsed_convert + ", check " + parsed_check + ", change " + parsed_change + ", validate " + doValidation + ", conformance " + parsed_conformance + ", verbose " + parsed_verbose);
-		if (parsed_input_file != null) {
-			System.out.println("Input file: " + parsed_input_file);
-		}
-		if (parsed_rename != null) {
-			System.out.println("Rename output file: " + parsed_rename + ".ods");
-		}
-		if (parsed_input_folder != null) {
-			System.out.println("Input folder: " + parsed_input_folder);
-		}
-		if (parsed_output_folder != null) {
-			System.out.println("Output folder: " + parsed_output_folder);
-		}
-
-		// Create output filepath, if file method is chosen
-		if (parsed_input_file != null && parsed_rename != null) {
-			parsed_output_file = parsed_output_folder + "\\" + parsed_rename + ".ods";
-		}
-		else if (parsed_input_file != null && parsed_output_folder != null) {
-			parsed_output_file = parsed_output_folder + "\\" + FilenameUtils.getBaseName(parsed_input_file) + ".ods";
-		}
-		else {
-			parsed_output_file = parsed_input_file; // Must be created if only check or validate is chosen
-		}
+		System.out.println("Options: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + doValidation + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
+		if (input_file != null)
+			System.out.println("Input file: " + input_file);
+		if (rename != null)
+			System.out.println("Rename output file: " + rename + ".ods");
+		if (input_folder != null)
+			System.out.println("Input folder: " + input_folder);
+		if (output_folder != null)
+			System.out.println("Output folder: " + output_folder);
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
 		IO IO = new IO();
 		operations OperateOn = new operations();
-		if (parsed_input_file != null) {
+		if (input_file != null) {
+			// Set output filepath
+			if (rename != null)
+				output_file = output_folder + "\\" + rename + ".ods";
+			else if (output_folder != null)
+				output_file = output_folder + "\\" + FilenameUtils.getBaseName(input_file) + ".ods";
+			else
+				output_file = input_file; // Must be created if only check or validate is chosen
+
 			// Check I/O of user inputs
-			IO.CheckFilepathIO(parsed_input_file, parsed_output_file);
+			IO.CheckFilepathIO(input_file, output_file, convert);
 
 			// Operate on user input
-			OperateOn.Filepath(parsed_input_file, parsed_output_file, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_conformance, parsed_verbose);
+			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, verbose);
 		}
-		else if (parsed_input_folder != null) {
+		else if (input_folder != null) {
+			// Set output folder, if only input folder is set
+			if (output_folder == null)
+				output_folder = input_folder;
+
 			// Check I/O of user inputs
-			IO.CheckFolderIO(parsed_input_folder, parsed_output_folder);
+			IO.CheckFolderIO(input_folder, output_folder);
+
+			// Create archival package, if chosen
+			if (archival_package)
+				output_folder = OperateOn.ArchivalPackage(output_folder);
 
 			// Operate on user input
-			OperateOn.Folder(parsed_input_folder, parsed_output_folder, parsed_recurse, parsed_convert, parsed_check, parsed_change, parsed_validate, parsed_rename, parsed_conformance, parsed_verbose);
+			OperateOn.Folder(input_folder, output_folder, recurse, convert, check, change, validate, rename, conformance, verbose, archival_package);
 		}
 
 		// Inform user of end of application
