@@ -42,7 +42,7 @@ Folder method
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --validate <"path to ODF Validator jar"> (optional, validates ODF file format standard)
---conformance <option> (optional, sets conformance level for archival requirements. Options are "must", 
+--conformance <option> (required, sets conformance level for archival requirements. Options are "must", 
                         "should", "may" or "experimental". All options contains previous conformance 
                         levels i.e. "should" also includes "must" requirements. "experimental" does 
                         archival requirements still under evaluation)
@@ -61,6 +61,22 @@ Folder usage
 ```
 java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose
 ```
+
+## Conformance
+
+The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [the OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
+* **must**
+* **should**
+* **may**
+
+A level include the requirements from the previous levels e.g. "should" includes all "must" requirements and "may" includes all "must" and "should" requirements. Some requirements are still under consideration. These can be enabled in the ODS Archiving application through this all-inclusive level:
+* **experimental**
+
+### Organisations
+
+It is known, that the following organisations conform to these levels:
+* **Must**
+  * Danish National Archives
 
 ## Dependencies
 

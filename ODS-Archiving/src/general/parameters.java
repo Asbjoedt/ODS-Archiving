@@ -86,7 +86,7 @@ public class parameters {
         Option conformance = Option.builder("cof").longOpt("conformance")
                 .argName("conformance")
                 .hasArg()
-                .required(false)
+                .required(true)
                 .desc("Set level of conformance for archival requirements").build();
         options.addOption(conformance);
 
@@ -125,7 +125,7 @@ public class parameters {
 
             // Check accepted compliance levels
             if (p_check || p_change)
-                if (p_conformance == null || !p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental"))
+                if (!p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental"))
                     throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"experimental\"");
             // Check if both input filepath and input folder are set, then throw exception
             if (p_input_file != null && p_input_folder != null)
