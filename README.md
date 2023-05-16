@@ -47,7 +47,7 @@ Folder method
                         levels i.e. "should" also includes "must" requirements. "experimental" does 
                         archival requirements still under evaluation)
 --verbose (optional, outputs detailed results of check, change and validate)
---archivalpackage (optional, spreadsheets are saved to an archivable data package)
+--archivalpackage (optional, only for folder usage, spreadsheets are saved to an archivable data package)
 ```
 **Examples**
 
@@ -59,7 +59,7 @@ java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidat
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose --archivalpackage
 ```
 
 ## Conformance
@@ -75,7 +75,7 @@ A level include the requirements from the previous levels e.g. "should" includes
 ### Organisations
 
 It is known, that the following organisations conform to these levels:
-* **Must**
+* **must**
   * Danish National Archives
 
 ## Dependencies
@@ -83,4 +83,4 @@ It is known, that the following organisations conform to these levels:
 The application uses the following software.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
-* [ODF Validator](https://github.com/tdf/odftoolkit): ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard. You must have download the jar file.
+* [ODF Validator](https://github.com/tdf/odftoolkit): ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard. You must download the jar file.

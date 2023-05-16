@@ -122,8 +122,7 @@ public class parameters {
                 p_rename = cmd.getOptionValue("rename");
 
             // In the following, throw parse errors if certain situations
-
-            // Check accepted compliance levels
+            // Check accepted conformance levels
             if (p_check || p_change)
                 if (!p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental"))
                     throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"experimental\"");
@@ -146,7 +145,7 @@ public class parameters {
                 throw new ParseException("PARSE ERROR: You must input a folder to create an archival package. You are inputting a file");
             // Check if archival package is selected but convert or change is NOT, then throw exception
             if (p_archival_package && !p_convert && !p_change)
-                throw new ParseException("PARSE ERROR: You must select convert or change, if you select archivalpackage");
+                throw new ParseException("PARSE ERROR: You must select convert or change method, if you select archivalpackage");
 
         } catch (ParseException e) {
             System.out.println(" ");
