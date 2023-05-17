@@ -19,22 +19,18 @@ public class contentExists {
 			NamedNodeMap currentAttributes = node.getAttributes();
 			var cellCount = currentAttributes.getNamedItem("meta:cell-count").getNodeValue();
 			var objectsCount = currentAttributes.getNamedItem("meta:object-count").getNodeValue();
-			if (Integer.parseInt(cellCount) > 0) {
+			if (Integer.parseInt(cellCount) > 0)
 				hasCellValues = true;
-			}
-			if (Integer.parseInt(objectsCount) > 0) {
+			if (Integer.parseInt(objectsCount) > 0)
 				hasObjects = true;
-			}
 		}
 		spreadsheet.close();
 
 		// Inform user and return boolean
-		if (!hasCellValues && !hasObjects) {
+		if (!hasCellValues && !hasObjects)
 			System.out.println("CHECK ODS_6: Cell values or objects NOT detected");
-		}
-		if (hasCellValues || hasObjects) {
+		if (hasCellValues || hasObjects)
 			hasContent = true;
-		}
 		return hasContent;
 	}
 }

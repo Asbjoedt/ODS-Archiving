@@ -27,9 +27,8 @@ public class dataConnections {
         spreadsheet.close();
 
         // Inform user and return number
-        if (conns > 0) {
+        if (conns > 0)
             System.out.println("CHECK ODS_4: " + conns + " data connections detected");
-        }
         return conns;
     }
 
@@ -55,9 +54,8 @@ public class dataConnections {
         spreadsheet.close();
 
         // Inform user and return number
-        if (conns > 0) {
+        if (conns > 0)
             System.out.println("CHANGE ODS_4: " + conns + " data connections removed");
-        }
         return conns;
     }
 }

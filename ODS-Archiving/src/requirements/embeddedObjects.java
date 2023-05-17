@@ -21,9 +21,8 @@ public class embeddedObjects {
         spreadsheet.close();
 
         // Inform user and return number
-        if (embedObjs > 0) {
+        if (embedObjs > 0)
             System.out.println("CHECK ODS_5: " + embedObjs + " embedded objects detected");
-        }
         return  embedObjs;
     }
 
@@ -34,9 +33,8 @@ public class embeddedObjects {
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 
         // Inform user and return number
-        if (embedObjs> 0) {
+        if (embedObjs> 0)
             System.out.println("CHANGE ODS_5: " + embedObjs + " embedded objects removed");
-        }
         return  embedObjs;
     }
 }

@@ -105,4 +105,16 @@ public class IO {
             throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
         }
     }
+
+    // Create output filepath for file method
+    public String CreateOutputFilepath(String input_file, String output_folder, String rename) {
+        String output_file;
+        if (rename != null)
+            output_file = output_folder + "\\" + rename + ".ods";
+        else if (output_folder != null)
+            output_file = output_folder + "\\" + FilenameUtils.getBaseName(input_file) + ".ods";
+        else
+            output_file = input_file; // Must be created if only the methods check or validate are chosen
+        return output_file;
+    }
 }

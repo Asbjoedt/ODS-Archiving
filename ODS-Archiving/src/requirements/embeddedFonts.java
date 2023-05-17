@@ -29,17 +29,15 @@ public class embeddedFonts {
                 if (attributeName.equals("EmbedFonts")) {
                     if (theNode.getTextContent().equals("false")) {
                         FirstCheck = true;
-                        if (verbose) {
+                        if (verbose)
                             System.out.println("CHECK ODS_EXPERIMENTAL VERBOSE: Attribute \"EmbedFonts\" in settings.xml is false");
-                        }
                     }
                 }
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
                     if (theNode.getTextContent().equals("false")) {
                         SecondCheck = true;
-                        if (verbose) {
+                        if (verbose)
                             System.out.println("CHECK ODS_EXPERIMENTAL VERBOSE: Attribute \"EmbedOnlyUsedFonts\" in settings.xml is false");
-                        }
                     }
                 }
             }
@@ -47,14 +45,12 @@ public class embeddedFonts {
         spreadsheet.close();
 
         // Change boolean according to checks
-        if (!FirstCheck && !SecondCheck) {
+        if (!FirstCheck && !SecondCheck)
             embedFonts = true;
-        }
 
         // Inform user and return number
-        if (embedFonts) {
+        if (embedFonts)
             System.out.println("CHECK ODS_EXPERIMENTAL: Embedding of fonts was NOT detected");
-        }
         return embedFonts;
     }
 
@@ -74,9 +70,8 @@ public class embeddedFonts {
                 Node theNode = fourthNode.item(i);
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("EmbedFonts")) {
-                    if (theNode.getTextContent().equals("false")) {
+                    if (theNode.getTextContent().equals("false"))
                         FirstCheck = true;
-                    }
                 }
                 if (attributeName.equals("EmbedOnlyUsedFonts")) {
                     if (theNode.getTextContent().equals("false")) {
@@ -98,9 +93,8 @@ public class embeddedFonts {
         spreadsheet.close();
 
         // Inform user and return boolean
-        if (embedFonts) {
+        if (embedFonts)
             System.out.println("CHANGE ODS_EXPERIMENTAL: This application does not support embedding of fonts - Process manually");
-        }
         return embedFonts;
     }
 }

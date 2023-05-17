@@ -24,8 +24,9 @@ public class printerSettings {
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
-                        System.out.println("CHECK ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml detected");
                         printers++;
+                        if (verbose)
+                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml detected");
                     }
                 }
             }
@@ -33,9 +34,8 @@ public class printerSettings {
         spreadsheet.close();
 
         // Inform user and return number
-        if (printers > 0) {
+        if (printers > 0)
             System.out.println("CHECK ODS_9: " + printers + " printers detected");
-        }
         return printers;
     }
 
@@ -55,19 +55,19 @@ public class printerSettings {
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
                         printers++;
+                        if (verbose)
+                            System.out.println("CHANGE ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml was removed");
                         System.out.println(theNode.getTextContent());
                         settingsDom.removeChild(theNode);
                     }
                 }
                 if (attributeName.equals("PrinterPaperFromSetup")) {
-                    if (theNode.getTextContent() != null) {
+                    if (theNode.getTextContent() != null)
                         settingsDom.removeChild(theNode);
-                    }
                 }
                 if (attributeName.equals("PrinterSetup")) {
-                    if (theNode.getTextContent() != null) {
+                    if (theNode.getTextContent() != null)
                         settingsDom.removeChild(theNode);
-                    }
                 }
             }
             spreadsheet.save(filepath);
@@ -75,9 +75,8 @@ public class printerSettings {
         spreadsheet.close();
 
         // Inform user and return number
-        if (printers > 0) {
+        if (printers > 0)
             System.out.println("CHANGE ODS_9: " + printers + " printers removed");
-        }
         return printers;
     }
 }

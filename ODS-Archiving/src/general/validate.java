@@ -2,11 +2,8 @@ package general;
 
 //import org.odftoolkit.odfvalidator.ODFValidator;
 //import org.odftoolkit.odfvalidator.result.ValidationResult;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.List;
-import java.util.stream.Stream;
 
 public class validate {
 
@@ -35,9 +32,8 @@ public class validate {
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
-                if (verbose) {
+                if (verbose)
                     System.out.println("VALIDATE ODS_2 VERBOSE: " + line);
-                }
             }
 
             // Handle and return exit codes
@@ -49,16 +45,9 @@ public class validate {
                 valid = true;
             }
             else if (exitCode == 1)
-            {
                 System.out.println("VALIDATE ODS_2: File format validation could not be completed");
-            }
             else if (exitCode == 2)
-            {
                 System.out.println("VALIDATE ODS_2: File format is invalid");
-            }
-            else {
-                System.out.println("VALIDATE ODS_2: File format is invalid");
-            }
         }
         else {
             System.out.println("VALIDATE ODS_2: ODF Validator jar file was not found - Validation is interrupted");

@@ -15,16 +15,14 @@ public class metadata {
         Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
         if (creator != null) {
             metadata = true;
-            if (verbose) {
+            if (verbose)
                 System.out.println("CHECK ODS_10 VERBOSE: Creator of file: " + creator.getTextContent());
-            }
         }
         spreadsheet.close();
 
         // Inform user and return boolean
-        if (metadata) {
+        if (metadata)
             System.out.println("CHECK ODS_10: Metadata detected");
-        }
         return metadata;
     }
 
@@ -44,9 +42,8 @@ public class metadata {
         spreadsheet.close();
 
         // Inform user and return boolean
-        if (metadata) {
+        if (metadata)
             System.out.println("CHANGE ODS_10: Metadata removed");
-        }
         return metadata;
     }
 }

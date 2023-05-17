@@ -29,9 +29,7 @@ public class application {
 		String conformance = parameters.p_conformance;
 
 		// Only to be used as long as validation requires path to jar file
-		boolean doValidation = false;
-		if (validate != null)
-			doValidation = true;
+		boolean doValidation = validate != null;
 		// Only to be used as long as validation requires path to jar file
 
 		// Inform user of inputs
@@ -52,12 +50,7 @@ public class application {
 		operations OperateOn = new operations();
 		if (input_file != null) {
 			// Set output filepath
-			if (rename != null)
-				output_file = output_folder + "\\" + rename + ".ods";
-			else if (output_folder != null)
-				output_file = output_folder + "\\" + FilenameUtils.getBaseName(input_file) + ".ods";
-			else
-				output_file = input_file; // Must be created if only check or validate is chosen
+			output_file = IO.CreateOutputFilepath(input_file, output_folder, rename);
 
 			// Check I/O of user inputs
 			IO.CheckFilepathIO(input_file, output_file, convert);

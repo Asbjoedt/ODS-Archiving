@@ -18,17 +18,15 @@ public class macros {
         for (int i = 0; i < fileEntries.getLength(); i++) {
             Node fileEntry = fileEntries.item(i);
             if (fileEntry.getNodeName().equals("manifest:file-entry")) {
-                if (fileEntry.getAttributes().getNamedItem("manifest:full-path").getNodeValue().startsWith("Basic")) {
+                if (fileEntry.getAttributes().getNamedItem("manifest:full-path").getNodeValue().startsWith("Basic"))
                     macros++;
-                }
             }
         }
         spreadsheet.close();
 
         // Inform user and return number
-        if (macros > 0) {
+        if (macros > 0)
             System.out.println("CHECK ODS_7: " + macros + " macros detected");
-        }
         return macros;
     }
 
@@ -52,9 +50,8 @@ public class macros {
         spreadsheet.close();
 
         // Inform user and return number
-        if (macros > 0) {
+        if (macros > 0)
             System.out.println("CHANGE ODS_7: " + macros + " macros removed");
-        }
         return macros;
     }
 }

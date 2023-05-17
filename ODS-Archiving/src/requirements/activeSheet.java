@@ -34,9 +34,8 @@ public class activeSheet {
         }
         spreadsheet.close();
 
-        if (activeSheet) {
+        if (activeSheet)
             System.out.println("CHECK ODS_EXPERIMENTAL: Active sheet NOT first sheet was detected");
-        }
         return activeSheet;
     }
 
@@ -65,9 +64,8 @@ public class activeSheet {
         }
         spreadsheet.close();
 
-        if (activeSheet) {
+        if (activeSheet)
             System.out.println("CHANGE ODS_EXPERIMENTAL: Active sheet was changed");
-        }
         return  activeSheet;
     }
 }
