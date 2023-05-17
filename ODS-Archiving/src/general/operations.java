@@ -2,9 +2,6 @@ package general;
 
 import org.apache.commons.io.*;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class operations {
@@ -13,8 +10,10 @@ public class operations {
     public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename, String compliance, boolean verbose) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
-        if (!convert && change)
-            CopySpreadsheet(input_filepath, output_filepath);
+        if (!convert && change) {
+            create Create = new create();
+            Create.CopySpreadsheet(input_filepath, output_filepath);
+        }
 
         // If not convert and not change, then use same input filepath for output filepath
         if (!convert && !change)
@@ -53,8 +52,10 @@ public class operations {
             // Set input and output filepaths
             String input_filepath = spreadsheet.getAbsolutePath();
             String output_filepath;
-            if (archivalpackage)
-                output_filepath = ArchiveSpreadsheet(input_filepath, output_folder);
+            if (archivalpackage) {
+                create Create = new create();
+                output_filepath = Create.ArchiveSpreadsheet(input_filepath, output_folder);
+            }
             else
                 output_filepath = output_folder + "\\" + FilenameUtils.getBaseName(input_filepath)  + ".ods";
 
@@ -74,58 +75,5 @@ public class operations {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    // Create archival package with docCollection
-    public String ArchivalPackage(String folder) {
-        String packageName = folder + "\\ODSArchivingPackage";
-
-        // Create package
-        Path path = Paths.get(packageName);
-        if (!Files.exists(path))
-            new File(path.toString()).mkdir();
-        else {
-            int n = 0;
-            while (Files.exists(path)) {
-                n++;
-                path = Paths.get(packageName + n);
-            }
-            new File(path.toString()).mkdir();
-        }
-
-        // Create docCollection
-        String docCol = path + "\\docCollection";
-        new File(docCol).mkdir();
-
-        // Return path to archival package
-        return path.toString();
-    }
-
-    // Create subfolder for each file in docCollection and copy original spreadsheet
-    public String ArchiveSpreadsheet(String input_filepath, String output_folder) throws IOException {
-        // Create subfolder in docCollection
-        String subPath = output_folder + "\\docCollection\\";
-        int n = 1;
-        Path path = Paths.get(subPath + n);
-        while (Files.exists(path)) {
-            n++;
-            path = Paths.get(subPath + n);
-        }
-        new File(path.toString()).mkdir();
-
-
-        // Copy original spreadsheet
-        String output_filepath = path + "\\" + FilenameUtils.getName(input_filepath);
-        CopySpreadsheet(input_filepath, output_filepath);
-
-        // Set and return output filepath
-        return output_filepath = path + "\\1.ods";
-    }
-
-    // Copy spreadsheet
-    public void CopySpreadsheet(String input_filepath, String output_filepath) throws IOException {
-        File input_file = new File(input_filepath);
-        File output_file = new File(output_filepath);
-        FileUtils.copyFile(input_file, output_file);
     }
 }

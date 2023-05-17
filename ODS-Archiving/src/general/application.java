@@ -46,11 +46,12 @@ public class application {
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
+		create Create = new create();
 		IO IO = new IO();
 		operations OperateOn = new operations();
 		if (input_file != null) {
 			// Set output filepath
-			output_file = IO.CreateOutputFilepath(input_file, output_folder, rename);
+			output_file = Create.OutputFilepath(input_file, output_folder, rename);
 
 			// Check I/O of user inputs
 			IO.CheckFilepathIO(input_file, output_file, convert);
@@ -66,9 +67,9 @@ public class application {
 			// Check I/O of user inputs
 			IO.CheckFolderIO(input_folder, output_folder);
 
-			// Create archival package, if chosen
+			// If chosen, create archival package
 			if (archival_package)
-				output_folder = OperateOn.ArchivalPackage(output_folder);
+				output_folder = Create.ArchivalPackage(output_folder);
 
 			// Operate on user input
 			OperateOn.Folder(input_folder, output_folder, recurse, convert, check, change, validate, rename, conformance, verbose, archival_package);
