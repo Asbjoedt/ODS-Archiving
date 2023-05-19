@@ -5,16 +5,18 @@ import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
 import java.util.List;
 
 public class hyperlinks {
 
     // Check for hyperlinks using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int hyperlinks = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
         for (OdfTable table : tables) {
             List<OdfTableRow> rows = table.getRowList();

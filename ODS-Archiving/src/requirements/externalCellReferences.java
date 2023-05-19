@@ -1,5 +1,6 @@
 package requirements;
 
+import java.io.InputStream;
 import java.util.List;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;
@@ -10,11 +11,11 @@ import org.w3c.dom.NodeList;
 public class externalCellReferences {
 
     // Check for external cell references using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int extCellRefs = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
         for (OdfTable table : tables) {
             List<OdfTableRow> rows = table.getRowList();

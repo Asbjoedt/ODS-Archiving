@@ -33,10 +33,8 @@ public class IO {
             case "numbers":
             case "ods":
             case "ots":
-            case "xla":
             case "xls":
             case "xlt":
-            case "xlam":
             case "xlsm":
             case "xlsx":
             case "xltm":

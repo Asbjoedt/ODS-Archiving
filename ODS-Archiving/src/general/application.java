@@ -51,13 +51,13 @@ public class application {
 		operations OperateOn = new operations();
 		if (input_file != null) {
 			// Set output filepath
-			output_file = Create.OutputFilepath(input_file, output_folder, rename);
+			output_file = Create.OutputFilepath(input_file, output_folder, rename, archival_package);
 
 			// Check I/O of user inputs
 			IO.CheckFilepathIO(input_file, output_file, convert);
 
 			// Operate on user input
-			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, verbose);
+			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, verbose, archival_package);
 		}
 		else if (input_folder != null) {
 			// Set output folder, if only input folder is set

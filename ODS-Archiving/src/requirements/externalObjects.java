@@ -5,16 +5,17 @@ import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class externalObjects {
 
     // Check for external object references using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int extObjs = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
         for (OdfTable table : tables) {
             NodeList nodeList = table.getOdfElement().getChildNodes();

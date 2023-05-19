@@ -3,14 +3,16 @@ package requirements;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 
+import java.io.InputStream;
+
 public class settingsDOM {
 
     // Check if settings.xml exists using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath) throws Exception {
+    public boolean Check_ODFToolkit(String input) throws Exception {
         boolean settingsDOM = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         if (settingsDom != null) settingsDOM = true;
         spreadsheet.close();

@@ -5,14 +5,16 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.InputStream;
+
 public class macros {
 
     // Check for macros using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int macros = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         OdfManifestDom manifestDom = spreadsheet.getPackage().getManifestDom();
         NodeList fileEntries = manifestDom.getFirstChild().getChildNodes();
         for (int i = 0; i < fileEntries.getLength(); i++) {

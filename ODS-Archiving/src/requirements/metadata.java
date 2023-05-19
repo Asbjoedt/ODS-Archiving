@@ -4,14 +4,16 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.w3c.dom.Node;
 
+import java.io.InputStream;
+
 public class metadata {
 
     // Check for metadata using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
         boolean metadata = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
         Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
         if (creator != null) {
             metadata = true;

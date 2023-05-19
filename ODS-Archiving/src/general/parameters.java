@@ -104,6 +104,8 @@ public class parameters {
                 p_check = true;
             if (cmd.hasOption("cha"))
                 p_change = true;
+            if (cmd.hasOption("rec"))
+                p_recurse = true;
             if (cmd.hasOption("ver"))
                 p_verbose = true;
             if (cmd.hasOption("arc"))
@@ -146,6 +148,9 @@ public class parameters {
             // Check if archival package is selected but convert or change is NOT, then throw exception
             if (p_archival_package && !p_convert && !p_change)
                 throw new ParseException("PARSE ERROR: You must select convert or change method, if you select archivalpackage");
+            // Check if archival package and rename is selected at the same time, then throw exception
+            if (p_archival_package && p_rename != null)
+                throw new ParseException("PARSE ERROR: You cannot use rename method when using archivalpackage method");
 
         } catch (ParseException e) {
             System.out.println(" ");

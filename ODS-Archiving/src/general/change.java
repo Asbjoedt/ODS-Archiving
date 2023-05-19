@@ -86,7 +86,7 @@ public class change {
             macros = Macros.Change_ODFToolkit(filepath, verbose);
 
             // LOADREADONLY
-            loadReadOnly LoadReadOnly = new loadReadOnly();
+            loadReadonly LoadReadOnly = new loadReadonly();
             loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("may") || conformance.equals("experimental")) {

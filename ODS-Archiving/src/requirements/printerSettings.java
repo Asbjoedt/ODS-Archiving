@@ -5,14 +5,16 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.InputStream;
+
 public class printerSettings {
 
     // Check for printer settings using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int printers = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node firstNode = settingsDom.getFirstChild();
         Node secondNode = firstNode.getFirstChild();

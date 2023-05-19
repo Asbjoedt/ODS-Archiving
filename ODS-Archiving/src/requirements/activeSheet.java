@@ -6,14 +6,16 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.InputStream;
+
 public class activeSheet {
 
     // Check if first sheet is active sheet using ODF Toolkit
-    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
         boolean activeSheet = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
         OdfTable firstTable = spreadsheet.getSpreadsheetTables().get(0);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();

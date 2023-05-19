@@ -1,7 +1,11 @@
 package general;
 
 import requirements.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.*;
+import java.util.zip.ZipInputStream;
 
 public class check {
 
@@ -61,69 +65,72 @@ public class check {
         boolean activeSheet = false;
         boolean settingsDOM = false;
 
+        // Set input
+        String input = filepath;
+
         // Perform checks based on compliance
         if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
-            dataConns = DataConnections.Check_ODFToolkit(filepath, verbose);
+            dataConns = DataConnections.Check_ODFToolkit(input, verbose);
 
             // EXTERNAL CELL REFERENCES
             externalCellReferences ExternalCellReference = new externalCellReferences();
-            extCellRefs = ExternalCellReference.Check_ODFToolkit(filepath, verbose);
+            extCellRefs = ExternalCellReference.Check_ODFToolkit(input, verbose);
 
             // RTD FUNCTIONS
             RTDFunctions RTDFunctions = new RTDFunctions();
-            rtdFunctions = RTDFunctions.Check_ODFToolkit(filepath, verbose);
+            rtdFunctions = RTDFunctions.Check_ODFToolkit(input, verbose);
 
             // EXTERNAL OBJECTS
             externalObjects ExternalObjects = new externalObjects();
-            extObjs = ExternalObjects.Check_ODFToolkit(filepath, verbose);
+            extObjs = ExternalObjects.Check_ODFToolkit(input, verbose);
 
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(input, verbose);
         }
         if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // CONTENT
             contentExists ContentExists = new contentExists();
-            content = ContentExists.Check_ODFToolkit(filepath);
+            content = ContentExists.Check_ODFToolkit(input);
 
             // MACROS
             macros Macros = new macros();
-            macros = Macros.Check_ODFToolkit(filepath, verbose);
+            macros = Macros.Check_ODFToolkit(input, verbose);
 
             // LOADREADONLY
-            loadReadOnly LoadReadOnly = new loadReadOnly();
-            loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
+            loadReadonly LoadReadOnly = new loadReadonly();
+            loadReadOnly = LoadReadOnly.Check_ODFToolkit(input, verbose);
         }
         if (conformance.equals("may") || conformance.equals("experimental")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
+            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
 
             // METADATA
             metadata Metadata = new metadata();
-            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
+            metadata = Metadata.Check_ODFToolkit(input, verbose);
 
             // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
+            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
         }
         if (conformance.equals("experimental")) {
             // EMBEDDED FONTS
             embeddedFonts EmbeddedFonts = new embeddedFonts();
-            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(filepath, verbose);
+            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(input, verbose);
 
             // ACTIVE SHEET
             activeSheet ActiveSheet = new activeSheet();
-            activeSheet = ActiveSheet.Check_ODFToolkit(filepath, verbose);
+            activeSheet = ActiveSheet.Check_ODFToolkit(input, verbose);
 
             // SETTINGSDOM
             settingsDOM SettingsDOM = new settingsDOM();
-            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);
+            settingsDOM = SettingsDOM.Check_ODFToolkit(input);
         }
 
-        // Add to list and return it
+        // Add info from checks to list and return it
         results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM));
         return results;
     }

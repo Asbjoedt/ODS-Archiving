@@ -4,14 +4,16 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+import java.io.InputStream;
+
 public class embeddedObjects {
 
     // Check for embedded objects using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int embedObjs = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         Node node = spreadsheet.getMetaDom().getElementsByTagName("meta:document-statistic").item(0);
         if (node != null) {
             NamedNodeMap currentAttributes = node.getAttributes();

@@ -5,14 +5,16 @@ import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import java.io.InputStream;
+
 public class dataConnections {
 
     // Check for data connections using ODF Toolkit
-    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
         int conns = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         OdfContentDom contentDom = spreadsheet.getContentDom();
         NodeList nodeList = contentDom.getElementsByTagName("table:database-range");
         if (nodeList != null) {
@@ -20,8 +22,9 @@ public class dataConnections {
                 Node dataConnection = nodeList.item(i);
                 String name = dataConnection.getAttributes().getNamedItem("table:name").getNodeValue();
                 String range = dataConnection.getAttributes().getNamedItem("table:target-range-address").getNodeValue();
-                System.out.println("CHECK ODS_4 VERBOSE: Data connection detected. Name: " + name + ", Range: " + range);
+
                 conns++;
+                if (verbose) System.out.println("CHECK ODS_4 VERBOSE: Data connection detected. Name: " + name + ", Range: " + range);
             }
         }
         spreadsheet.close();
