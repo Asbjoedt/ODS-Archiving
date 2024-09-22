@@ -69,14 +69,8 @@ The conformance parameter is a required parameter. It determines the level of re
 * **should**
 * **may**
 
-A level include the requirements from the previous levels e.g. "should" includes all "must" requirements and "may" includes all "must" and "should" requirements. Some requirements are still under consideration. These can be enabled in the ODS Archiving application through this all-inclusive level:
+A level include the requirements from the previous levels e.g. "should" includes all "must" requirements and "may" includes all "must" and "should" requirements. Some requirements are still under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive level:
 * **experimental**
-
-### Organisations
-
-It is known, that the following organisations conform to these levels:
-* **must**
-  * Danish National Archives
 
 ## Dependencies
 

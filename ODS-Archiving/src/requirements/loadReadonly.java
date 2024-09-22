@@ -5,8 +5,6 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.InputStream;
-
 public class loadReadonly {
 
     // Check for loadReadOnly using ODF Toolkit

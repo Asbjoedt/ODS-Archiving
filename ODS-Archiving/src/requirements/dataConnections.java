@@ -5,8 +5,6 @@ import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.InputStream;
-
 public class dataConnections {
 
     // Check for data connections using ODF Toolkit

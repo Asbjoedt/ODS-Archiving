@@ -1,6 +1,5 @@
 package requirements;
 
-import java.io.InputStream;
 import java.util.List;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.table.OdfTable;

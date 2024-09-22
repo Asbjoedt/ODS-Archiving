@@ -5,8 +5,6 @@ import org.odftoolkit.odfdom.pkg.manifest.OdfManifestDom;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import java.io.InputStream;
-
 public class macros {
 
     // Check for macros using ODF Toolkit

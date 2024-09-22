@@ -5,9 +5,6 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 import org.odftoolkit.odfdom.dom.element.office.OfficeFontFaceDeclsElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import java.io.InputStream;
-import java.util.List;
 import java.util.Set;
 
 public class embeddedFonts {

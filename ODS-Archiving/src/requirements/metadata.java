@@ -4,8 +4,6 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfMetaDom;
 import org.w3c.dom.Node;
 
-import java.io.InputStream;
-
 public class metadata {
 
     // Check for metadata using ODF Toolkit

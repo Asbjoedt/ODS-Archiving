@@ -3,8 +3,6 @@ package requirements;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 
-import java.io.InputStream;
-
 public class settingsDOM {
 
     // Check if settings.xml exists using ODF Toolkit

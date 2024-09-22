@@ -5,8 +5,6 @@ import org.odftoolkit.odfdom.doc.table.OdfTable;
 import org.odftoolkit.odfdom.doc.table.OdfTableRow;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import java.io.InputStream;
 import java.util.List;
 
 public class hyperlinks {

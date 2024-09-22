@@ -4,8 +4,6 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import java.io.InputStream;
-
 public class contentExists {
 
 	// Check if cell values or objects exist using ODF Toolkit
