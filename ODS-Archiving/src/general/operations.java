@@ -30,7 +30,7 @@ public class operations {
         }
         if (validate != null) {
             general.validate Perform = new validate();
-            Perform.Validate_ODFValidator(output_filepath, validate, verbose);
+            Perform.Validate_OPFValidator(output_filepath, conformance, verbose);
         }
     }
 

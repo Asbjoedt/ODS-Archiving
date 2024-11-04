@@ -17,6 +17,11 @@
   </build>
   <dependencies>
     <dependency>
+      <groupId>org.openpreservation.odf</groupId>
+      <artifactId>odf-core</artifactId>
+      <version>0.16.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.odftoolkit</groupId>
       <artifactId>odftoolkit</artifactId>
       <version>0.12.0</version>
