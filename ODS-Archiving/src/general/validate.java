@@ -38,9 +38,17 @@ public class validate {
         // Inform user of error messages
         if (validity.getErrors() != null) {
             for (Message errors : validity.getErrors())  {
-                System.out.println("VALIDATE: " + errors.getMessage());
+                System.out.println("VALIDATE: ERROR: " + errors.getMessage());
             }
         }
+
+        // Inform user of all messages
+        if (validity.getErrors() != null) {
+            for (Message messages : validity.getMessages())  {
+                System.out.println("VALIDATE: MESSAGE: " + messages.getMessage());
+            }
+        }
+
 
         // Return and inform user of boolean validity
         if(valid)
