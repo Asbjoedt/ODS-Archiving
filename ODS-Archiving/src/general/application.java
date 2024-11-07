@@ -50,6 +50,10 @@ public class application {
 		IO IO = new IO();
 		operations OperateOn = new operations();
 		if (input_file != null) {
+			// If chosen, create archival package
+			if (archival_package)
+				output_folder = Create.ArchivalPackage(output_folder);
+
 			// Set output filepath
 			output_file = Create.OutputFilepath(input_file, output_folder, rename, archival_package);
 

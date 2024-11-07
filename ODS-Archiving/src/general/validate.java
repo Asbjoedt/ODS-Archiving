@@ -102,7 +102,7 @@ public class validate {
         return valid;
     }
 
-    // Validate OpenDocument Spreadsheets using ODF library Validator
+/*    // Validate OpenDocument Spreadsheets using ODF library Validator
     public boolean Validate_ODFLibraryValidator(String filepath, String path_to_jar, boolean verbose) throws Exception {
         boolean valid = false;
 
@@ -120,5 +120,5 @@ public class validate {
             System.out.println("VALIDATE: The spreadsheet file is valid.");
         }
         return valid;
-    }
+    }*/
 }
