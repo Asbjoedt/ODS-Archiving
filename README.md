@@ -65,18 +65,18 @@ java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder 
 ## Conformance
 
 The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [the OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
-* **must** - This corresponds in ODS Archiving application to **"all"**
+* **must** - This corresponds in ODS Archiving application to **"all"** and **"dna"**
 * **should**  - This corresponds in ODS Archiving application to **"normal"**
 * **may**  - This corresponds in ODS Archiving application to **"minimal"**
 
 The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "should" and "may" requirements and "minimal" performs only "may" requirements.
 
-Some requirements are still under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive festivitas level:
+Some requirements are under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive festivitas level:
 * **experimental**
 
 ## Dependencies
 
 The application uses the following software.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
-* [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
+* [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file. ODF Toolkit is used for checking and changing the content of spreadsheets.
 * [Open Preservation Foundation ODF Validator](https://github.com/openpreserve/odf-validator): OPF ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard.
