@@ -65,9 +65,9 @@ java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder 
 ## Conformance
 
 The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [the OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
-* **must** - This corresponds in ODS Archiving application to **"all"** and **"dna"**
-* **should**  - This corresponds in ODS Archiving application to **"normal"**
-* **may**  - This corresponds in ODS Archiving application to **"minimal"**
+* **must** - corresponds in ODS Archiving app to **"all"** and **"dna"**
+* **should**  - corresponds in ODS Archiving app to **"normal"**
+* **may**  - corresponds in ODS Archiving app to **"minimal"**
 
 The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "should" and "may" requirements and "minimal" performs only "may" requirements.
 
