@@ -19,7 +19,7 @@ The application requires input filepath or input folder as argument, and then yo
 Filepath method
 ```
 --inputfile "<filepath>" (optional, spreadsheet to process)
---rename "<new filename>" (optional, if you want to rename the output file. Extension is not necessary)
+--rename "<new filename>" (optional, if you want to rename output file. Extension is not necessary)
 ```
 Folder method
 ```
@@ -42,10 +42,10 @@ Folder method
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
 --validate (optional, validates ODF file format standard)
---conformance <option> (required, sets conformance level for archival requirements. Options are "all", 
-                        "dna" (conforms to the preservation profile of the Danish National Archives), 
-                        "normal", "minimal" and "experimental". The latter performs "all" archival 
-                        requirements plus those still under evaluation)
+--conformance <option> (required, sets conformance level for archival requirements. Options are: 
+                        "all", "dna" (conforms to the preservation profile of the Danish National 
+                        Archives), "normal", "minimal" and "experimental". The latter performs 
+                        "all" archival requirements plus those still under evaluation)
 --verbose (optional, outputs detailed results of check, change and validate)
 --archivalpackage (optional, creates and saves to an archivable folder)
 ```
@@ -55,21 +55,23 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance must --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance experimental --verbose
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose --archivalpackage
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance experimental --verbose --archivalpackage
 ```
 
 ## Conformance
 
 The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [the OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
-* **must**
-* **should**
-* **may**
+* **must** - This corresponds in ODS Archiving application to **"all"**
+* **should**  - This corresponds in ODS Archiving application to **"normal"**
+* **may**  - This corresponds in ODS Archiving application to **"minimal"**
 
-A level include the requirements from the previous levels e.g. "should" includes all "must" requirements and "may" includes all "must" and "should" requirements. Some requirements are still under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive level:
+The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "should" and "may" requirements and "minimal" performs only "may" requirements.
+
+Some requirements are still under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive festivitas level:
 * **experimental**
 
 ## Dependencies
@@ -77,4 +79,4 @@ A level include the requirements from the previous levels e.g. "should" includes
 The application uses the following software.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
-* [Open PReservation Foundation ODF Validator](https://github.com/openpreserve/odf-validator): OPF ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard.
+* [Open Preservation Foundation ODF Validator](https://github.com/openpreserve/odf-validator): OPF ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard.
