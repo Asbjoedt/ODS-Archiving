@@ -7,6 +7,7 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.lang3.StringUtils;
 
 public class parameters {
 
@@ -14,10 +15,10 @@ public class parameters {
     public static boolean p_convert = false;
     public static boolean p_check = false;
     public static boolean p_change = false;
+    public static boolean p_validate = false;
     public static boolean p_recurse = false;
     public static boolean p_verbose = false;
     public static boolean p_archival_package = false;
-    public static String p_validate = null;
     public static String p_input_file = null;
     public static String p_output_file = null;
     public static String p_input_folder = null;
@@ -38,6 +39,9 @@ public class parameters {
 
         Option change = new Option("cha", "change", false, "Change spreadsheet according to archival requirements");
         options.addOption(change);
+
+        Option validate = new Option("val", "validate", false, "Validate spreadsheet according to ODF file format standard");
+        options.addOption(validate);
 
         Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
         options.addOption(recurse);
@@ -76,13 +80,6 @@ public class parameters {
                 .desc("Set new name of output file").build();
         options.addOption(rename);
 
-        Option validate = Option.builder("val").longOpt("validate")
-                .argName("validate")
-                .hasArg()
-                .required(false)
-                .desc("Set path to ODF Validator jar to validate OpenDocument Spreadsheets file format").build();
-        options.addOption(validate);
-
         Option conformance = Option.builder("cof").longOpt("conformance")
                 .argName("conformance")
                 .hasArg()
@@ -104,14 +101,14 @@ public class parameters {
                 p_check = true;
             if (cmd.hasOption("cha"))
                 p_change = true;
+            if (cmd.hasOption("val"))
+                p_validate = true;
             if (cmd.hasOption("rec"))
                 p_recurse = true;
             if (cmd.hasOption("ver"))
                 p_verbose = true;
             if (cmd.hasOption("arc"))
                 p_archival_package = true;
-            if (cmd.hasOption("val"))
-                p_validate = cmd.getOptionValue("validate");
             if (cmd.hasOption("cof"))
                 p_conformance = cmd.getOptionValue("conformance").toLowerCase();
             if (cmd.hasOption("inp"))
