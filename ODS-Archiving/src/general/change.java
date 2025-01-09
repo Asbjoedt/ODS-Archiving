@@ -59,7 +59,7 @@ public class change {
         boolean settingsDOM = false;
 
         // Perform checks based on compliance
-        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
+        if (conformance.equals("all") || conformance.equals("dna") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
@@ -79,8 +79,7 @@ public class change {
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
             embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
-        }
-        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
+
             // MACROS
             macros Macros = new macros();
             macros = Macros.Change_ODFToolkit(filepath, verbose);
@@ -88,8 +87,41 @@ public class change {
             // LOADREADONLY
             loadReadonly LoadReadOnly = new loadReadonly();
             loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
+
+            // PRINTER SETTINGS
+            printerSettings PrinterSettings = new printerSettings();
+            printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
+
+            // METADATA
+            metadata Metadata = new metadata();
+            metadata = Metadata.Change_ODFToolkit(filepath, verbose);
+
+            // HYPERLINKS
+            hyperlinks Hyperlinks = new hyperlinks();
+            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
         }
-        if (conformance.equals("may") || conformance.equals("experimental")) {
+        if (conformance.equals("normal")) {
+            // MACROS
+            macros Macros = new macros();
+            macros = Macros.Change_ODFToolkit(filepath, verbose);
+
+            // LOADREADONLY
+            loadReadonly LoadReadOnly = new loadReadonly();
+            loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
+
+            // PRINTER SETTINGS
+            printerSettings PrinterSettings = new printerSettings();
+            printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
+
+            // METADATA
+            metadata Metadata = new metadata();
+            metadata = Metadata.Change_ODFToolkit(filepath, verbose);
+
+            // HYPERLINKS
+            hyperlinks Hyperlinks = new hyperlinks();
+            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
+        }
+        if (conformance.equals("minimal")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);

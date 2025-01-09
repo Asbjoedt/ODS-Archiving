@@ -4,12 +4,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import org.openpreservation.messages.Message;
+import org.openpreservation.odf.validation.Profile;
+import org.openpreservation.odf.validation.ProfileResult;
 import org.openpreservation.odf.validation.ValidationReport;
 import org.openpreservation.odf.validation.Validator;
+import org.openpreservation.odf.validation.rules.Rules;
 
 public class validate {
 
     // Validate OpenDocument Spreadsheets using Open Preservation Foundation Validator
+    // Reference: https://odf.openpreservation.org/developer/
     public boolean Validate_OPFValidator(String filepath, String conformance, boolean verbose) throws Exception {
         boolean valid = false;
 
@@ -18,37 +22,51 @@ public class validate {
         ValidationReport validity = validate.validateSpreadsheet(new File(filepath));
         valid = validity.isValid();
 
-        // Perform checks based on compliance
-        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
+        // Perform checks based on compliance except DNA profile
+        if (conformance.equals("all") || conformance.equals("normal") || conformance.equals("minimal") || conformance.equals("experimental")) {
+            // Inform user of all messages
+            if (verbose) {
+                if (validity.getErrors() != null) {
+                    for (Message message : validity.getMessages()) {
+                        System.out.println("VALIDATE VERBOSE: " + message.getId() + ", " + message.getSeverity() + ", " + message.getMessage());
+                    }
+                }
+            }
 
-        }
-
-        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
-
-        }
-
-        if (conformance.equals("may") || conformance.equals("experimental")) {
-
-        }
-
-        if (conformance.equals("experimental")) {
-
-        }
-
-        // Inform user of all messages
-        if(verbose) {
-            if (validity.getErrors() != null) {
-                for (Message messages : validity.getMessages())  {
-                    System.out.println("VALIDATE VERBOSE: " + messages.getMessage());
+            // Inform user of only error messages
+            if (!verbose) {
+                if (validity.getErrors() != null) {
+                    for (Message message : validity.getErrors()) {
+                        if (message.getSeverity().toString().equals("ERROR"))
+                            System.out.println("VALIDATE: " + message.getId() + ", " + message.getSeverity() + ", " + message.getMessage());
+                    }
                 }
             }
         }
 
-        // Inform user of only error messages
-        if(!verbose) {
-            if (validity.getErrors() != null) {
-                for (Message errors : validity.getErrors())  {
-                    System.out.println("VALIDATE: ERROR: " + errors.getMessage());
+        // Performs validation based on DNA profile conformance
+        if (conformance.equals("dna")) {
+            Profile dnaProfile = Rules.getDnaProfile();
+            ProfileResult dnaResult = dnaProfile.check(validity);
+            ValidationReport dnaReport = dnaResult.getValidationReport();
+
+            // Inform user of all messages
+            if (verbose) {
+                if (dnaReport.getErrors() != null) {
+                    for (Message message : dnaReport.getMessages()) {
+                        System.out.println("VALIDATE DNA PROFILE VERBOSE: " + message.getId() + ", " + message.getSeverity() + ", " + message.getMessage());
+                    }
+                }
+            }
+
+            // Inform user of only error messages
+            if (!verbose) {
+                if (dnaReport.getErrors() != null) {
+                    for (Message message : dnaReport.getMessages()) {
+                        if (message.getSeverity().toString().equals("ERROR")) {
+                            System.out.println("VALIDATE DNA PROFILE: " + message.getId() + ", " + message.getSeverity() + ", " + message.getMessage());
+                        }
+                    }
                 }
             }
         }

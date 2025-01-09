@@ -9,6 +9,7 @@ public class application {
 		// Inform user of beginning of application
 		System.out.println("ODS Archiving v1.0.0");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
+		System.out.println("---");
 
 		// Parse arguments
 		parameters Parse = new parameters();
@@ -34,15 +35,16 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("Options: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + doValidation + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
+		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + doValidation + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
 		if (input_file != null)
-			System.out.println("Input file: " + input_file);
+			System.out.println("INPUT FILE: " + input_file);
 		if (rename != null)
-			System.out.println("Rename output file: " + rename + ".ods");
+			System.out.println("RENAME OUTPUT FILE: " + rename + ".ods");
 		if (input_folder != null)
-			System.out.println("Input folder: " + input_folder);
+			System.out.println("INPUT FOLDER: " + input_folder);
 		if (output_folder != null)
-			System.out.println("Output folder: " + output_folder);
+			System.out.println("OUTPUT FOLDER: " + output_folder);
+		System.out.println("---");
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
@@ -80,6 +82,7 @@ public class application {
 		}
 
 		// Inform user of end of application
+		System.out.println("---");
 		System.out.println("APPLICATION FINISHED");
 	}
 }

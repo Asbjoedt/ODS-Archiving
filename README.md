@@ -41,11 +41,11 @@ Folder method
 --convert (optional, converts spreadsheet to .ods file format using LibreOffice)
 --check (optional, checks for archival requirements)
 --change (optional, changes data according to archival requirements)
---validate <"path to ODF Validator jar"> (optional, validates ODF file format standard)
---conformance <option> (required, sets conformance level for archival requirements. Options are "must", 
-                        "should", "may" or "experimental". All options contains previous conformance 
-                        levels i.e. "should" also includes "must" requirements. "experimental" does 
-                        archival requirements still under evaluation)
+--validate (optional, validates ODF file format standard)
+--conformance <option> (required, sets conformance level for archival requirements. Options are "all", 
+                        "dna" (conforms to the preservation profile of the Danish National Archives), 
+                        "normal", "minimal" and "experimental". The latter performs "all" archival 
+                        requirements plus those still under evaluation)
 --verbose (optional, outputs detailed results of check, change and validate)
 --archivalpackage (optional, creates and saves to an archivable folder)
 ```
@@ -55,11 +55,11 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance must --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance must --verbose
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate "C:\ODFValidator.jar" --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose --archivalpackage
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance must --verbose --archivalpackage
 ```
 
 ## Conformance
@@ -77,4 +77,4 @@ A level include the requirements from the previous levels e.g. "should" includes
 The application uses the following software.
 * [LibreOffice](https://www.libreoffice.org/): LibreOffice is used for background conversion of spreadsheets to .ods file format. You must therefore have the program installed.
 * [ODF Toolkit](https://odftoolkit.org/): The ODF Toolkit includes a number of subcomponents with separate copyright notices and license terms. Your use of these subcomponents is subject to the terms and conditions of the licenses listed in their [LICENSE](https://github.com/tdf/odftoolkit/blob/master/LICENSE) file. Copyright ownership information can be found in their [NOTICE](https://github.com/tdf/odftoolkit/blob/master/NOTICE) file.
-* [ODF Validator](https://github.com/tdf/odftoolkit): ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard. You must download the jar file.
+* [Open PReservation Foundation ODF Validator](https://github.com/openpreserve/odf-validator): OPF ODF Validator is used for validating the OpenDocument Spreadsheets file format Standard.

@@ -69,7 +69,7 @@ public class check {
         String input = filepath;
 
         // Perform checks based on compliance
-        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
+        if (conformance.equals("all") || conformance.equals("dna") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Check_ODFToolkit(input, verbose);
@@ -89,8 +89,7 @@ public class check {
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
             embedObjs = EmbeddedObjects.Check_ODFToolkit(input, verbose);
-        }
-        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
+
             // CONTENT
             contentExists ContentExists = new contentExists();
             content = ContentExists.Check_ODFToolkit(input);
@@ -102,8 +101,45 @@ public class check {
             // LOADREADONLY
             loadReadonly LoadReadOnly = new loadReadonly();
             loadReadOnly = LoadReadOnly.Check_ODFToolkit(input, verbose);
+
+            // PRINTER SETTINGS
+            printerSettings PrinterSettings = new printerSettings();
+            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
+
+            // METADATA
+            metadata Metadata = new metadata();
+            metadata = Metadata.Check_ODFToolkit(input, verbose);
+
+            // HYPERLINKS
+            hyperlinks Hyperlinks = new hyperlinks();
+            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
         }
-        if (conformance.equals("may") || conformance.equals("experimental")) {
+        if (conformance.equals("normal")) {
+            // CONTENT
+            contentExists ContentExists = new contentExists();
+            content = ContentExists.Check_ODFToolkit(input);
+
+            // MACROS
+            macros Macros = new macros();
+            macros = Macros.Check_ODFToolkit(input, verbose);
+
+            // LOADREADONLY
+            loadReadonly LoadReadOnly = new loadReadonly();
+            loadReadOnly = LoadReadOnly.Check_ODFToolkit(input, verbose);
+
+            // PRINTER SETTINGS
+            printerSettings PrinterSettings = new printerSettings();
+            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
+
+            // METADATA
+            metadata Metadata = new metadata();
+            metadata = Metadata.Check_ODFToolkit(input, verbose);
+
+            // HYPERLINKS
+            hyperlinks Hyperlinks = new hyperlinks();
+            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
+        }
+        if (conformance.equals("minimal")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Check_ODFToolkit(input, verbose);
