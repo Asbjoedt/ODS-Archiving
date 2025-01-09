@@ -12,7 +12,8 @@ public class settingsDOM {
         // Perform check
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        if (settingsDom != null) settingsDOM = true;
+        if (settingsDom != null)
+            settingsDOM = true;
         spreadsheet.close();
 
         if (settingsDOM) {

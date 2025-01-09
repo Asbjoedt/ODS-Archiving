@@ -43,9 +43,9 @@ Folder method
 --change (optional, changes data according to archival requirements)
 --validate (optional, validates ODF file format standard)
 --conformance <option> (required, sets conformance level for archival requirements. Options are: 
-                        "all", "dna" (conforms to the preservation profile of the Danish National 
-                        Archives), "normal", "minimal" and "experimental". The latter performs 
-                        "all" archival requirements plus those still under evaluation)
+                        "all", "normal", "minimal", "experimental" (conforms to "all" archival 
+                        requirements plus those still under evaluation) and "dna" (conforms to 
+                        the preservation profile of the Danish National Archives).
 --verbose (optional, outputs detailed results of check, change and validate)
 --archivalpackage (optional, creates and saves to an archivable folder)
 ```
@@ -64,8 +64,8 @@ java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder 
 
 ## Conformance
 
-The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [the OPF Spreadsheets Preservation Specification](https://github.com/opf-labs/Spreadsheets-Preservation-Specification/blob/main/v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
-* **must** - corresponds in ODS Archiving app to **"all"** and **"dna"**
+The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [a forked version of the OPF Spreadsheets Preservation Specification](https://github.com/Asbjoedt/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
+* **must** - corresponds in ODS Archiving app to **"all"**
 * **should**  - corresponds in ODS Archiving app to **"normal"**
 * **may**  - corresponds in ODS Archiving app to **"minimal"**
 
@@ -73,6 +73,9 @@ The conformance levels are embedded in each other so that the "all" conformance 
 
 Some requirements are under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive festivitas level:
 * **experimental**
+
+I was the main writer of the original specification for the OPF Spreadsheets Preservation Specification when I worked at the Danish National Archives (DNA). Since my departure, I tongue-in-cheek quote Godfather and say "look how they massacred my boy" because it has changed decidedly. I therefore continue my own app implementation of the original "Draft v1.0" by using the above-mentioned forked version of the specification. However, I do want to support the Danish National Archives' changes to the specification as they appear now in "[Draft v1.9](https://github.com/openpreserve/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#1-introduction)". Therefore, I provide a conformance level for using this version of the spec:
+* **dna**
 
 ## Dependencies
 

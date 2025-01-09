@@ -6,7 +6,7 @@ import java.util.*;
 public class change {
 
     // Class for creating list of changes
-    public class changeList {
+    public static class changeList {
         // Class data types
         int dataConnections = 0;
         int externalCellReferences = 0;
@@ -21,9 +21,10 @@ public class change {
         boolean embeddedFonts = false;
         boolean activeSheet = false;
         boolean settingsDOM = false;
+        int digitalSignatures = 0;
 
         // Method for class data types
-        public changeList(int dataConns, int cellrefs, int rtd, int extobjs, int embedsobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet, boolean settingsDOM) {
+        public changeList(int dataConns, int cellrefs, int rtd, int extobjs, int embedsobjs, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embeddedFonts, boolean activeSheet, boolean settingsDOM, int digitalSignatures) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
@@ -37,6 +38,7 @@ public class change {
             this.embeddedFonts = embeddedFonts;
             this.activeSheet = activeSheet;
             this.settingsDOM = settingsDOM;
+            this.digitalSignatures = digitalSignatures;
         }
     }
 
@@ -57,9 +59,10 @@ public class change {
         boolean embeddedFonts = false;
         boolean activeSheet = false;
         boolean settingsDOM = false;
+        int digitalSignatures = 0;
 
         // Perform checks based on compliance
-        if (conformance.equals("all") || conformance.equals("dna") || conformance.equals("experimental")) {
+        if (conformance.equals("all") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
@@ -147,9 +150,18 @@ public class change {
             settingsDOM SettingsDOM = new settingsDOM();
             settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);
         }
+        if (conformance.equals("dna")) {
+            // MACROS
+            macros Macros = new macros();
+            macros = Macros.Change_ODFToolkit(filepath, verbose);
+
+            // DIGITAL SIGNATURES
+            digitalSignatures DigitalSignature = new digitalSignatures();
+            digitalSignatures = DigitalSignature.Change_ODFToolkit(filepath, verbose);
+        }
 
         // Add to list and return it
-        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM));
+        results.add(new changeList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM, digitalSignatures));
         return results;
     }
 }

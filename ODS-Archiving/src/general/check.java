@@ -10,7 +10,7 @@ import java.util.zip.ZipInputStream;
 public class check {
 
     // Class for creating list of checks
-    public class checkList {
+    public static class checkList {
         // Class data types
         int dataConnections = 0;
         int externalCellReferences = 0;
@@ -26,9 +26,10 @@ public class check {
         boolean embeddedFonts = false;
         boolean activeSheet = false;
         boolean settingsDOM = false;
+        int digitalSignatures = 0;
 
         // Method for class data types
-        public checkList(int dataConns, int cellrefs, int rtd, int extobjs, int embedobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet, boolean settingsDOM) {
+        public checkList(int dataConns, int cellrefs, int rtd, int extobjs, int embedobjs, boolean hasContent, int macros, boolean loadReadOnly, int printers, boolean metadata, int hyperlinks, boolean embedFonts, boolean activeSheet, boolean settingsDOM, int digitalSignatures) {
             this.dataConnections = dataConns;
             this.externalCellReferences = cellrefs;
             this.RTDFunctions = rtd;
@@ -43,6 +44,7 @@ public class check {
             this.embeddedFonts = embedFonts;
             this.activeSheet = activeSheet;
             this.settingsDOM = settingsDOM;
+            this.digitalSignatures = digitalSignatures;
         }
     }
 
@@ -64,12 +66,13 @@ public class check {
         boolean embeddedFonts = false;
         boolean activeSheet = false;
         boolean settingsDOM = false;
+        int digitalSignatures = 0;
 
         // Set input
         String input = filepath;
 
         // Perform checks based on compliance
-        if (conformance.equals("all") || conformance.equals("dna") || conformance.equals("experimental")) {
+        if (conformance.equals("all") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Check_ODFToolkit(input, verbose);
@@ -165,9 +168,42 @@ public class check {
             settingsDOM SettingsDOM = new settingsDOM();
             settingsDOM = SettingsDOM.Check_ODFToolkit(input);
         }
+        if (conformance.equals("dna")) {
+            // DATA CONNECTIONS
+            dataConnections DataConnections = new dataConnections();
+            dataConns = DataConnections.Check_ODFToolkit(input, verbose);
+
+            // EXTERNAL CELL REFERENCES
+            externalCellReferences ExternalCellReference = new externalCellReferences();
+            extCellRefs = ExternalCellReference.Check_ODFToolkit(input, verbose);
+
+            // RTD FUNCTIONS
+            RTDFunctions RTDFunctions = new RTDFunctions();
+            rtdFunctions = RTDFunctions.Check_ODFToolkit(input, verbose);
+
+            // EXTERNAL OBJECTS
+            externalObjects ExternalObjects = new externalObjects();
+            extObjs = ExternalObjects.Check_ODFToolkit(input, verbose);
+
+            // EMBEDDED OBJECTS
+            embeddedObjects EmbeddedObjects = new embeddedObjects();
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(input, verbose);
+
+            // CONTENT
+            contentExists ContentExists = new contentExists();
+            content = ContentExists.Check_ODFToolkit(input);
+
+            // MACROS
+            macros Macros = new macros();
+            macros = Macros.Check_ODFToolkit(input, verbose);
+
+            // DIGITAL SIGNATURES
+            digitalSignatures DigitalSignatures = new digitalSignatures();
+            digitalSignatures = DigitalSignatures.Check_ODFToolkit(input, verbose);
+        }
 
         // Add info from checks to list and return it
-        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM));
+        results.add(new checkList(dataConns, extCellRefs, rtdFunctions, extObjs, embedObjs, content, macros, loadReadOnly, printers, metadata, hyperlinks, embeddedFonts, activeSheet, settingsDOM, digitalSignatures));
         return results;
     }
 }
