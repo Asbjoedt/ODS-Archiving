@@ -48,9 +48,15 @@ public class application {
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
+
 		create Create = new create();
 		IO IO = new IO();
 		operations OperateOn = new operations();
+
+		// Check if LibreOffice is installed and set path to executable
+		if(convert)
+			IO.CheckLibreOfficeIO();
+
 		if (input_file != null) {
 			// If chosen, create archival package
 			if (archival_package)

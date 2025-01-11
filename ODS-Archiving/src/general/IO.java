@@ -3,8 +3,16 @@ package general;
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
 
 public class IO {
+
+    // Globally accessible variable for path to LibreOffice
+    public static String LibreOffice_path = null;
 
     // Method for checking availability of input and output filepaths
     public void CheckFilepathIO(String input_filepath, String output_filepath, boolean convert) throws IOException {
@@ -102,5 +110,50 @@ public class IO {
         if (!outputfolder_writeable) {
             throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
         }
+    }
+
+    // Method for checking if LibreOffice is installed, in which dir and setting the dir path
+    public void CheckLibreOfficeIO() throws IOException, InterruptedException {
+
+        // Check for operating system and define search paths for LibreOffice
+        String search_app_name = null;
+        String[] search_array = null;
+        String operating_system = System.getProperty("os.name").replaceAll("\\s.*","");
+        if(operating_system.equals("Windows")) {
+            search_app_name = "scalc.exe";
+            search_array = new String[] {
+                    "C:\\Program Files\\LibreOffice\\",
+                    "C:\\Program Files (x86)\\LibreOffice",
+            };
+        }
+        else {
+            search_app_name = "scalc";
+            search_array = new String[] {
+                    "/var/lib/flatpak/app/org.libreoffice.LibreOffice/"
+            };
+        }
+
+        // Search filesystem for LibreOffice Calc
+        for (String search_dir : search_array) {
+            Path startingDir = Paths.get(search_dir);
+            String filenameToFind = search_app_name;
+
+            try {
+                LibreOffice_path = Files.walk(startingDir)
+                        .filter(path -> path.getFileName().toString().equals(filenameToFind))
+                        .map(Path::toString)
+                        .findFirst()
+                        .orElse(null);
+
+                if (LibreOffice_path != null)
+                    return;
+            } catch (UncheckedIOException e) {
+                continue;
+            }
+        }
+
+        // If path cannot be found throw exception
+        if(LibreOffice_path == null)
+            throw new IOException("LibreOffice cannot be found.");
     }
 }

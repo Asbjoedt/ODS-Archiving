@@ -23,7 +23,7 @@ public class convert {
 
         // Set arguments
         ProcessBuilder Conversion = new ProcessBuilder (
-                "C:\\Program Files\\LibreOffice\\program\\scalc.exe",
+                IO.LibreOffice_path,
                 "--headless",
                 "--convert-to",
                 "ods",

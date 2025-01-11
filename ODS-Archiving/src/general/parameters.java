@@ -60,6 +60,10 @@ public class parameters {
                 .hasArg()
                 .required(false)
                 .desc("Set spreadsheet input folder path").build();
+
+        //System.out.println(input_folder..replaceAll("/$", ""));
+
+
         options.addOption(input_folder);
 
         Option output_folder = Option.builder("out").longOpt("outputfolder")
