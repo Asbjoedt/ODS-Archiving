@@ -18,10 +18,10 @@ public class application {
 		boolean convert = parameters.p_convert;
 		boolean check = parameters.p_check;
 		boolean change = parameters.p_change;
+		boolean validate = parameters.p_validate;
 		boolean recurse = parameters.p_recurse;
 		boolean verbose = parameters.p_verbose;
 		boolean archival_package = parameters.p_archival_package;
-		String validate = parameters.p_validate;
 		String input_file = parameters.p_input_file;
 		String output_file = parameters.p_output_file;
 		String input_folder = parameters.p_input_folder;
@@ -29,13 +29,9 @@ public class application {
 		String rename = parameters.p_rename;
 		String conformance = parameters.p_conformance;
 
-		// Only to be used as long as validation requires path to jar file
-		boolean doValidation = validate != null;
-		// Only to be used as long as validation requires path to jar file
-
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + doValidation + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
+		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
 		if (input_file != null)
 			System.out.println("INPUT FILE: " + input_file);
 		if (rename != null)

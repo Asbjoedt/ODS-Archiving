@@ -7,7 +7,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, String validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -28,14 +28,14 @@ public class operations {
             general.change Perform = new change();
             Perform.Change_ODFToolkit(output_filepath, conformance, verbose);
         }
-        if (validate != null) {
+        if (validate) {
             general.validate Perform = new validate();
             Perform.Validate_OPFValidator(output_filepath, conformance, verbose);
         }
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, String validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);

@@ -4,6 +4,8 @@ import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.dom.OdfContentDom;
 import org.w3c.dom.Node;
 
+import java.io.InputStream;
+
 public class digitalSignatures {
 
     // Check for digital signatures using ODF Toolkit
@@ -13,6 +15,9 @@ public class digitalSignatures {
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
         Node node = spreadsheet.getMetaDom().getElementsByTagName("document-signatures").item(0);
+        InputStream contentXMLStream = spreadsheet.getPackage().getInputStream("content.xml");
+        byte[] contentBytes = contentXMLStream.readAllBytes();
+        System.out.println(new String(contentBytes));
 
         spreadsheet.close();
 
