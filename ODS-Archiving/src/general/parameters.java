@@ -9,6 +9,8 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
+
 public class parameters {
 
     // Data types
@@ -65,9 +67,6 @@ public class parameters {
                 .required(false)
                 .desc("Set spreadsheet input folder path").build();
 
-        //System.out.println(input_folder..replaceAll("/$", ""));
-
-
         options.addOption(input_folder);
 
         Option output_folder = Option.builder("out").longOpt("outputfolder")
@@ -88,7 +87,7 @@ public class parameters {
                 .argName("conformance")
                 .hasArg()
                 .required(true)
-                .desc("Set level of conformance for archival requirements").build();
+                .desc("Set level of conformance for archival requirements. Options: all, normal, minimal, experimental or dna").build();
         options.addOption(conformance);
 
         // define argument parser
@@ -113,8 +112,6 @@ public class parameters {
                 p_verbose = true;
             if (cmd.hasOption("arc"))
                 p_archival_package = true;
-            if (cmd.hasOption("cof"))
-                p_conformance = cmd.getOptionValue("conformance").toLowerCase();
             if (cmd.hasOption("inp"))
                 p_input_file = cmd.getOptionValue("inputfile");
             if (cmd.hasOption("inf"))
@@ -123,12 +120,13 @@ public class parameters {
                 p_output_folder = cmd.getOptionValue("outputfolder");
             if (cmd.hasOption("ren"))
                 p_rename = cmd.getOptionValue("rename");
+            if (cmd.hasOption("cof"))
+                p_conformance = cmd.getOptionValue("conformance").toLowerCase();
 
-            // In the following, throw parse errors if certain situations
-            // Check accepted conformance levels
+            // In the following, throw parse errors under certain conditions
             if (p_check || p_change)
-                if (!p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental"))
-                    throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\" or \"experimental\"");
+                if (!p_conformance.equals("all") && !p_conformance.equals("normal") && !p_conformance.equals("minimal") && !p_conformance.equals("experimental") && !p_conformance.equals("dna"))
+                    throw new ParseException("PARSE ERROR: Compliance is not \"all\", \"normal\", \"minimal\", \"experimental\" or \"dna\"");
             // Check if both input filepath and input folder are set, then throw exception
             if (p_input_file != null && p_input_folder != null)
                 throw new ParseException("PARSE ERROR: Both input filepath and input folder are set");

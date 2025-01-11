@@ -24,9 +24,10 @@ public class printerSettings {
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
+                        String printer_name = theNode.getTextContent();
                         printers++;
                         if (verbose)
-                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml detected");
+                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name \"" + printer_name + "\" in settings.xml detected");
                     }
                 }
             }

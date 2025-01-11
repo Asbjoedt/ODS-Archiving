@@ -1,9 +1,12 @@
 package requirements;
 
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
-import org.odftoolkit.odfdom.dom.OdfContentDom;
+import org.odftoolkit.odfdom.pkg.OdfPackageDocument;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-
+import org.w3c.dom.NodeList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.InputStream;
 
 public class digitalSignatures {
@@ -14,13 +17,34 @@ public class digitalSignatures {
 
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
-        Node node = spreadsheet.getMetaDom().getElementsByTagName("document-signatures").item(0);
-        InputStream contentXMLStream = spreadsheet.getPackage().getInputStream("content.xml");
-        byte[] contentBytes = contentXMLStream.readAllBytes();
-        System.out.println(new String(contentBytes));
+
+        OdfPackageDocument signatures_file = spreadsheet.getFileDom("META-INF/documentsignatures.xml").getDocument();
+
+        NodeList nodes = spreadsheet.getFileDom("META-INF/documentsignatures.xml").getElementsByTagName("document-signatures");
+        if(nodes.getLength() > 0) {
+            for (int i = 0; i < nodes.getLength(); i++) {
+                Node node = nodes.item(i);
+                System.out.println(node.getNodeValue());
+                digsigs++;
+            }
+        }
+
+        InputStream in = spreadsheet.getPackage().getInputStream();
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document document = docBuilder.parse(in);
+        NodeList signatures = document.getElementsByTagName("Signature");
+
+        if(signatures.getLength() > 0) {
+            for (int i = 0; i < signatures.getLength(); i++) {
+                Node node = signatures.item(i);
+                System.out.println(node.getNodeValue());
+                digsigs++;
+            }
+        }
+
 
         spreadsheet.close();
-
 
         // Inform user and return number
         if (digsigs > 0)
@@ -34,7 +58,8 @@ public class digitalSignatures {
 
         // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
-        OdfContentDom contentDom = spreadsheet.getContentDom();
+
+
         spreadsheet.save(filepath);
         spreadsheet.close();
 
