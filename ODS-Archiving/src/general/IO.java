@@ -122,7 +122,7 @@ public class IO {
         if(operating_system.equals("Windows")) {
             search_app_name = "scalc.exe";
             search_array = new String[] {
-                    "C:\\Program Files\\LibreOffice\\",
+                    "C:\\Program Files\\LibreOffice",
                     "C:\\Program Files (x86)\\LibreOffice",
             };
         }

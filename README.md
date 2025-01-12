@@ -79,6 +79,10 @@ Some requirements are under consideration (embedded fonts, active sheet and sett
 I was the main writer of the original specification for the OPF Spreadsheets Preservation Specification when I worked at the Danish National Archives (DNA). Since my departure, tongue-in-cheek I quote Godfather and say "look how they massacred my boy" because it has changed decidedly. I therefore continue my own app implementation of the original "Draft v1.0" by using the above-mentioned forked version of the specification. However, I do want to support the Danish National Archives' changes to the specification as they appear now in "[Draft v1.9](https://github.com/openpreserve/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#1-introduction)". Therefore, I provide a conformance level for using this version of the spec:
 * **dna**
 
+## Sample Data
+You can download a zipped folder with spreadsheets sample data, "SampleData.zip", from this location:
+* [Download Sample Data](https://github.com/Asbjoedt/CLISC/tree/master/Docs)
+
 ## Dependencies
 
 The application uses the following software.
