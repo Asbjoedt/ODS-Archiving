@@ -49,7 +49,7 @@ public class check {
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<checkList> Check_ODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
+    public List<checkList> CheckODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
         // Create list and data types to return
         List<checkList> results = new ArrayList<>();
         int dataConns = 0;
@@ -68,138 +68,135 @@ public class check {
         boolean settingsDOM = false;
         int digitalSignatures = 0;
 
-        // Set input
-        String input = filepath;
-
         // Perform checks based on compliance
         if (conformance.equals("all") || conformance.equals("experimental")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
-            dataConns = DataConnections.Check_ODFToolkit(input, verbose);
+            dataConns = DataConnections.Check_ODFToolkit(filepath, verbose);
 
             // EXTERNAL CELL REFERENCES
             externalCellReferences ExternalCellReference = new externalCellReferences();
-            extCellRefs = ExternalCellReference.Check_ODFToolkit(input, verbose);
+            extCellRefs = ExternalCellReference.Check_ODFToolkit(filepath, verbose);
 
             // RTD FUNCTIONS
             RTDFunctions RTDFunctions = new RTDFunctions();
-            rtdFunctions = RTDFunctions.Check_ODFToolkit(input, verbose);
+            rtdFunctions = RTDFunctions.Check_ODFToolkit(filepath, verbose);
 
             // EXTERNAL OBJECTS
             externalObjects ExternalObjects = new externalObjects();
-            extObjs = ExternalObjects.Check_ODFToolkit(input, verbose);
+            extObjs = ExternalObjects.Check_ODFToolkit(filepath, verbose);
 
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Check_ODFToolkit(input, verbose);
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
 
             // CONTENT
             contentExists ContentExists = new contentExists();
-            content = ContentExists.Check_ODFToolkit(input);
+            content = ContentExists.Check_ODFToolkit(filepath);
 
             // MACROS
             macros Macros = new macros();
-            macros = Macros.Check_ODFToolkit(input, verbose);
+            macros = Macros.Check_ODFToolkit(filepath, verbose);
 
             // LOADREADONLY
             loadReadonly LoadReadOnly = new loadReadonly();
-            loadReadOnly = LoadReadOnly.Check_ODFToolkit(input, verbose);
+            loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
 
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
+            printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
 
             // METADATA
             metadata Metadata = new metadata();
-            metadata = Metadata.Check_ODFToolkit(input, verbose);
+            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
 
             // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
+            hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("normal")) {
             // CONTENT
             contentExists ContentExists = new contentExists();
-            content = ContentExists.Check_ODFToolkit(input);
+            content = ContentExists.Check_ODFToolkit(filepath);
 
             // MACROS
             macros Macros = new macros();
-            macros = Macros.Check_ODFToolkit(input, verbose);
+            macros = Macros.Check_ODFToolkit(filepath, verbose);
 
             // LOADREADONLY
             loadReadonly LoadReadOnly = new loadReadonly();
-            loadReadOnly = LoadReadOnly.Check_ODFToolkit(input, verbose);
+            loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
 
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
+            printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
 
             // METADATA
             metadata Metadata = new metadata();
-            metadata = Metadata.Check_ODFToolkit(input, verbose);
+            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
 
             // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
+            hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("minimal")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Check_ODFToolkit(input, verbose);
+            printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
 
             // METADATA
             metadata Metadata = new metadata();
-            metadata = Metadata.Check_ODFToolkit(input, verbose);
+            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
 
             // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Check_ODFToolkit(input, verbose);
+            hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("experimental")) {
             // EMBEDDED FONTS
             embeddedFonts EmbeddedFonts = new embeddedFonts();
-            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(input, verbose);
+            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(filepath, verbose);
 
             // ACTIVE SHEET
             activeSheet ActiveSheet = new activeSheet();
-            activeSheet = ActiveSheet.Check_ODFToolkit(input, verbose);
+            activeSheet = ActiveSheet.Check_ODFToolkit(filepath, verbose);
 
             // SETTINGSDOM
             settingsDOM SettingsDOM = new settingsDOM();
-            settingsDOM = SettingsDOM.Check_ODFToolkit(input);
+            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);
         }
         if (conformance.equals("dna")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
-            dataConns = DataConnections.Check_ODFToolkit(input, verbose);
+            dataConns = DataConnections.Check_ODFToolkit(filepath, verbose);
 
             // EXTERNAL CELL REFERENCES
             externalCellReferences ExternalCellReference = new externalCellReferences();
-            extCellRefs = ExternalCellReference.Check_ODFToolkit(input, verbose);
+            extCellRefs = ExternalCellReference.Check_ODFToolkit(filepath, verbose);
 
             // RTD FUNCTIONS
             RTDFunctions RTDFunctions = new RTDFunctions();
-            rtdFunctions = RTDFunctions.Check_ODFToolkit(input, verbose);
+            rtdFunctions = RTDFunctions.Check_ODFToolkit(filepath, verbose);
 
             // EXTERNAL OBJECTS
             externalObjects ExternalObjects = new externalObjects();
-            extObjs = ExternalObjects.Check_ODFToolkit(input, verbose);
+            extObjs = ExternalObjects.Check_ODFToolkit(filepath, verbose);
 
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Check_ODFToolkit(input, verbose);
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
 
             // CONTENT
             contentExists ContentExists = new contentExists();
-            content = ContentExists.Check_ODFToolkit(input);
+            content = ContentExists.Check_ODFToolkit(filepath);
 
             // MACROS
             macros Macros = new macros();
-            macros = Macros.Check_ODFToolkit(input, verbose);
+            macros = Macros.Check_ODFToolkit(filepath, verbose);
 
             // DIGITAL SIGNATURES
             digitalSignatures DigitalSignatures = new digitalSignatures();
-            digitalSignatures = DigitalSignatures.Check_ODFToolkit(input, verbose);
+            digitalSignatures = DigitalSignatures.Check_ODFToolkit(filepath, verbose);
         }
 
         // Add info from checks to list and return it

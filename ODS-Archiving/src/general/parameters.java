@@ -7,9 +7,6 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.Arrays;
 
 public class parameters {
 
@@ -19,6 +16,7 @@ public class parameters {
     public static boolean p_change = false;
     public static boolean p_validate = false;
     public static boolean p_recurse = false;
+    public static boolean p_report = false;
     public static boolean p_verbose = false;
     public static boolean p_archival_package = false;
     public static String p_input_file = null;
@@ -47,6 +45,9 @@ public class parameters {
 
         Option recurse = new Option("rec", "recurse", false, "Include subdirectories in input folder");
         options.addOption(recurse);
+
+        Option report = new Option("rep", "report", false, "Reports the results of convert, check, change and validate to a CSV file");
+        options.addOption(report);
 
         Option verbose = new Option("ver", "verbose", false, "Output detailed information");
         options.addOption(verbose);
@@ -108,6 +109,8 @@ public class parameters {
                 p_validate = true;
             if (cmd.hasOption("rec"))
                 p_recurse = true;
+            if (cmd.hasOption("rep"))
+                p_report = true;
             if (cmd.hasOption("ver"))
                 p_verbose = true;
             if (cmd.hasOption("arc"))

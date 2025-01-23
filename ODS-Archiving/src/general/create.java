@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.zeroturnaround.zip.ZipUtil;
 
 public class create {
 
@@ -47,6 +48,11 @@ public class create {
 
         // Return path to archival package
         return path.toString();
+    }
+
+    // Zips the archival package
+    public void ZipArchivalPackage(String output_folder) throws IOException {
+        ZipUtil.pack(new File(output_folder), new File(output_folder + ".zip"));
     }
 
     // Create subfolder for a spreadsheet in docCollection and copy original spreadsheet

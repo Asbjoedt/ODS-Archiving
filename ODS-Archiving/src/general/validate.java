@@ -14,7 +14,7 @@ public class validate {
 
     // Validate OpenDocument Spreadsheets using Open Preservation Foundation Validator
     // Reference: https://odf.openpreservation.org/developer/
-    public boolean Validate_OPFValidator(String filepath, String conformance, boolean verbose) throws Exception {
+    public boolean ValidateOPFValidator(String filepath, String conformance, boolean verbose) throws Exception {
         boolean valid = false;
 
         // Validate using OPF ODF Validator
@@ -80,7 +80,7 @@ public class validate {
     }
 
     // Validate OpenDocument Spreadsheets using ODF Jar Validator
-    public boolean Validate_ODFJarValidator(String filepath, String path_to_jar, boolean verbose) throws Exception {
+    public boolean ValidateODFJarValidator(String filepath, String path_to_jar, boolean verbose) throws Exception {
         boolean valid = false;
 
         // Validate using ODF Jar validator

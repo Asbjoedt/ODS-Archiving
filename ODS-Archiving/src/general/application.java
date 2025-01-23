@@ -20,6 +20,7 @@ public class application {
 		boolean change = parameters.p_change;
 		boolean validate = parameters.p_validate;
 		boolean recurse = parameters.p_recurse;
+		boolean report = parameters.p_report;
 		boolean verbose = parameters.p_verbose;
 		boolean archival_package = parameters.p_archival_package;
 		String input_file = parameters.p_input_file;
@@ -31,7 +32,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
-		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", verbose " + verbose + ", archivalpackage " + archival_package);
+		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", report " + report + ", verbose " + verbose + ", archivalpackage " + archival_package);
 		if (input_file != null)
 			System.out.println("INPUT FILE: " + input_file);
 		if (rename != null)
@@ -65,7 +66,7 @@ public class application {
 			IO.CheckFilepathIO(input_file, output_file, convert);
 
 			// Operate on user input
-			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, verbose, archival_package);
+			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
 		}
 		else if (input_folder != null) {
 			// Set output folder, if only input folder is set
@@ -80,7 +81,7 @@ public class application {
 				output_folder = Create.ArchivalPackage(output_folder);
 
 			// Operate on user input
-			OperateOn.Folder(input_folder, output_folder, recurse, convert, check, change, validate, rename, conformance, verbose, archival_package);
+			OperateOn.Folder(input_folder, output_folder, recurse, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
 		}
 
 		// Inform user of end of application

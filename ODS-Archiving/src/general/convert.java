@@ -7,7 +7,7 @@ import java.io.*;
 public class convert {
 
     // Convert spreadsheet to .ods file format using LibreOffice
-    public int Convert_LibreOffice(String input_filepath, String output_filepath, String rename, boolean archival_package) throws IOException, InterruptedException {
+    public int ConvertLibreOffice(String input_filepath, String output_filepath, String rename, boolean archival_package) throws IOException, InterruptedException {
         String output_folder = new File(output_filepath).getParent();
         String original_output_folder = output_folder;
         String converted_filepath = output_folder + "\\" + FilenameUtils.getBaseName(input_filepath) + ".ods";

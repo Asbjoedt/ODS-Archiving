@@ -43,7 +43,7 @@ public class change {
     }
 
     // Perform check of archival requirements on OpenDocument Spreadsheets using ODF Toolkit
-    public List<changeList> Change_ODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
+    public List<changeList> ChangeODFToolkit(String filepath, String conformance, boolean verbose) throws Exception {
         // Create list to return
         List<changeList> results = new ArrayList<>();
         int dataConns = 0;
@@ -151,13 +151,33 @@ public class change {
             settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);
         }
         if (conformance.equals("dna")) {
+            // DATA CONNECTIONS
+            dataConnections DataConnections = new dataConnections();
+            dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
+
+            // EXTERNAL CELL REFERENCES
+            externalCellReferences ExternalCellReference = new externalCellReferences();
+            extCellRefs = ExternalCellReference.Change_ODFToolkit(filepath, verbose);
+
+            // RTD FUNCTIONS
+            RTDFunctions RTDFunctions = new RTDFunctions();
+            rtdFunctions = RTDFunctions.Change_ODFToolkit(filepath, verbose);
+
+            // EXTERNAL OBJECTS
+            externalObjects ExternalObjects = new externalObjects();
+            extObjs = ExternalObjects.Change_ODFToolkit(filepath, verbose);
+
+            // EMBEDDED OBJECTS
+            embeddedObjects EmbeddedObjects = new embeddedObjects();
+            embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
+
             // MACROS
             macros Macros = new macros();
             macros = Macros.Change_ODFToolkit(filepath, verbose);
 
             // DIGITAL SIGNATURES
-            digitalSignatures DigitalSignature = new digitalSignatures();
-            digitalSignatures = DigitalSignature.Change_ODFToolkit(filepath, verbose);
+            digitalSignatures DigitalSignatures = new digitalSignatures();
+            digitalSignatures = DigitalSignatures.Change_ODFToolkit(filepath, verbose);
         }
 
         // Add to list and return it

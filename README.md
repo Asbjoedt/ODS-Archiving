@@ -48,8 +48,9 @@ Folder method
                         "all", "normal", "minimal", "experimental" (conforms to "all" archival 
                         requirements plus those still under evaluation) and "dna" (conforms to 
                         the preservation profile of the Danish National Archives).
---verbose (optional, outputs detailed results of check, change and validate)
---archivalpackage (optional, creates and saves to an archivable folder)
+--report (optional, reports the results of operations to a CSV file)
+--verbose (optional, outputs to console the detailed results of operations)
+--archivalpackage (optional, creates and saves spreadsheets to an archivable folder)
 ```
 **Examples**
 

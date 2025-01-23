@@ -7,7 +7,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean report, boolean verbose, boolean archival_package) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -17,25 +17,51 @@ public class operations {
 
         // Perform operations
         if (convert) {
-            general.convert Perform = new convert();
-            Perform.Convert_LibreOffice(input_filepath, output_filepath, rename, archival_package);
+            convert Perform = new convert();
+            int result = Perform.ConvertLibreOffice(input_filepath, output_filepath, rename, archival_package);
+
+            // Report conversion
+            if(report) {
+                reporting Report = new reporting();
+                Report.ReportConversion(output_filepath, result);
+            }
+
         }
         if (check) {
-            general.check Perform = new check();
-            Perform.Check_ODFToolkit(output_filepath, conformance, verbose);
+            check Perform = new check();
+            List<check.checkList> result = Perform.CheckODFToolkit(output_filepath, conformance, verbose);
+
+            // Report on checking
+            if(report) {
+                reporting Report = new reporting();
+                Report.ReportCheck(output_filepath, result);
+            }
         }
         if (change) {
-            general.change Perform = new change();
-            Perform.Change_ODFToolkit(output_filepath, conformance, verbose);
+            change Perform = new change();
+            List<change.changeList> result = Perform.ChangeODFToolkit(output_filepath, conformance, verbose);
+
+            // Report on changing
+            if(report) {
+                reporting Report = new reporting();
+                Report.ReportChange(output_filepath, result);
+            }
         }
         if (validate) {
-            general.validate Perform = new validate();
-            Perform.Validate_OPFValidator(output_filepath, conformance, verbose);
+            validate Perform = new validate();
+            boolean result = Perform.ValidateOPFValidator(output_filepath, conformance, verbose);
+
+            // Report on validation
+            if(report) {
+                reporting Report = new reporting();
+                Report.ReportValidation(output_filepath, result);
+            }
+
         }
     }
 
     // Perform operations on input folder
-    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean verbose, boolean archival_package) throws Exception {
+    public void Folder(String input_folder, String output_folder, boolean recurse, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean report, boolean verbose, boolean archival_package) throws Exception {
 
         // Enumerate files in folder based on extension and optionally recursively
         File inputfolder = new File(input_folder);
@@ -66,11 +92,17 @@ public class operations {
                 IO.CheckFilepathIO(input_filepath, output_filepath, convert);
 
                 // Perform operations on each spreadsheet
-                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, conformance, verbose, archival_package);
+                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());
             }
+        }
+
+        // Zip the archival package if selected
+        if(archival_package) {
+            create Create = new create();
+            Create.ZipArchivalPackage(output_folder);
         }
     }
 }
