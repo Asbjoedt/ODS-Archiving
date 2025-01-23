@@ -7,7 +7,7 @@ public class application {
 	// Main method of the application
 	public static void main(String[] args) throws Exception {
 		// Inform user of beginning of application
-		System.out.println("ODS Archiving v1.0.0");
+		System.out.println("ODS Archiving v1.0.0-Beta");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
 		System.out.println("---");
 
