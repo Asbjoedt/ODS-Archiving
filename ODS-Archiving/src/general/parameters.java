@@ -88,7 +88,7 @@ public class parameters {
                 .argName("conformance")
                 .hasArg()
                 .required(true)
-                .desc("Set level of conformance for archival requirements. Options: all, normal, minimal, experimental or dna").build();
+                .desc("Set level of conformance for archival requirements. Options: must, should, may, experimental or dna").build();
         options.addOption(conformance);
 
         // define argument parser
@@ -128,8 +128,8 @@ public class parameters {
 
             // In the following, throw parse errors under certain conditions
             if (p_check || p_change)
-                if (!p_conformance.equals("all") && !p_conformance.equals("normal") && !p_conformance.equals("minimal") && !p_conformance.equals("experimental") && !p_conformance.equals("dna"))
-                    throw new ParseException("PARSE ERROR: Compliance is not \"all\", \"normal\", \"minimal\", \"experimental\" or \"dna\"");
+                if (!p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental") && !p_conformance.equals("dna"))
+                    throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\", \"experimental\" or \"dna\"");
             // Check if both input filepath and input folder are set, then throw exception
             if (p_input_file != null && p_input_folder != null)
                 throw new ParseException("PARSE ERROR: Both input filepath and input folder are set");

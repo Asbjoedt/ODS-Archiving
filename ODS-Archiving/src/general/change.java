@@ -62,7 +62,7 @@ public class change {
         int digitalSignatures = 0;
 
         // Perform checks based on compliance
-        if (conformance.equals("all") || conformance.equals("experimental")) {
+        if (conformance.equals("must") || conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental") || conformance.equals("dna")) {
             // DATA CONNECTIONS
             dataConnections DataConnections = new dataConnections();
             dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
@@ -79,52 +79,20 @@ public class change {
             externalObjects ExternalObjects = new externalObjects();
             extObjs = ExternalObjects.Change_ODFToolkit(filepath, verbose);
 
+            // MACROS
+            macros Macros = new macros();
+            macros = Macros.Change_ODFToolkit(filepath, verbose);
+        }
+        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // EMBEDDED OBJECTS
             embeddedObjects EmbeddedObjects = new embeddedObjects();
             embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
 
-            // MACROS
-            macros Macros = new macros();
-            macros = Macros.Change_ODFToolkit(filepath, verbose);
-
             // LOADREADONLY
             loadReadonly LoadReadOnly = new loadReadonly();
             loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
-
-            // PRINTER SETTINGS
-            printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
-
-            // METADATA
-            metadata Metadata = new metadata();
-            metadata = Metadata.Change_ODFToolkit(filepath, verbose);
-
-            // HYPERLINKS
-            hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
         }
-        if (conformance.equals("normal")) {
-            // MACROS
-            macros Macros = new macros();
-            macros = Macros.Change_ODFToolkit(filepath, verbose);
-
-            // LOADREADONLY
-            loadReadonly LoadReadOnly = new loadReadonly();
-            loadReadOnly = LoadReadOnly.Change_ODFToolkit(filepath, verbose);
-
-            // PRINTER SETTINGS
-            printerSettings PrinterSettings = new printerSettings();
-            printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
-
-            // METADATA
-            metadata Metadata = new metadata();
-            metadata = Metadata.Change_ODFToolkit(filepath, verbose);
-
-            // HYPERLINKS
-            hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
-        }
-        if (conformance.equals("minimal")) {
+        if (conformance.equals("may") || conformance.equals("experimental")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
@@ -151,30 +119,6 @@ public class change {
             settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);
         }
         if (conformance.equals("dna")) {
-            // DATA CONNECTIONS
-            dataConnections DataConnections = new dataConnections();
-            dataConns = DataConnections.Change_ODFToolkit(filepath, verbose);
-
-            // EXTERNAL CELL REFERENCES
-            externalCellReferences ExternalCellReference = new externalCellReferences();
-            extCellRefs = ExternalCellReference.Change_ODFToolkit(filepath, verbose);
-
-            // RTD FUNCTIONS
-            RTDFunctions RTDFunctions = new RTDFunctions();
-            rtdFunctions = RTDFunctions.Change_ODFToolkit(filepath, verbose);
-
-            // EXTERNAL OBJECTS
-            externalObjects ExternalObjects = new externalObjects();
-            extObjs = ExternalObjects.Change_ODFToolkit(filepath, verbose);
-
-            // EMBEDDED OBJECTS
-            embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Change_ODFToolkit(filepath, verbose);
-
-            // MACROS
-            macros Macros = new macros();
-            macros = Macros.Change_ODFToolkit(filepath, verbose);
-
             // DIGITAL SIGNATURES
             digitalSignatures DigitalSignatures = new digitalSignatures();
             digitalSignatures = DigitalSignatures.Change_ODFToolkit(filepath, verbose);

@@ -45,8 +45,8 @@ Folder method
 --change (optional, changes data according to archival requirements)
 --validate (optional, validates ODF file format standard)
 --conformance <option> (required, sets conformance level for archival requirements. Options are: 
-                        "all", "normal", "minimal", "experimental" (conforms to "all" archival 
-                        requirements plus those still under evaluation) and "dna" (conforms to 
+                        "must", "should", "may", "experimental" (all previous levels plus 
+                        requirements still under evaluation) and "dna" (conforms to 
                         the preservation profile of the Danish National Archives).
 --report (optional, reports the results of operations to a CSV file)
 --verbose (optional, outputs to console the detailed results of operations)
@@ -58,27 +58,49 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance "experimental" --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance "experimental" --report --verbose
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance "experimental" --verbose --archivalpackage
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance "experimental" --report --verbose --archivalpackage
 ```
 
 ## Conformance
 
-The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [a forked version of the OPF Spreadsheets Preservation Specification](https://github.com/Asbjoedt/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#41-opendocument-spreadsheets). The levels in the specification are:
-* **must** - corresponds in ODS Archiving app to **"all"**
-* **should**  - corresponds in ODS Archiving app to **"normal"**
-* **may**  - corresponds in ODS Archiving app to **"minimal"**
+The conformance parameter is a required parameter. It determines the level of requirements to be compliant with. To find information on the associated requirements for each level, read [a forked version of the OPF Spreadsheets Preservation Specification](https://github.com/Asbjoedt/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#41-opendocument-spreadsheets). The levels and associated requirements in the specification are:
+* **must**
+  * Data connections
+  * External cell references
+  * MS Excel RealTimeData functions
+  * External objects
+  * Embedded objects
+* **should** - includes "must" and following requirements
+  * Has content
+  * Macros
+  * Read-only
+* **may** - includes "must", "should" and following requirements
+  * Printer settings
+  * Metadata
+  * Hyperlinks
 
-The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "should" and "may" requirements and "minimal" performs only "may" requirements.
+The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "must" and "should" requirements and "minimal" performs only "must" requirements.
 
 Some requirements are under consideration (embedded fonts, active sheet and settingsDOM). These can be enabled in the ODS Archiving application through this all-inclusive festivitas level:
-* **experimental**
+* **experimental** - includes "must", "should", "may" and following requirements
+  * Embedded fonts
+  * Active sheet
+  * SettingsDOM
 
-I was the main writer of the original specification for the OPF Spreadsheets Preservation Specification when I worked at the Danish National Archives (DNA). Since my departure, tongue-in-cheek I quote Godfather and say "look how they massacred my boy" because it has changed decidedly. I therefore continue my own app implementation of the original "Draft v1.0" by using the above-mentioned forked version of the specification. However, I do want to support the Danish National Archives' changes to the specification as they appear now in "[Draft v1.9](https://github.com/openpreserve/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#1-introduction)". Therefore, I provide a conformance level for using this version of the spec:
+I was the main writer of the original specification for the OPF Spreadsheets Preservation Specification when I worked at the Danish National Archives (DNA). Since my departure, tongue-in-cheek I quote Godfather and say "look how they massacred my boy" because it has changed decidedly. I therefore continue my own app implementation of the original "Draft v1.0" by using the above-mentioned forked version of the specification. However, I do want to support the Danish National Archives' changes to the specification as they appear now in [Draft v1.9](https://github.com/openpreserve/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#1-introduction). Therefore, I provide a conformance level for using this version of the spec:
 * **dna**
+  * Data connections
+  * External cell references
+  * RTD functions
+  * External objects
+  * Embedded objects
+  * Has content
+  * Macros
+  * Digital signatures
 
 ## Sample Data
 You can download a zipped folder with spreadsheets sample data, "SampleData.zip", from this location:
