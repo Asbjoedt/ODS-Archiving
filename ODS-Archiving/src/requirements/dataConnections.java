@@ -8,11 +8,11 @@ import org.w3c.dom.NodeList;
 public class dataConnections {
 
     // Check for data connections using ODF Toolkit
-    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int conns = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfContentDom contentDom = spreadsheet.getContentDom();
         NodeList nodeList = contentDom.getElementsByTagName("table:database-range");
         if (nodeList != null) {

@@ -7,11 +7,11 @@ import org.w3c.dom.Node;
 public class metadata {
 
     // Check for metadata using ODF Toolkit
-    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean metadata = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
         if (creator != null) {
             metadata = true;

@@ -7,7 +7,7 @@ import java.util.*;
 public class operations {
 
     // Perform operations on input filepath
-    public void Filepath(String input_filepath, String output_filepath, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean report, boolean verbose, boolean archival_package) throws Exception {
+    public void Filepath(String input_filepath, String output_filepath, String output_folder, boolean convert, boolean check, boolean change, boolean validate, String rename, String conformance, boolean report, boolean verbose, boolean archival_package) throws Exception {
 
         // If not convert but change, then copy spreadsheet to output filepath
         if (!convert && change) {
@@ -23,7 +23,7 @@ public class operations {
             // Report conversion
             if(report) {
                 reporting Report = new reporting();
-                Report.ReportConversion(output_filepath, result);
+                Report.ReportConversion(input_filepath, output_filepath, output_folder, result);
             }
 
         }
@@ -34,7 +34,7 @@ public class operations {
             // Report on checking
             if(report) {
                 reporting Report = new reporting();
-                Report.ReportCheck(output_filepath, result);
+                Report.ReportCheck(input_filepath, output_filepath, output_folder, result);
             }
         }
         if (change) {
@@ -44,7 +44,7 @@ public class operations {
             // Report on changing
             if(report) {
                 reporting Report = new reporting();
-                Report.ReportChange(output_filepath, result);
+                Report.ReportChange(input_filepath, output_filepath, output_folder, result);
             }
         }
         if (validate) {
@@ -54,7 +54,7 @@ public class operations {
             // Report on validation
             if(report) {
                 reporting Report = new reporting();
-                Report.ReportValidation(output_filepath, result);
+                Report.ReportValidation(input_filepath, output_filepath, output_folder, result);
             }
 
         }
@@ -92,7 +92,7 @@ public class operations {
                 IO.CheckFilepathIO(input_filepath, output_filepath, convert);
 
                 // Perform operations on each spreadsheet
-                Filepath(input_filepath, output_filepath, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
+                Filepath(input_filepath, output_filepath, output_folder, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
             }
             catch (IOException e) {
                 System.out.println(e.getMessage());

@@ -10,11 +10,11 @@ import java.io.InputStream;
 public class digitalSignatures {
 
     // Check for digital signatures using ODF Toolkit
-    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int digsigs = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfPackage odfPackage = spreadsheet.getPackage();
 
         // Access the META-INF/documentsignatures.xml file

@@ -1,15 +1,13 @@
 package general;
 
-import org.apache.commons.io.FilenameUtils;
-
 public class application {
 
 	// Main method of the application
 	public static void main(String[] args) throws Exception {
 		// Inform user of beginning of application
-		System.out.println("ODS Archiving v1.0.0-Beta");
+		System.out.println("ODS Archiving v1.0.0-BETA");
 		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
-		System.out.println("---");
+		System.out.println("------");
 
 		// Parse arguments
 		parameters Parse = new parameters();
@@ -32,6 +30,7 @@ public class application {
 
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
+		System.out.println("---");
 		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", report " + report + ", verbose " + verbose + ", archivalpackage " + archival_package);
 		if (input_file != null)
 			System.out.println("INPUT FILE: " + input_file);
@@ -41,7 +40,7 @@ public class application {
 			System.out.println("INPUT FOLDER: " + input_folder);
 		if (output_folder != null)
 			System.out.println("OUTPUT FOLDER: " + output_folder);
-		System.out.println("---");
+		System.out.println("------");
 
 		// Perform operations
 		System.out.println("PERFORMING OPERATIONS ON INPUT");
@@ -66,7 +65,7 @@ public class application {
 			IO.CheckFilepathIO(input_file, output_file, convert);
 
 			// Operate on user input
-			OperateOn.Filepath(input_file, output_file, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
+			OperateOn.Filepath(input_file, output_file, output_folder, convert, check, change, validate, rename, conformance, report, verbose, archival_package);
 		}
 		else if (input_folder != null) {
 			// Set output folder, if only input folder is set

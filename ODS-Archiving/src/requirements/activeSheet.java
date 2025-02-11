@@ -9,11 +9,11 @@ import org.w3c.dom.NodeList;
 public class activeSheet {
 
     // Check if first sheet is active sheet using ODF Toolkit
-    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean activeSheet = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfTable firstTable = spreadsheet.getSpreadsheetTables().get(0);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();

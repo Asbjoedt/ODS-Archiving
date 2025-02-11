@@ -6,11 +6,11 @@ import org.odftoolkit.odfdom.dom.OdfSettingsDom;
 public class settingsDOM {
 
     // Check if settings.xml exists using ODF Toolkit
-    public boolean Check_ODFToolkit(String input) throws Exception {
+    public boolean Check_ODFToolkit(String filepath) throws Exception {
         boolean settingsDOM = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         if (settingsDom != null)
             settingsDOM = true;

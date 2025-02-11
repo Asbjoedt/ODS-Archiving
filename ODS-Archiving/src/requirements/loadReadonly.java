@@ -8,11 +8,11 @@ import org.w3c.dom.NodeList;
 public class loadReadonly {
 
     // Check for loadReadOnly using ODF Toolkit
-    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean loadReadonly = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
         if (thirdNode != null) {

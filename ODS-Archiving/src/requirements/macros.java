@@ -8,11 +8,11 @@ import org.w3c.dom.NodeList;
 public class macros {
 
     // Check for macros using ODF Toolkit
-    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int macros = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfManifestDom manifestDom = spreadsheet.getPackage().getManifestDom();
         NodeList fileEntries = manifestDom.getFirstChild().getChildNodes();
         for (int i = 0; i < fileEntries.getLength(); i++) {

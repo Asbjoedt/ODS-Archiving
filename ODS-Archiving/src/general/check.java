@@ -1,11 +1,7 @@
 package general;
 
 import requirements.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.*;
-import java.util.zip.ZipInputStream;
 
 public class check {
 

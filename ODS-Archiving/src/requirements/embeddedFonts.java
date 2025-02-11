@@ -10,13 +10,13 @@ import java.util.Set;
 public class embeddedFonts {
 
     // Check for embedding of fonts using ODF Toolkit
-    public boolean Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public boolean Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         boolean embedFonts = false;
         boolean FirstCheck = false;
         boolean SecondCheck = false;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
         Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
         if (thirdNode != null) {

@@ -10,11 +10,11 @@ import org.w3c.dom.NodeList;
 public class RTDFunctions {
 
     // Check for RTD functions using ODF Toolkit
-    public int Check_ODFToolkit(String input, boolean verbose) throws Exception {
+    public int Check_ODFToolkit(String filepath, boolean verbose) throws Exception {
         int rtdfunctions = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         List<OdfTable> tables = spreadsheet.getSpreadsheetTables();
         for (OdfTable table : tables) {
             List<OdfTableRow> rows = table.getRowList();

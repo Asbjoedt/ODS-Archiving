@@ -7,13 +7,13 @@ import org.w3c.dom.Node;
 public class contentExists {
 
 	// Check if cell values or objects exist using ODF Toolkit
-	public boolean Check_ODFToolkit(String input) throws Exception {
+	public boolean Check_ODFToolkit(String filepath) throws Exception {
 		boolean hasContent = false;
 		boolean hasCellValues = false;
 		boolean hasObjects = false;
 
 		// Perform check
-		OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input);
+		OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
 		Node node = spreadsheet.getMetaDom().getElementsByTagName("meta:document-statistic").item(0);
 		if (node != null) {
 			NamedNodeMap currentAttributes = node.getAttributes();
