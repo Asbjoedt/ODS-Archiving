@@ -56,7 +56,6 @@ public class operations {
                 reporting Report = new reporting();
                 Report.ReportValidation(input_filepath, output_filepath, output_folder, result);
             }
-
         }
     }
 

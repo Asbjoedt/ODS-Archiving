@@ -1,10 +1,8 @@
 package general;
 
 import general.check;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+
+import java.io.*;
 import java.util.List;
 
 public class reporting {
@@ -15,22 +13,16 @@ public class reporting {
         String pathToCSV = output_folder + "/log_conversion.csv";
         File f = new File(pathToCSV);
 
-        // Create new CSV file if it does not exist
+        // Create header if the file is new
         if(f.length() == 0) {
-            File newCSVFile = new File(pathToCSV);
-            PrintWriter headerCSV = new PrintWriter(newCSVFile);
-            headerCSV.println("Input filepath;" + "Output filepath;" + "Conversion success");
-            headerCSV.close();
+            writeHeader(f, "Input filepath;" + "Output filepath;" + "Conversion success");
         }
 
         // Parse result to boolean
         boolean parsed_result = result == 0;
 
         // Append new line to existing CSV file
-        File existingCSVFile = new File(pathToCSV);
-        PrintWriter appendCSV = new PrintWriter(new FileWriter(existingCSVFile, true));
-        appendCSV.println(input_filepath + ";" + output_filepath + ";" + parsed_result);
-        appendCSV.close();
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + parsed_result);
     }
 
     // Report on the success of checking
@@ -39,12 +31,9 @@ public class reporting {
         String pathToCSV = output_folder + "/log_check.csv";
         File f = new File(pathToCSV);
 
-        // Create new CSV file if it does not exist
+        // Create header if the file is new
         if(f.length() == 0) {
-            File newCSVFile = new File(pathToCSV);
-            PrintWriter headerCSV = new PrintWriter(newCSVFile);
-            headerCSV.println("Input filepath;" + "Output filepath;" + "Data connections;" + "External cell refs;" + "External objects;" + "Embedded objects;"+ "Content exists;" + "Macros;" + "LoadReadOnly;"+ "Printer settings;" + "Metadata;" + "Hyperlinks;" + "Embedded fonts;"+ "Active sheet;" + "SettingsDOM;" + "Digital signatures");
-            headerCSV.close();
+            writeHeader(f, "Input filepath;" + "Output filepath;" + "Data connections;" + "External cell refs;" + "External objects;" + "Embedded objects;"+ "Content exists;" + "Macros;" + "LoadReadOnly;"+ "Printer settings;" + "Metadata;" + "Hyperlinks;" + "Embedded fonts;"+ "Active sheet;" + "SettingsDOM;" + "Digital signatures");
         }
 
         // Parse checklist
@@ -55,10 +44,7 @@ public class reporting {
         }
 
         // Append new line to existing CSV file
-        File existingCSVFile = new File(pathToCSV);
-        PrintWriter appendCSV = new PrintWriter(new FileWriter(existingCSVFile, true));
-        appendCSV.println(input_filepath + ";" + output_filepath + ";" + result);
-        appendCSV.close();
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + result);
     }
 
     // Report on the success of changing
@@ -72,18 +58,26 @@ public class reporting {
         String pathToCSV = output_folder + "/log_validation.csv";
         File f = new File(pathToCSV);
 
-        // Create new CSV file if it does not exist
+        // Create header if the file is new
         if(f.length() == 0) {
-            File newCSVFile = new File(pathToCSV);
-            PrintWriter headerCSV = new PrintWriter(newCSVFile);
-            headerCSV.println("Input filepath;" + "Output filepath;" + "Validation success");
-            headerCSV.close();
+            writeHeader(f, "Input filepath;" + "Output filepath;" + "Validation success");
         }
 
         // Append new line to existing CSV file
-        File existingCSVFile = new File(pathToCSV);
-        PrintWriter appendCSV = new PrintWriter(new FileWriter(existingCSVFile, true));
-        appendCSV.println(input_filepath + ";" + output_filepath + ";" + result);
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + result);
+    }
+
+    // Method for writing first line of the CSV report file
+    private void writeHeader(File f, String header) throws FileNotFoundException {
+        PrintWriter headerCSV = new PrintWriter(f);
+        headerCSV.println(header);
+        headerCSV.close();
+    }
+
+    // Method for writing a new line to the CSV report file
+    private void writeLine(File f, String line) throws IOException {
+        PrintWriter appendCSV = new PrintWriter(new FileWriter(f, true));
+        appendCSV.println(line);
         appendCSV.close();
     }
 }

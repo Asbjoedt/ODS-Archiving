@@ -14,13 +14,11 @@ public class printerSettings {
         // Perform check
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        Node firstNode = settingsDom.getFirstChild();
-        Node secondNode = firstNode.getFirstChild();
-        Node thirdNode = secondNode.getLastChild();
-        if (thirdNode != null) {
-            NodeList fourthNode = thirdNode.getChildNodes();
-            for (int i = 0; i < fourthNode.getLength(); i++) {
-                Node theNode = fourthNode.item(i);
+        Node node = settingsDom.getFirstChild().getFirstChild().getLastChild();
+        if (node != null) {
+            NodeList childNodes = node.getChildNodes();
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Node theNode = childNodes.item(i);
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
@@ -47,18 +45,17 @@ public class printerSettings {
         // Perform change
         OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
         OdfSettingsDom settingsDom = spreadsheet.getSettingsDom();
-        Node thirdNode = settingsDom.getFirstChild().getFirstChild().getLastChild();
-        if (thirdNode != null) {
-            NodeList fourthNode = thirdNode.getChildNodes();
-            for (int i = 0; i < fourthNode.getLength(); i++) {
-                Node theNode = fourthNode.item(i);
+        Node node = settingsDom.getFirstChild().getFirstChild().getLastChild();
+        if (node != null) {
+            NodeList childNodes = node.getChildNodes();
+            for (int i = 0; i < childNodes.getLength(); i++) {
+                Node theNode = childNodes.item(i);
                 String attributeName = theNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
                     if (theNode.getTextContent() != null) {
                         printers++;
                         if (verbose)
                             System.out.println("CHANGE ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml was removed");
-                        System.out.println(theNode.getTextContent());
                         settingsDom.removeChild(theNode);
                     }
                 }

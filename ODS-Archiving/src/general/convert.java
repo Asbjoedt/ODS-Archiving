@@ -54,7 +54,10 @@ public class convert {
         }
 
         // Inform user and return exit code
-        System.out.println("CONVERT: Spreadsheet converted to OpenDocument Spreadsheets (.ods) file format");
+        if (exitCode == 0)
+            System.out.println("CONVERT: Spreadsheet converted to OpenDocument Spreadsheets (.ods) file format");
+        else
+            System.out.println("CONVERT ERROR: Conversion of spreadsheet to OpenDocument Spreadsheets (.ods) file format failed");
         return exitCode;
     }
 }
