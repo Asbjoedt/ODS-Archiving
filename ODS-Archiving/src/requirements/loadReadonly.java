@@ -64,7 +64,7 @@ public class loadReadonly {
 
         // Inform user and return boolean
         if (loadReadonly)
-            System.out.println("CHANGE ODS_8: \"LoadReadonly\" was set as true");
+            System.out.println("CHANGE ODS_8: \"LoadReadonly\" was set to true");
         return loadReadonly;
     }
 }

@@ -121,9 +121,9 @@ public class check {
             activeSheet ActiveSheet = new activeSheet();
             activeSheet = ActiveSheet.Check_ODFToolkit(filepath, verbose);
 
-            // SETTINGSDOM
+/*            // SETTINGSDOM
             settingsDOM SettingsDOM = new settingsDOM();
-            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);
+            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);*/
         }
         if (conformance.equals("dna")) {
             // DIGITAL SIGNATURES

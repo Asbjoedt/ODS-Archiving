@@ -12,17 +12,25 @@ public class metadata {
 
         // Perform check
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
-        Node creator = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
-        if (creator != null) {
+
+        Node creatorInitial = spreadsheet.getMetaDom().getElementsByTagName("meta:initial-creator").item(0);
+        if (creatorInitial != null) {
             metadata = true;
             if (verbose)
-                System.out.println("CHECK ODS_10 VERBOSE: Creator of file: " + creator.getTextContent());
+                System.out.println("CHECK ODS_10 VERBOSE: Attribute \"meta:initial-creator\" detected");
         }
+        Node creatorDC = spreadsheet.getMetaDom().getElementsByTagName("dc:creator").item(0);
+        if (creatorDC != null) {
+            metadata = true;
+            if (verbose)
+                System.out.println("CHECK ODS_10 VERBOSE: Attribute \"dc:creator\" detected");
+        }
+
         spreadsheet.close();
 
         // Inform user and return boolean
         if (metadata)
-            System.out.println("CHECK ODS_10: Metadata detected");
+            System.out.println("CHECK ODS_10: Creator metadata detected");
         return metadata;
     }
 
@@ -33,17 +41,29 @@ public class metadata {
         // Perform change
         OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfMetaDom metaDom = spreadsheet.getMetaDom();
-        Node creator = metaDom.getElementsByTagName("meta:initial-creator").item(0);
-        if (creator.hasChildNodes()) {
-            metaDom.removeChild(creator);
+
+        Node creatorInitial = metaDom.getElementsByTagName("meta:initial-creator").item(0);
+        if (creatorInitial != null) {
+            Node parentNode = creatorInitial.getParentNode();
+            parentNode.removeChild(creatorInitial);
+            System.out.println("CHECK ODS_10 VERBOSE: Attribute \"meta:initial-creator\" was removed");
             metadata = true;
         }
-        spreadsheet.save(filepath);
+        Node creatorDC = metaDom.getElementsByTagName("dc:creator").item(0);
+        if (creatorDC != null) {
+            Node parentNode = creatorDC.getParentNode();
+            parentNode.removeChild(creatorDC);
+            System.out.println("CHECK ODS_10 VERBOSE: Attribute \"dc:creator\" was removed");
+            metadata = true;
+        }
+
+        if (metadata)
+            spreadsheet.save(filepath);
         spreadsheet.close();
 
         // Inform user and return boolean
         if (metadata)
-            System.out.println("CHANGE ODS_10: Metadata removed");
+            System.out.println("CHANGE ODS_10: Creator metadata removed");
         return metadata;
     }
 }

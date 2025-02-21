@@ -80,7 +80,7 @@ The conformance parameter is a required parameter. It determines the level of re
   * Read-only
 * **may** - includes "must", "should" and following requirements
   * Printer settings
-  * Metadata
+  * Creator metadata
   * Hyperlinks
 
 The conformance levels are embedded in each other so that the "all" conformance parameter performs "must", "should" and "may" requirements from the specification, "normal" performs "must" and "should" requirements and "minimal" performs only "must" requirements.
@@ -89,7 +89,6 @@ Some requirements are under consideration (embedded fonts, active sheet and sett
 * **experimental** - includes "must", "should", "may" and following requirements
   * Embedded fonts
   * Active sheet
-  * SettingsDOM
 
 I was the main writer of the original specification for the OPF Spreadsheets Preservation Specification when I worked at the Danish National Archives (DNA). Since my departure, tongue-in-cheek I quote Godfather and say "look how they massacred my boy" because it has changed decidedly. I therefore continue my own app implementation of the original "Draft v1.0" by using the above-mentioned forked version of the specification. However, I do want to support the Danish National Archives' changes to the specification as they appear now in [Draft v1.9](https://github.com/openpreserve/sheets-preservation-spec/blob/main/Draft%20v1.0/Specification.md#1-introduction). Therefore, I provide a conformance level for using this version of the spec:
 * **dna**

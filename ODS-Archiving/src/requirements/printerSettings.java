@@ -18,14 +18,14 @@ public class printerSettings {
         if (node != null) {
             NodeList childNodes = node.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
-                Node theNode = childNodes.item(i);
-                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                Node childNode = childNodes.item(i);
+                String attributeName = childNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
-                    if (theNode.getTextContent() != null) {
-                        String printer_name = theNode.getTextContent();
+                    if (childNode.getTextContent() != null) {
+                        String printer_name = childNode.getTextContent();
                         printers++;
                         if (verbose)
-                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name \"" + printer_name + "\" in settings.xml detected");
+                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name \"" + printer_name + "\" in \"settings.xml\" detected");
                     }
                 }
             }
@@ -49,26 +49,18 @@ public class printerSettings {
         if (node != null) {
             NodeList childNodes = node.getChildNodes();
             for (int i = 0; i < childNodes.getLength(); i++) {
-                Node theNode = childNodes.item(i);
-                String attributeName = theNode.getAttributes().item(0).getNodeValue();
+                Node childNode = childNodes.item(i);
+                String attributeName = childNode.getAttributes().item(0).getNodeValue();
                 if (attributeName.equals("PrinterName")) {
-                    if (theNode.getTextContent() != null) {
+                    if (childNode.getTextContent() != null) {
                         printers++;
                         if (verbose)
-                            System.out.println("CHANGE ODS_9 VERBOSE: Printer with name " + theNode.getTextContent() + " in settings.xml was removed");
-                        settingsDom.removeChild(theNode);
+                            System.out.println("CHANGE ODS_9 VERBOSE: Printer with name \"" + childNode.getTextContent() + "\" in \"settings.xml\" was removed");
+                        node.removeChild(childNode);
+                        spreadsheet.save(filepath);
                     }
                 }
-                if (attributeName.equals("PrinterPaperFromSetup")) {
-                    if (theNode.getTextContent() != null)
-                        settingsDom.removeChild(theNode);
-                }
-                if (attributeName.equals("PrinterSetup")) {
-                    if (theNode.getTextContent() != null)
-                        settingsDom.removeChild(theNode);
-                }
             }
-            spreadsheet.save(filepath);
         }
         spreadsheet.close();
 

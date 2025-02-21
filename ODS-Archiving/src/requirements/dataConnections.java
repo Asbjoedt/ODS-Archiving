@@ -47,7 +47,7 @@ public class dataConnections {
                 String name = dataConnection.getAttributes().getNamedItem("table:name").getNodeValue();
                 String range = dataConnection.getAttributes().getNamedItem("table:target-range-address").getNodeValue();
                 System.out.println("CHANGE ODS_4 VERBOSE: Database connection removed. Name: " + name + ", Range: " + range);
-                contentDom.removeChild(dataConnection);
+                dataConnection.getParentNode().removeChild(dataConnection);
                 conns++;
             }
             spreadsheet.save(filepath);

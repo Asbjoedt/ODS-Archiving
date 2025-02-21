@@ -97,13 +97,13 @@ public class change {
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Change_ODFToolkit(filepath, verbose);
 
-            // METADATA
+            // CREATOR METADATA
             metadata Metadata = new metadata();
             metadata = Metadata.Change_ODFToolkit(filepath, verbose);
 
-            // HYPERLINKS
+/*            // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
-            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);
+            hyperlinks = Hyperlinks.Change_ODFToolkit(filepath, verbose);*/
         }
         if (conformance.equals("experimental")) {
             // EMBEDDED FONTS
@@ -114,9 +114,9 @@ public class change {
             activeSheet ActiveSheet = new activeSheet();
             activeSheet = ActiveSheet.Change_ODFToolkit(filepath, verbose);
 
-            // SETTINGSDOM
+/*            // SETTINGSDOM
             settingsDOM SettingsDOM = new settingsDOM();
-            settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);
+            settingsDOM = SettingsDOM.Change_ODFToolkit(filepath);*/
         }
         if (conformance.equals("dna")) {
             // DIGITAL SIGNATURES
