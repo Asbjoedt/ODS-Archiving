@@ -46,7 +46,7 @@ public class dataConnections {
                 Node dataConnection = nodeList.item(i);
                 String name = dataConnection.getAttributes().getNamedItem("table:name").getNodeValue();
                 String range = dataConnection.getAttributes().getNamedItem("table:target-range-address").getNodeValue();
-                System.out.println("CHANGE ODS_4 VERBOSE: Database connection removed. Name: " + name + ", Range: " + range);
+                System.out.println("CHANGE ODS_5 VERBOSE: Database connection removed. Name: " + name + ", Range: " + range);
                 dataConnection.getParentNode().removeChild(dataConnection);
                 conns++;
             }
@@ -56,7 +56,7 @@ public class dataConnections {
 
         // Inform user and return number
         if (conns > 0)
-            System.out.println("CHANGE ODS_4: " + conns + " data connections removed");
+            System.out.println("CHANGE ODS_5: " + conns + " data connections removed");
         return conns;
     }
 }

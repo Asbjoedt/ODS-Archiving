@@ -17,20 +17,20 @@ public class metadata {
         if (creatorInitial != null) {
             metadata = true;
             if (verbose)
-                System.out.println("CHECK ODS_10 VERBOSE: Attribute \"meta:initial-creator\" detected");
+                System.out.println("CHECK ODS_11 VERBOSE: Attribute \"meta:initial-creator\" detected");
         }
         Node creatorDC = spreadsheet.getMetaDom().getElementsByTagName("dc:creator").item(0);
         if (creatorDC != null) {
             metadata = true;
             if (verbose)
-                System.out.println("CHECK ODS_10 VERBOSE: Attribute \"dc:creator\" detected");
+                System.out.println("CHECK ODS_11 VERBOSE: Attribute \"dc:creator\" detected");
         }
 
         spreadsheet.close();
 
         // Inform user and return boolean
         if (metadata)
-            System.out.println("CHECK ODS_10: Creator metadata detected");
+            System.out.println("CHECK ODS_11: Creator metadata detected");
         return metadata;
     }
 
@@ -46,14 +46,14 @@ public class metadata {
         if (creatorInitial != null) {
             Node parentNode = creatorInitial.getParentNode();
             parentNode.removeChild(creatorInitial);
-            System.out.println("CHECK ODS_10 VERBOSE: Attribute \"meta:initial-creator\" was removed");
+            System.out.println("CHECK ODS_11 VERBOSE: Attribute \"meta:initial-creator\" was removed");
             metadata = true;
         }
         Node creatorDC = metaDom.getElementsByTagName("dc:creator").item(0);
         if (creatorDC != null) {
             Node parentNode = creatorDC.getParentNode();
             parentNode.removeChild(creatorDC);
-            System.out.println("CHECK ODS_10 VERBOSE: Attribute \"dc:creator\" was removed");
+            System.out.println("CHECK ODS_11 VERBOSE: Attribute \"dc:creator\" was removed");
             metadata = true;
         }
 
@@ -63,7 +63,7 @@ public class metadata {
 
         // Inform user and return boolean
         if (metadata)
-            System.out.println("CHANGE ODS_10: Creator metadata removed");
+            System.out.println("CHANGE ODS_11: Creator metadata removed");
         return metadata;
     }
 }

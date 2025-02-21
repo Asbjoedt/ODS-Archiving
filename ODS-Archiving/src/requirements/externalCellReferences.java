@@ -27,7 +27,7 @@ public class externalCellReferences {
                         if (formulaNode.getNodeValue().startsWith("of:=['file")) {
                             extCellRefs++;
                             if (verbose)
-                                System.out.println("CHECK ODS_4 VERBOSE: External cell reference detected. Sheet: " + table.getTableName() + ", Cell: unknown, Reference: " + formulaNode.getTextContent());
+                                System.out.println("CHECK ODS_5 VERBOSE: External cell reference detected. Sheet: " + table.getTableName() + ", Cell: unknown, Reference: " + formulaNode.getTextContent());
                         }
                     }
                 }
@@ -37,7 +37,7 @@ public class externalCellReferences {
 
         // Inform user and return number
         if (extCellRefs > 0)
-            System.out.println("CHECK ODS_4: " + extCellRefs + " external cell references detected");
+            System.out.println("CHECK ODS_5: " + extCellRefs + " external cell references detected");
         return extCellRefs;
     }
 
@@ -69,7 +69,7 @@ public class externalCellReferences {
 
         // Inform user and return number
         if (extCellRefs > 0)
-            System.out.println("CHANGE ODS_4: " + extCellRefs + " external cell references removed");
+            System.out.println("CHANGE ODS_5: " + extCellRefs + " external cell references removed");
         return extCellRefs;
     }
 }

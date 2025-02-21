@@ -22,7 +22,7 @@ public class externalObjects {
                 if (node.getNodeName().equals("table:table-source")) {
                     extObjs++;
                     if (verbose)
-                        System.out.println("CHECK ODS_4 VERBOSE: External object reference detected. Reference: " + table.getTableName());
+                        System.out.println("CHECK ODS_5 VERBOSE: External object reference detected. Reference: " + table.getTableName());
                 }
             }
         }
@@ -30,7 +30,7 @@ public class externalObjects {
 
         // Inform user and return number
         if (extObjs > 0)
-            System.out.println("CHECK ODS_4: " + extObjs + " external object references detected");
+            System.out.println("CHECK ODS_5: " + extObjs + " external object references detected");
         return extObjs;
     }
 
@@ -46,16 +46,17 @@ public class externalObjects {
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
                 if (node.getNodeName().equals("table:table-source")) {
-                    tables.remove(table);
-                    spreadsheet.save(filepath);
+                    node.getParentNode().removeChild(node);
+                    extObjs++;
                 }
             }
         }
+        spreadsheet.save(filepath);
         spreadsheet.close();
 
         // Inform user and return number
         if (extObjs > 0)
-            System.out.println("CHANGE ODS_4: " + extObjs + " external objects removed");
+            System.out.println("CHANGE ODS_5: " + extObjs + " external objects removed");
         return extObjs;
     }
 }

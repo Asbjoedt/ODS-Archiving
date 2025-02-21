@@ -25,7 +25,7 @@ public class printerSettings {
                         String printer_name = childNode.getTextContent();
                         printers++;
                         if (verbose)
-                            System.out.println("CHECK ODS_9 VERBOSE: Printer with name \"" + printer_name + "\" in \"settings.xml\" detected");
+                            System.out.println("CHECK ODS_EXP VERBOSE: Printer with name \"" + printer_name + "\" in settings.xml detected");
                     }
                 }
             }
@@ -34,7 +34,7 @@ public class printerSettings {
 
         // Inform user and return number
         if (printers > 0)
-            System.out.println("CHECK ODS_9: " + printers + " printers detected");
+            System.out.println("CHECK ODS_EXP: " + printers + " printers detected");
         return printers;
     }
 
@@ -55,7 +55,7 @@ public class printerSettings {
                     if (childNode.getTextContent() != null) {
                         printers++;
                         if (verbose)
-                            System.out.println("CHANGE ODS_9 VERBOSE: Printer with name \"" + childNode.getTextContent() + "\" in \"settings.xml\" was removed");
+                            System.out.println("CHANGE ODS_EXP VERBOSE: Printer with name \"" + childNode.getTextContent() + "\" in settings.xml was removed");
                         node.removeChild(childNode);
                         spreadsheet.save(filepath);
                     }
@@ -66,7 +66,7 @@ public class printerSettings {
 
         // Inform user and return number
         if (printers > 0)
-            System.out.println("CHANGE ODS_9: " + printers + " printers removed");
+            System.out.println("CHANGE ODS_EXP: " + printers + " printers removed");
         return printers;
     }
 }

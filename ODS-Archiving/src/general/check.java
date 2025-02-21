@@ -82,6 +82,11 @@ public class check {
             externalObjects ExternalObjects = new externalObjects();
             extObjs = ExternalObjects.Check_ODFToolkit(filepath, verbose);
 
+            // EMBEDDED OBJECTS
+            embeddedObjects EmbeddedObjects = new embeddedObjects();
+            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
+        }
+        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
             // CONTENT
             contentExists ContentExists = new contentExists();
             content = ContentExists.Check_ODFToolkit(filepath);
@@ -89,41 +94,36 @@ public class check {
             // MACROS
             macros Macros = new macros();
             macros = Macros.Check_ODFToolkit(filepath, verbose);
-        }
-        if (conformance.equals("should") || conformance.equals("may") || conformance.equals("experimental")) {
-            // EMBEDDED OBJECTS
-            embeddedObjects EmbeddedObjects = new embeddedObjects();
-            embedObjs = EmbeddedObjects.Check_ODFToolkit(filepath, verbose);
 
-            // LOADREADONLY
-            loadReadonly LoadReadOnly = new loadReadonly();
-            loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
+            // EMBEDDED FONTS
+            embeddedFonts EmbeddedFonts = new embeddedFonts();
+            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("may") || conformance.equals("experimental")) {
             // PRINTER SETTINGS
             printerSettings PrinterSettings = new printerSettings();
             printers = PrinterSettings.Check_ODFToolkit(filepath, verbose);
 
-            // METADATA
-            metadata Metadata = new metadata();
-            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
-
             // HYPERLINKS
             hyperlinks Hyperlinks = new hyperlinks();
             hyperlinks = Hyperlinks.Check_ODFToolkit(filepath, verbose);
+
+            // SETTINGSDOM
+            settingsDOM SettingsDOM = new settingsDOM();
+            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);
         }
         if (conformance.equals("experimental")) {
-            // EMBEDDED FONTS
-            embeddedFonts EmbeddedFonts = new embeddedFonts();
-            embeddedFonts = EmbeddedFonts.Check_ODFToolkit(filepath, verbose);
+            // METADATA
+            metadata Metadata = new metadata();
+            metadata = Metadata.Check_ODFToolkit(filepath, verbose);
 
             // ACTIVE SHEET
             activeSheet ActiveSheet = new activeSheet();
             activeSheet = ActiveSheet.Check_ODFToolkit(filepath, verbose);
 
-/*            // SETTINGSDOM
-            settingsDOM SettingsDOM = new settingsDOM();
-            settingsDOM = SettingsDOM.Check_ODFToolkit(filepath);*/
+            // LOADREADONLY
+            loadReadonly LoadReadOnly = new loadReadonly();
+            loadReadOnly = LoadReadOnly.Check_ODFToolkit(filepath, verbose);
         }
         if (conformance.equals("dna")) {
             // DIGITAL SIGNATURES

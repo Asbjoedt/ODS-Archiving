@@ -26,7 +26,7 @@ public class macros {
 
         // Inform user and return number
         if (macros > 0)
-            System.out.println("CHECK ODS_7: " + macros + " macros detected");
+            System.out.println("CHECK ODS_8: " + macros + " macros detected");
         return macros;
     }
 
@@ -51,7 +51,7 @@ public class macros {
 
         // Inform user and return number
         if (macros > 0)
-            System.out.println("CHANGE ODS_7: " + macros + " macros removed");
+            System.out.println("CHANGE ODS_8: " + macros + " macros removed");
         return macros;
     }
 }

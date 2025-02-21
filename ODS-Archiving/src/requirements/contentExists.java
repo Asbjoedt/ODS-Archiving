@@ -28,7 +28,7 @@ public class contentExists {
 
 		// Inform user and return boolean
 		if (!hasCellValues && !hasObjects)
-			System.out.println("CHECK ODS_6: Cell values or objects NOT detected");
+			System.out.println("CHECK ODS_7: Cell values or objects NOT detected");
 		if (hasCellValues || hasObjects)
 			hasContent = true;
 		return hasContent;

@@ -22,7 +22,7 @@ public class embeddedObjects {
 
         // Inform user and return number
         if (embedObjs > 0)
-            System.out.println("CHECK ODS_5: " + embedObjs + " embedded objects detected");
+            System.out.println("CHECK ODS_6: " + embedObjs + " embedded objects detected");
         return  embedObjs;
     }
 
@@ -34,7 +34,7 @@ public class embeddedObjects {
 
         // Inform user and return number
         if (embedObjs> 0)
-            System.out.println("CHANGE ODS_5: " + embedObjs + " embedded objects removed");
+            System.out.println("CHANGE ODS_6: " + embedObjs + " embedded objects removed");
         return  embedObjs;
     }
 }
