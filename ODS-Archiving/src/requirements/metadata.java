@@ -46,14 +46,14 @@ public class metadata {
         if (creatorInitial != null) {
             Node parentNode = creatorInitial.getParentNode();
             parentNode.removeChild(creatorInitial);
-            System.out.println("CHECK ODS_11 VERBOSE: Attribute \"meta:initial-creator\" was removed");
+            System.out.println("CHANGE ODS_11 VERBOSE: Attribute \"meta:initial-creator\" was removed");
             metadata = true;
         }
         Node creatorDC = metaDom.getElementsByTagName("dc:creator").item(0);
         if (creatorDC != null) {
             Node parentNode = creatorDC.getParentNode();
             parentNode.removeChild(creatorDC);
-            System.out.println("CHECK ODS_11 VERBOSE: Attribute \"dc:creator\" was removed");
+            System.out.println("CHANGE ODS_11 VERBOSE: Attribute \"dc:creator\" was removed");
             metadata = true;
         }
 

@@ -42,7 +42,7 @@ Folder method
 ```
 --convert (optional, converts spreadsheet to .ods file format using LibreOffice)
 --check (optional, checks for archival requirements)
---change (optional, changes data according to archival requirements)
+--change (optional, changes data to comply with archival requirements)
 --validate (optional, validates ODF file format standard)
 --conformance <option> (required, sets conformance level for archival requirements. Options are: 
                         "must", "should", "may", "experimental" (all previous levels plus 
@@ -93,7 +93,7 @@ I was the main writer of the original specification for the OPF Spreadsheets Pre
 * **dna**
   * May have external data i.e. data connections, cell references, RealTimeData functions or objects
   * May have embedded objects
-  * Must have content
+  * Content exists
   * No macros
   * No digital signatures
 

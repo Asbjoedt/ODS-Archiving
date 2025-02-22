@@ -27,10 +27,10 @@ public class IO {
         boolean readable = input_file.canRead();
         boolean writeable = input_file.canWrite();
         if (!readable) {
-            throw new IOException("CHECK ODS_1: File cannot be processed e.g. has password protection, is corrupt");
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
         }
         if (!writeable) {
-            throw new IOException("CHECK ODS_1: File cannot be processed e.g. has password protection, is corrupt");
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
         }
 
         // Check for accepted input file format extensions for conversion
@@ -105,10 +105,10 @@ public class IO {
         boolean outputfolder_readable = inputfolder.canRead();
         boolean outputfolder_writeable = inputfolder.canWrite();
         if (!outputfolder_readable) {
-            throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Output folder cannot be processed e.g. has encryption");
         }
         if (!outputfolder_writeable) {
-            throw new IOException("ERROR: Output folder cannot be processed e.g. has password protection");
+            throw new IOException("ERROR: Output folder cannot be processed e.g. has encryption");
         }
     }
 

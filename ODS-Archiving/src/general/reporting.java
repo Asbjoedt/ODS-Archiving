@@ -31,10 +31,11 @@ public class reporting {
 
         // Create header if the file is new
         if(f.length() == 0) {
-            writeHeader(f, "Input filepath;" + "Output filepath;" + "Data connections;" + "External cell refs;" + "RTD functions" + "External objects;" + "Embedded objects;"+ "Content exists;" + "Macros;" + "Embedded fonts;" + "Settings file;" + "Metadata;" + "Hyperlinks;" + "Active sheet;" + "LoadReadOnly;" + "Printer settings;" + "Digital signatures");
+            writeHeader(f, "Input filepath;" + "Output filepath;" + "MimeType" + "Data connections;" + "External cell refs;" + "RTD functions;" + "External objects;" + "Embedded objects;" + "Content exists;" + "Macros;" + "Embedded fonts;" + "Settings file;" + "Metadata;" + "Hyperlinks;" + "Preview image;" + "Printer settings;" + "LoadReadOnly;" + "Active sheet;" + "Digital signatures");
         }
 
         // Parse checklist
+        boolean mimeType = result.get(0).mimeType;
         int dataConns = result.get(0).dataConnections;
         int extCellRefs = result.get(0).externalCellReferences;
         int rtdFunctions = result.get(0).RTDFunctions;
@@ -46,13 +47,14 @@ public class reporting {
         boolean settings = result.get(0).settingsDOM;
         boolean metadata = result.get(0).metadata;
         int hyperlinks = result.get(0).hyperlinks;
-        boolean activeSheet = result.get(0).activeSheet;
-        boolean loadReadOnly = result.get(0).loadReadOnly;
+        boolean previewImage = result.get(0).previewImage;
         int printers = result.get(0).printerSettings;
+        boolean loadReadOnly = result.get(0).loadReadOnly;
+        boolean activeSheet = result.get(0).activeSheet;
         int digsigs = result.get(0).digitalSignatures;
 
         // Append new line to existing CSV file
-        writeLine(f, input_filepath + ";" + output_filepath + ";" + dataConns + ";" + extCellRefs + ";" + rtdFunctions + ";" + extObjs + ";" + embedObjs + ";" + content + ";" + macros + ";" + embedFonts + ";" + settings + ";" + settings + ";"  + metadata + ";" + hyperlinks + ";" + activeSheet + ";" + loadReadOnly + ";" + printers + ";" + digsigs);
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + mimeType + ";" + dataConns + ";" + extCellRefs + ";" + rtdFunctions + ";" + extObjs + ";" + embedObjs + ";" + content + ";" + macros + ";" + embedFonts + ";" + settings + ";" + metadata + ";" + hyperlinks + ";" + previewImage + ";" + printers + ";" + loadReadOnly + ";" + activeSheet + ";" + digsigs);
     }
 
     // Report on the success of changing
@@ -63,10 +65,11 @@ public class reporting {
 
         // Create header if the file is new
         if(f.length() == 0) {
-            writeHeader(f, "Input filepath;" + "Output filepath;" + "Data connections removed;" + "RTD functions removed" + "External cell refs removed;" + "External objects removed;" + "Embedded objects removed;" + "Macros removed;" + "Embedded fonts;" + "Settings file removed" + "Creator metadata removed;" + "Active sheet set to first;" + "LoadReadOnly set to true;" + "Printer settings removed;" + "Digital signatures removed");
+            writeHeader(f, "Input filepath;" + "Output filepath;" + "MimeType" + "Data connections removed;" + "RTD functions removed;" + "External cell refs removed;" + "External objects removed;" + "Embedded objects removed;" + "Macros removed;" + "Embedded fonts;" + "Settings file removed;" + "Creator metadata removed;" + "Preview image removed;" + "Printer settings removed;" + "LoadReadOnly set to true;" + "Active sheet set to first;" + "Digital signatures removed");
         }
 
         // Parse changelist
+        boolean mimeType = result.get(0).mimeType;
         int dataConns = result.get(0).dataConnections;
         int extCellRefs = result.get(0).externalCellReferences;
         int rtdFunctions = result.get(0).RTDFunctions;
@@ -76,13 +79,14 @@ public class reporting {
         boolean embedFonts = result.get(0).embeddedFonts;
         boolean settings = result.get(0).settingsDOM;
         boolean metadata = result.get(0).metadata;
-        boolean activeSheet = result.get(0).activeSheet;
-        boolean loadReadOnly = result.get(0).loadReadOnly;
+        boolean previewImage = result.get(0).previewImage;
         int printers = result.get(0).printerSettings;
+        boolean loadReadOnly = result.get(0).loadReadOnly;
+        boolean activeSheet = result.get(0).activeSheet;
         int digsigs = result.get(0).digitalSignatures;
 
         // Append new line to existing CSV file
-        writeLine(f, input_filepath + ";" + output_filepath + ";" + dataConns + ";" + extCellRefs + ";" + rtdFunctions + ";" + extObjs + ";" + embedObjs + ";" + macros + ";" + embedFonts + ";" + settings + ";" + settings + ";"  + metadata + ";" + activeSheet + ";" + loadReadOnly + ";" + printers + ";" + digsigs);
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + mimeType + ";" + dataConns + ";" + extCellRefs + ";" + rtdFunctions + ";" + extObjs + ";" + embedObjs + ";" + macros + ";" + embedFonts + ";" + settings + ";"  + metadata + ";" + previewImage + ";" + printers + ";" + loadReadOnly + ";" + activeSheet + ";" + digsigs);
     }
 
     // Report on the success of validation
