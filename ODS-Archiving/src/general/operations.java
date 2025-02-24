@@ -90,7 +90,7 @@ public class operations {
                 Filepath(input_filepath, output_filepath, output_folder, convert, check, change, validate, conformance, report, verbose, archival_package);
             }
             catch (IOException e) {
-                System.out.println(e.getMessage());
+                // Do nothing
             }
         }
     }

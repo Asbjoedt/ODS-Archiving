@@ -7,8 +7,14 @@ public class application {
 	// Main method of the application
 	public static void main(String[] args) throws Exception {
 		// Inform user of beginning of application
-		System.out.println("ODS Archiving v1.0.0-BETA");
-		System.out.println("@Asbjørn Skødt, web: https://github.com/Asbjoedt/ODS-Archiving");
+		// Inform user of end of application
+		System.out.println("------");
+		System.out.println("APPLICATION INFO");
+		System.out.println("---");
+		System.out.println("NAME: ODS Archiving");
+		System.out.println("VERSION: v1.0.0-BETA");
+		System.out.println("WEBSITE: https://github.com/Asbjoedt/ODS-Archiving");
+		System.out.println("DEVELOPED BY: Asbjørn Skødt, asbjoedt@mailbox.org");
 		System.out.println("------");
 
 		// Parse arguments
@@ -31,7 +37,7 @@ public class application {
 		// Inform user of inputs
 		System.out.println("YOUR INPUT");
 		System.out.println("---");
-		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", recurse" + recurse + ", report " + report + ", verbose " + verbose + ", archivalpackage " + archival_package);
+		System.out.println("OPTIONS: " + "convert " + convert + ", check " + check + ", change " + change + ", validate " + validate + ", conformance " + conformance + ", recurse " + recurse + ", report " + report + ", verbose " + verbose + ", archivalpackage " + archival_package);
 		if (input_file != null)
 			System.out.println("INPUT FILE: " + input_file);
 		if (input_folder != null)
@@ -59,7 +65,7 @@ public class application {
 		}
 
 		// Inform user of end of application
-		System.out.println("---");
+		System.out.println("------");
 		System.out.println("APPLICATION FINISHED");
 	}
 

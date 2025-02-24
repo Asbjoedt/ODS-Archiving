@@ -70,7 +70,7 @@ public class create {
         String output_filepath = path + "\\OrgFile_" + FilenameUtils.getName(input_filepath);
         Create.CopySpreadsheet(input_filepath, output_filepath);
 
-        // Set and return output filepath
+        // Set and return new output filepath to be used in conversion
         output_filepath = Create.OutputFilepath(input_filepath, path.toString(), archivalpackage);
         return output_filepath;
     }
@@ -80,5 +80,8 @@ public class create {
         File input_file = new File(input_filepath);
         File output_file = new File(output_filepath);
         FileUtils.copyFile(input_file, output_file);
+
+        // Inform user of copied file
+        System.out.println("COPY: Spreadsheet saved to: " + output_filepath);
     }
 }

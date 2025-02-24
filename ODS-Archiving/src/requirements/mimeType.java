@@ -1,10 +1,8 @@
 package requirements;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.jena.base.Sys;
-import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
+
 import java.io.*;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -19,52 +17,46 @@ public class mimeType {
         String extension = FilenameUtils.getExtension(filepath).toLowerCase();
 
         // Perform check of mimetype file in root
-        try (ZipFile zipFile = new ZipFile(filepath)) {
-            ZipEntry zipEntry = zipFile.getEntry("mimetype");
-            if (zipEntry != null) {
-                try (InputStream zipStream = zipFile.getInputStream(zipEntry);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream))) {
-                    String mimetype = reader.readLine();
-                    if(extension.equals("fods") || extension.equals("ods")) {
-                        if (mimetype.equals("application/vnd.oasis.opendocument.spreadsheet"))
-                            mimeType2 = true;
-                    }
-                    if(extension.equals("ots")) {
-                        if (mimetype.equals("application/vnd.oasis.opendocument.spreadsheet-template"))
-                            mimeType2 = true;
-                    }
-                }
+        ZipFile zipFile1 = new ZipFile(filepath);
+        ZipEntry zipEntry1 = zipFile1.getEntry("mimetype");
+        if (zipEntry1 != null) {
+            InputStream zipStream1 = zipFile1.getInputStream(zipEntry1);
+            BufferedReader reader1 = new BufferedReader(new InputStreamReader(zipStream1));
+            String mimetype = reader1.readLine();
+
+            if (extension.equals("fods") || extension.equals("ods")) {
+                if (mimetype.equals("application/vnd.oasis.opendocument.spreadsheet"))
+                    mimeType1 = true;
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+
+            if (extension.equals("ots")) {
+                if (mimetype.equals("application/vnd.oasis.opendocument.spreadsheet-template"))
+                    mimeType1 = true;
+            }
         }
 
         // Perform check of META-INF/manifest.xml file
-        try (ZipFile zipFile = new ZipFile(filepath)) {
-            ZipEntry zipEntry = zipFile.getEntry("META-INF/manifest.xml");
-            if (zipEntry != null) {
-                try (InputStream zipStream = zipFile.getInputStream(zipEntry);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(zipStream))) {
-                    if(extension.equals("fods") || extension.equals("ods")) {
-                        String pattern = "manifest:media-type=\"application/vnd.oasis.opendocument.spreadsheet\"";
-                        Predicate<String> predicate = line -> line.contains(pattern);
-                        boolean match = reader.lines().anyMatch(predicate);
-                        if (match)
-                            mimeType2 = true;
-                    }
-                    if(extension.equals("ots")) {
-                        String pattern = "manifest:media-type=\"application/vnd.oasis.opendocument.spreadsheet-template\"";
-                        Predicate<String> predicate = line -> line.contains(pattern);
-                        boolean match = reader.lines().anyMatch(predicate);
-                        if (match)
-                            mimeType2 = true;
-                    }
+        ZipFile zipFile2 = new ZipFile(filepath);
+        ZipEntry zipEntry2 = zipFile1.getEntry("META-INF/manifest.xml");
+        if (zipEntry2 != null) {
+            InputStream zipStream2 = zipFile1.getInputStream(zipEntry2);
+            BufferedReader reader2 = new BufferedReader(new InputStreamReader(zipStream2));
+            if (extension.equals("fods") || extension.equals("ods")) {
+                String pattern = "manifest:media-type=\"application/vnd.oasis.opendocument.spreadsheet\"";
+                Predicate<String> predicate = line -> line.contains(pattern);
+                boolean match = reader2.lines().anyMatch(predicate);
+                if (match) {
+                    mimeType2 = true;
                 }
             }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
+            if (extension.equals("ots")) {
+                String pattern = "manifest:media-type=\"application/vnd.oasis.opendocument.spreadsheet-template\"";
+                Predicate<String> predicate = line -> line.contains(pattern);
+                boolean match = reader2.lines().anyMatch(predicate);
+                if (match) {
+                    mimeType2 = true;
+                }
+            }
         }
 
         if (mimeType1 && mimeType2)

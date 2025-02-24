@@ -55,12 +55,12 @@ public class IO {
                 break;
 
             default:
-                throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension");
+                throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension for conversion");
         }
 
         // Check for accepted input file format extensions if NOT conversion
         if (!convert && input_extension.equals("fods"))
-            throw new IOException("ERROR: Input extension .fods is currently only supported if --convert is selected");
+            throw new IOException("CHECK ERROR: Input extension .fods is currently only supported if --convert is selected");
         if (!convert && !input_extension.equals("ods") && !input_extension.equals("ots"))
             throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension. Select --convert");
     }
