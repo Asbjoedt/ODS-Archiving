@@ -14,7 +14,7 @@ public class application {
 		System.out.println("NAME: ODS Archiving");
 		System.out.println("VERSION: v1.0.0-BETA");
 		System.out.println("WEBSITE: https://github.com/Asbjoedt/ODS-Archiving");
-		System.out.println("DEVELOPED BY: Asbjørn Skødt, asbjoedt@mailbox.org");
+		System.out.println("@Asbjørn Skødt, asbjoedt@mailbox.org");
 		System.out.println("------");
 
 		// Parse arguments

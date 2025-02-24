@@ -119,30 +119,30 @@ public class parameters {
             // In the following, throw parse errors under certain conditions
             if (p_check || p_change)
                 if (!p_conformance.equals("must") && !p_conformance.equals("should") && !p_conformance.equals("may") && !p_conformance.equals("experimental") && !p_conformance.equals("dna"))
-                    throw new ParseException("PARSE ERROR: Compliance is not \"must\", \"should\", \"may\", \"experimental\" or \"dna\"");
+                    throw new ParseException("INPUT ERROR: Compliance is not \"must\", \"should\", \"may\", \"experimental\" or \"dna\"");
             // Check if both input filepath and input folder are set, then throw exception
             if (p_input_file != null && p_input_folder != null)
-                throw new ParseException("PARSE ERROR: Both input filepath and input folder are set");
+                throw new ParseException("INPUT ERROR: Both input filepath and input folder are set");
             // Check if either input filepath or input folder are not set, then throw exception
             if (p_input_file == null && p_input_folder == null)
-                throw new ParseException("PARSE ERROR: Input filepath or input folder are NOT set");
+                throw new ParseException("INPUT ERROR: Input filepath or input folder are NOT set");
             // Check if convert or change are set, but output folder is NOT, then throw exception
             if (p_convert || p_change)
                 if (p_output_folder == null)
-                    throw new ParseException("PARSE ERROR: Output folder is NOT set");
+                    throw new ParseException("INPUT ERROR: Output folder is NOT set");
             // Check if convert or change are NOT set, but output folder is, then throw exception
             if (!p_convert && !p_change && !p_archival_package)
                 if (p_output_folder != null)
-                    throw new ParseException("PARSE ERROR: Output folder is set but convert, change or archivalpackage is not chosen. Remove output folder");
+                    throw new ParseException("INPUT ERROR: Output folder is set but convert, change or archivalpackage is not chosen. Remove output folder");
             // Check if input folder is NOT set but archival package is, then throw exception
             if (p_input_folder == null && p_archival_package)
-                throw new ParseException("PARSE ERROR: You must input a folder to create an archival package. You are inputting a file");
+                throw new ParseException("INPUT ERROR: You must input a folder to create an archival package. You are inputting a file");
 
         } catch (ParseException e) {
-            System.out.println(" ");
+            System.out.println("APPLICATION INPUT ERROR");
+            System.out.println("---");
             System.out.println(e.getMessage());
-            System.out.println(" ");
-            helper.printHelp(" ", options);
+            helper.printHelp("(available options)", options);
             System.exit(0);
         }
     }

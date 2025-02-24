@@ -25,16 +25,13 @@ Folder method
 --inputfolder "<folder>" (optional, folder to enumerate for input spreadsheets)
 --recurse (optional, set if subfolders should be included)
 ```
-> **Note:** Do not leave a trailing "\\" on Windows or "/" on Linux in folder paths. If you do, you will get the error: "Missing required option: cof".
 
 **Set output folder**
-
-*You only need to set output folder if you want to convert spreadsheet to .ods file format or change data according to archival requirements.*
 
 ```
 --outputfolder "<folder>" (optional)
 ```
-> **Note:** Do not leave a trailing "\\" on Windows or "/" on Linux in folder paths. If you do, you will get the error: "Missing required option: cof".
+> **Note:** You only need to set output folder if you want to convert spreadsheet to .ods file format, change data according to archival requirements or create archivalpackage.
 
 **Choose operation methods**
 
@@ -57,11 +54,11 @@ In your terminal change directory to the folder where you have the ```ODS-Archiv
 
 Filepath usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath "C:\Spreadsheet.xlsx" --outputfolder "C:\AnyFolder" --conformance "experimental" --report --verbose
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfilepath C:\Spreadsheet.xlsx --outputfolder C:\AnyFolder --conformance experimental --report --verbose
 ```
 Folder usage
 ```
-java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder "C:\FolderOne" --recurse --outputfolder "C:\FolderTwo" --conformance "experimental" --report --verbose --archivalpackage
+java -jar ODS-Archiving.jar --convert --check --change --validate --inputfolder C:\FolderOne --recurse --outputfolder C:\FolderTwo --conformance experimental --report --verbose --archivalpackage
 ```
 
 ## Conformance
