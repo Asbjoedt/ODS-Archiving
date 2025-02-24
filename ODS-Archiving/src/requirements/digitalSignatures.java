@@ -5,7 +5,11 @@ import org.odftoolkit.odfdom.pkg.OdfFileDom;
 import org.odftoolkit.odfdom.pkg.OdfPackage;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
 
 public class digitalSignatures {
 
@@ -14,17 +18,17 @@ public class digitalSignatures {
         int digsigs = 0;
 
         // Perform check
-        OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(filepath);
+        OdfSpreadsheetDocument spreadsheet = OdfSpreadsheetDocument.loadDocument(filepath);
         OdfPackage odfPackage = spreadsheet.getPackage();
 
         // Access the META-INF/documentsignatures.xml file
         InputStream signatureStream = odfPackage.getInputStream("META-INF/documentsignatures.xml");
-
         if (signatureStream != null) {
-            // Read the content of the documentsignatures.xml
-            String signatureContent = new String(signatureStream.readAllBytes());
+            BufferedReader reader = new BufferedReader(new InputStreamReader(signatureStream));
+            List<String> signatureContent =  reader.lines().toList();
             System.out.println("Contents of META-INF/documentsignatures.xml:");
             System.out.println(signatureContent);
+            digsigs++;
 
             // Close the input stream
             signatureStream.close();

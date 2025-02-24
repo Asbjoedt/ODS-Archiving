@@ -23,7 +23,6 @@ public class parameters {
     public static String p_output_file = null;
     public static String p_input_folder = null;
     public static String p_output_folder = null;
-    public static String p_rename = null;
     public static String p_conformance = null;
 
     // Parse the arguments of the user
@@ -77,13 +76,6 @@ public class parameters {
                 .desc("Set spreadsheet output folder path").build();
         options.addOption(output_folder);
 
-        Option rename = Option.builder("ren").longOpt("rename")
-                .argName("rename")
-                .hasArg()
-                .required(false)
-                .desc("Set new name of output file").build();
-        options.addOption(rename);
-
         Option conformance = Option.builder("cof").longOpt("conformance")
                 .argName("conformance")
                 .hasArg()
@@ -121,8 +113,6 @@ public class parameters {
                 p_input_folder = cmd.getOptionValue("inputfolder");
             if (cmd.hasOption("out"))
                 p_output_folder = cmd.getOptionValue("outputfolder");
-            if (cmd.hasOption("ren"))
-                p_rename = cmd.getOptionValue("rename");
             if (cmd.hasOption("cof"))
                 p_conformance = cmd.getOptionValue("conformance").toLowerCase();
 
@@ -141,18 +131,12 @@ public class parameters {
                 if (p_output_folder == null)
                     throw new ParseException("PARSE ERROR: Output folder is NOT set");
             // Check if convert or change are NOT set, but output folder is, then throw exception
-            if (!p_convert && !p_change)
+            if (!p_convert && !p_change && !p_archival_package)
                 if (p_output_folder != null)
-                    throw new ParseException("PARSE ERROR: Output folder is set but convert or change is not chosen. Remove output folder");
+                    throw new ParseException("PARSE ERROR: Output folder is set but convert, change or archivalpackage is not chosen. Remove output folder");
             // Check if input folder is NOT set but archival package is, then throw exception
             if (p_input_folder == null && p_archival_package)
                 throw new ParseException("PARSE ERROR: You must input a folder to create an archival package. You are inputting a file");
-            // Check if archival package is selected but convert or change is NOT, then throw exception
-            if (p_archival_package && !p_convert && !p_change)
-                throw new ParseException("PARSE ERROR: You must select convert or change method, if you select archivalpackage");
-            // Check if archival package and rename is selected at the same time, then throw exception
-            if (p_archival_package && p_rename != null)
-                throw new ParseException("PARSE ERROR: You cannot use rename method when using archivalpackage method");
 
         } catch (ParseException e) {
             System.out.println(" ");

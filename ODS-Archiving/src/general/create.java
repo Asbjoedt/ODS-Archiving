@@ -12,12 +12,10 @@ import org.zeroturnaround.zip.ZipUtil;
 public class create {
 
     // Create output filepath for file method
-    public String OutputFilepath(String input_file, String output_folder, String rename, boolean archivalpackage) {
+    public String OutputFilepath(String input_file, String output_folder, boolean archivalpackage) {
         String output_file;
         if (archivalpackage)
             output_file = output_folder + "\\1.ods";
-        else if (rename != null)
-            output_file = output_folder + "\\" + rename + ".ods";
         else if (output_folder != null)
             output_file = output_folder + "\\" + FilenameUtils.getBaseName(input_file) + ".ods";
         else
@@ -56,7 +54,7 @@ public class create {
     }
 
     // Create subfolder for a spreadsheet in docCollection and copy original spreadsheet
-    public String ArchiveSpreadsheet(String input_filepath, String output_folder, String rename, boolean archivalpackage) throws IOException {
+    public String ArchiveSpreadsheet(String input_filepath, String output_folder, boolean archivalpackage) throws IOException {
         // Create subfolder in docCollection
         String subPath = output_folder + "\\docCollection\\";
         int n = 1;
@@ -73,7 +71,7 @@ public class create {
         Create.CopySpreadsheet(input_filepath, output_filepath);
 
         // Set and return output filepath
-        output_filepath = Create.OutputFilepath(input_filepath, path.toString(), rename, archivalpackage);
+        output_filepath = Create.OutputFilepath(input_filepath, path.toString(), archivalpackage);
         return output_filepath;
     }
 

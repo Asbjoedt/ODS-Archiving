@@ -19,7 +19,6 @@ The application requires input filepath or input folder as argument, and then yo
 Filepath method
 ```
 --inputfile "<filepath>" (optional, spreadsheet to process)
---rename "<new filename>" (optional, if you want to rename output file. Extension is not necessary)
 ```
 Folder method
 ```

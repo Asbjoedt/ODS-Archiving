@@ -1,38 +1,42 @@
 package general;
 
 import org.apache.commons.io.FilenameUtils;
+import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 public class IO {
 
     // Globally accessible variable for path to LibreOffice
     public static String LibreOffice_path = null;
 
-    // Method for checking availability of input and output filepaths
+    // Collective method for checking availability of input and output filepaths
     public void CheckFilepathIO(String input_filepath, String output_filepath, boolean convert) throws IOException {
+        // Check if file exists
+        CheckExistence(input_filepath);
 
+        // Check for accepted input file formats
+        CheckExtension(input_filepath, convert);
+
+        // Check IO of output folder and output filepath
+        CheckOutputIO(input_filepath, output_filepath);
+    }
+
+    // Method for checking if the file exists and is not encrypted or corrupted
+    public void CheckExistence(String input_filepath) throws IOException {
         // Check if input filepath exists
         File input_file = new File(input_filepath);
         if (!input_file.exists() && !input_file.isDirectory()) {
             throw new IOException("ERROR: Input file does not exist");
         }
+    }
 
-        // Check for file protection and corruption
-        boolean readable = input_file.canRead();
-        boolean writeable = input_file.canWrite();
-        if (!readable) {
-            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
-        }
-        if (!writeable) {
-            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
-        }
-
+    // Method for checking the correct file format extensions
+    public void CheckExtension(String input_filepath, boolean convert) throws IOException {
         // Check for accepted input file format extensions for conversion
         String input_extension = FilenameUtils.getExtension(input_filepath).toLowerCase();
         switch (input_extension) {
@@ -56,10 +60,13 @@ public class IO {
 
         // Check for accepted input file format extensions if NOT conversion
         if (!convert && input_extension.equals("fods"))
-            throw new IOException("ERROR: Input extension .fods is currently not supported if convert is NOT selected");
+            throw new IOException("ERROR: Input extension .fods is currently only supported if --convert is selected");
         if (!convert && !input_extension.equals("ods") && !input_extension.equals("ots"))
-            throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension");
+            throw new IOException("CHECK ODS_3: Input filepath does not have an accepted file format extension. Select --convert");
+    }
 
+    // Method for checking IO of output folder and files
+    public void CheckOutputIO(String input_filepath, String output_filepath) throws IOException {
         // Check if output directory exists
         String parent = FilenameUtils.getFullPathNoEndSeparator(output_filepath);
         File directory = new File(parent);
@@ -67,7 +74,7 @@ public class IO {
             throw new IOException("ERROR: Output directory does not exist");
         }
 
-        // Check if output file exists
+        // Check if output file already exists
         if (!input_filepath.equals(output_filepath)) {
             File output_file = new File(output_filepath);
             if (output_file.exists()) {
@@ -76,19 +83,38 @@ public class IO {
         }
     }
 
-    // Method for checking availability of input and output folders
-    public void CheckFolderIO(String input_folder, String output_folder) throws IOException {
+    // Method for checking if the file exists and is not encrypted or corrupted
+    public void CheckBasicReadability(String input_filepath) throws IOException {
+        // Check if input filepath exists
+        File input_file = new File(input_filepath);
 
+        // Check for file protection and corruption
+        boolean readable = input_file.canRead();
+        boolean writeable = input_file.canWrite();
+        if (!readable) {
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
+        }
+        if (!writeable) {
+            throw new IOException("CHECK ODS_1: File cannot be processed e.g. is encrypted or corrupted");
+        }
+    }
+
+    // Method for checking if the file can be processed by ODF Toolkit
+    public void CheckODFToolkitIO(String input_filepath) throws IOException {
+        try {
+            OdfSpreadsheetDocument spreadsheet =  OdfSpreadsheetDocument.loadDocument(input_filepath);
+        }
+        catch (Exception e) {
+            throw new IOException("ERROR: ODF Toolkit cannot process the file: " + e.getMessage());
+        }
+    }
+
+    // Method for checking availability of input folder
+    public void CheckInputFolderIO(String input_folder) throws IOException {
         // Check if input directory exists
         File inputfolder = new File(input_folder);
         if (!inputfolder.exists()) {
             throw new IOException("ERROR: Input directory does not exist");
-        }
-
-        // Check if output directory exists
-        File outputfolder = new File(output_folder);
-        if (!outputfolder.exists()) {
-            throw new IOException("ERROR: Output directory does not exist");
         }
 
         // Check for input directory protection
@@ -100,10 +126,19 @@ public class IO {
         if (!inputfolder_writeable) {
             throw new IOException("ERROR: Input folder cannot be processed e.g. has password protection");
         }
+    }
+
+    // Method for checking availability of output folder
+    public void CheckOutputFolderIO(String output_folder) throws IOException {
+        // Check if output directory exists
+        File outputfolder = new File(output_folder);
+        if (!outputfolder.exists()) {
+            throw new IOException("ERROR: Output directory does not exist");
+        }
 
         // Check for output directory protection
-        boolean outputfolder_readable = inputfolder.canRead();
-        boolean outputfolder_writeable = inputfolder.canWrite();
+        boolean outputfolder_readable = outputfolder.canRead();
+        boolean outputfolder_writeable = outputfolder.canWrite();
         if (!outputfolder_readable) {
             throw new IOException("ERROR: Output folder cannot be processed e.g. has encryption");
         }

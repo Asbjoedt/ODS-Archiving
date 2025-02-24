@@ -6,7 +6,7 @@ import java.util.List;
 public class reporting {
 
     // Report on the success of conversion
-    public void ReportConversion(String input_filepath, String output_filepath, String output_folder, int result) throws IOException {
+    public void ReportConversion(String input_filepath, String output_filepath, String output_folder, boolean result) throws IOException {
         // Create CSV file object
         String pathToCSV = output_folder + "/log_conversion.csv";
         File f = new File(pathToCSV);
@@ -16,11 +16,8 @@ public class reporting {
             writeHeader(f, "Input filepath;" + "Output filepath;" + "Conversion success");
         }
 
-        // Parse result to boolean
-        boolean parsed_result = result == 0;
-
         // Append new line to existing CSV file
-        writeLine(f, input_filepath + ";" + output_filepath + ";" + parsed_result);
+        writeLine(f, input_filepath + ";" + output_filepath + ";" + result);
     }
 
     // Report on the success of checking
