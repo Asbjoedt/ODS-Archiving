@@ -4,7 +4,7 @@
   <artifactId>ODS-Archiving</artifactId>
   <version>1.0.0-BETA</version>
   <build>
-    <sourceDirectory>ODS-Archiving/src</sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
